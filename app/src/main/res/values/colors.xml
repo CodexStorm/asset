@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="enabled_color">#F7FE2E</color>
+    <color name="disabled_color">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
+    <color name="darkGrey">#9E9E9E</color>
+    <color name="lightGrey">#B6B6B6</color>
+
+    <color name="dialog_bg">#cc000000</color>
+
+    <color name="my_customer_active_not_ordered">#D32F2F</color>
+    <color name="my_customer_active_ordered">#60a844</color>
+    <color name="my_customer_inactive">#9E9E9E</color>
+    <color name="col_dfdfdf">#dfdfdf</color>
+    <color name="FFFFFFFF">#FFFFFFFF</color>
+
+    <color name="orange">#F44336</color>
+
+    <color name="col_55cc">#55cccccc</color>
+    <color name="col_0000">#00000000</color>
+    <color name="col_4400">#44000000</color>
+
+    <color name="themegrayDark">#616161</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#000</color>
+    <color name="textColorPrimary">#ffffff</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+</resources>

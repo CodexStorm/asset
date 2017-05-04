@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true"
+        android:overScrollMode="always"
+        tools:targetApi="lollipop">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tvNinjacart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ninjacart"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:typeface="sans" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNinjacart"
+                android:padding="15dp"
+                android:textColorHint="@color/colorPrimary">
+
+                <EditText
+                    android:id="@+id/etUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_username"
+                    android:isScrollContainer="false"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tilUserName"
+                android:padding="15dp"
+                android:textColorHint="@color/colorPrimary">
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@color/colorPrimary" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/bLogin"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tilPassword"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ripple"
+                android:elevation="4dp"
+                android:padding="5dp"
+                android:text="@string/login"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rlProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:clickable="true"
+        android:background="#cc000000">
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            style="?android:attr/progressBarStyle"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</RelativeLayout>
+

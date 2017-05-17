@@ -22,7 +22,9 @@
             android:name=".activity.HomepageActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".activity.AssetDetailsActivity"></activity>
+        <activity android:name=".activity.AssetDetailsActivity"
+            android:theme="@style/MyMaterialTheme"></activity>
+        <activity android:name=".activity.MyAssetsActivity"></activity>
     </application>
 
 </manifest>

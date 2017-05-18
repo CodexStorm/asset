@@ -25,6 +25,7 @@
         <activity android:name=".activity.AssetDetailsActivity"
             android:theme="@style/MyMaterialTheme"></activity>
         <activity android:name=".activity.MyAssetsActivity"></activity>
+        <activity android:name=".activity.HomescreenActivity"></activity>
     </application>
 
 </manifest>

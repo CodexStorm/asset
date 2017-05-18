@@ -15,6 +15,12 @@ public class Constants {
     public static final String HETZNER_IOTA_PORT = ":8999";
     public static final String USER_PREFERENCE = "User_Pref";
 
+    public static final String INIT_APP_NAME = "Ultron";
+    public static final String APP_VERSION_KEY = "appVersion";
+    public static final String NO_INTERNET_CONNECTION = "No Internet Connection. Kindly check";
+
+
+
     public static final String BASE_URL = "http://88.99.31.206" +HEZNER_DELTA; //GAMMA-HEZNER
 
 }

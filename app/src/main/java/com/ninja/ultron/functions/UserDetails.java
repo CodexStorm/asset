@@ -66,6 +66,14 @@ public class UserDetails {
 
     }
 
+    public static void setCurrentServerDate(Context context, long currentServerDate) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putLong("currentServerDate", currentServerDate);
+        editor.commit();
+    }
+
+
     public static void setServerTimeDifference(Context context, long serverTimeDifference) {
         SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
         SharedPreferences.Editor editor = settings.edit();
@@ -126,6 +134,92 @@ public class UserDetails {
     public static int getMyAssetList(Context context) {
         SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
         return settings.getInt("roleType", 0);
+    }
+
+    public static void setUserCityId(Context context, String vendorId) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("usercityId", vendorId);
+        editor.commit();
+    }
+
+    public static String getUserCityId(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("usercityId", ""));
+    }
+
+    public static void setCustomerCareMobileNumber(Context context, String customerCareMobileNumber) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("customerCareMobileNumber", customerCareMobileNumber);
+        editor.commit();
+    }
+
+    public static String getCustomerCareMobileNumber(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("customerCareMobileNumber", ""));
+    }
+
+    public static void setCustomerCareEmail(Context context, String customerCareEmail) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("customerCareEmail", customerCareEmail);
+        editor.commit();
+    }
+
+    public static String getCustomerCareEmail(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("customerCareEmail", ""));
+    }
+
+    public static void setCityId(Context context, int cityId) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("cityId", cityId);
+        editor.commit();
+    }
+
+    public static int getCityId(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return settings.getInt("cityId", 0);
+
+    }
+
+    public static void setInitializeConfig(Context context, String initializeConfig) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("initializeConfig", initializeConfig);
+        editor.commit();
+    }
+
+    public static String getInitializeConfig(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("initializeConfig", ""));
+    }
+
+    public static void setFacilityId(Context context, int facilityId) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("facilityId", facilityId);
+        editor.commit();
+    }
+
+    public static int getFacilityId(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return settings.getInt("facilityId", 0);
+
+    }
+
+    public static void setFacilityName(Context context, String facilityName) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("facilityName", facilityName);
+        editor.commit();
+    }
+
+    public static String getFacilityName(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("facilityName", ""));
     }
 
 }

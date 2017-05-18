@@ -43,7 +43,7 @@ public class MyAssetsActivity extends AppCompatActivity{
         setContentView(R.layout.my_assets);
         assetList=new ArrayList<>();
         RequestQueue queue= Volley.newRequestQueue(MyAssetsActivity.this);
-        recyclerView=(RecyclerView)findViewById(R.id.rv);
+        recyclerView=(RecyclerView)findViewById(R.id.rvMyAssets);
         LinearLayoutManager manager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {

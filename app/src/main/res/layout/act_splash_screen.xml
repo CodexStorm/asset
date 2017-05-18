@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ninja.ultron.activity.SplashScreen">
+
+    <ImageView
+        android:id="@+id/imgSplashHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="60dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icn_logo_splash" />
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:id="@+id/splashCentreProgressBar"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:indeterminate="true"
+        android:layout_below="@+id/imgSplashHeader"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rlSplashActionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        >
+
+
+        <Button
+            android:id="@+id/bSplashRetry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:clickable="true"
+            android:layout_alignParentBottom="true"
+            android:onClick="retry"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="RETRY"
+            android:textColor="@color/actionbarcolor"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:textSize="25dp"
+            android:visibility="visible"
+            tools:targetApi="lollipop" />
+
+        <TextView
+            android:id="@+id/tvSplashNoInternet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bSplashRetry"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:paddingTop="10dp"
+            android:text="No Internet Connection"
+            android:textColor="@color/actionbarcolor"
+            android:textSize="16dp"
+            android:visibility="visible" />
+        <View
+            android:id="@+id/circle1"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/circle_shape"
+            android:alpha="0.08"
+            android:layout_centerInParent="true"/>
+        <View
+            android:id="@+id/circle2"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/circle_shape"
+            android:alpha="0.08"
+            android:layout_centerInParent="true"/>
+
+        <ProgressBar
+            android:id="@+id/splashProgressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:progressDrawable="@color/actionbarcolor"
+            android:indeterminate="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/copyRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:padding="7dp"
+        android:text="\u00a9 ninjacart 2016"
+        android:textColor="#d3d3d3"
+        android:textSize="14dp" />
+
+</RelativeLayout>

@@ -11,16 +11,17 @@ import com.ninja.ultron.R;
     import com.ninja.ultron.entity.AssetAccessoryEntity;
 
     import java.util.ArrayList;
+    import java.util.List;
 
-    /**
+/**
      * Created by manoj on 17-05-2017.
      */
 
         public class AssetAccessoryAdapter extends ArrayAdapter<AssetAccessoryEntity>{
 
-        ArrayList<AssetAccessoryEntity> assetAccessories = new ArrayList<>();
+        List<AssetAccessoryEntity> assetAccessories = new ArrayList<>();
         AssetAccessoryEntity accessory;
-        public AssetAccessoryAdapter(Context context, ArrayList<AssetAccessoryEntity> assetAccessories) {
+        public AssetAccessoryAdapter(Context context, List<AssetAccessoryEntity> assetAccessories) {
             super(context, 0, assetAccessories);
         }
 

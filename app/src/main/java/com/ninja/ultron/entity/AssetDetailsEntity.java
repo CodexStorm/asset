@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by manoj on 17-05-2017.
@@ -14,14 +15,14 @@ import java.util.ArrayList;
 
 public class AssetDetailsEntity {
     private String assetName;
-    private String assetId;
+    private int assetId;
     private String assetSpecification;
     private String assetCategory;
     private String assetType;
     private String assetMaker;
-    private ArrayList<AssetAccessoryEntity> assetAccessory;
+    private List<AssetAccessoryEntity> assetAccessory;
 
-    public AssetDetailsEntity(String assetName, String assetId, String assetSpecification, String assetCategory, String assetType, String assetMaker, ArrayList<AssetAccessoryEntity> assetAccessory) {
+    public AssetDetailsEntity(String assetName, int assetId, String assetSpecification, String assetCategory, String assetType, String assetMaker, List<AssetAccessoryEntity> assetAccessory) {
         this.assetName = assetName;
         this.assetId = assetId;
         this.assetSpecification = assetSpecification;
@@ -39,11 +40,11 @@ public class AssetDetailsEntity {
         this.assetName = assetName;
     }
 
-    public String getAssetId() {
+    public int getAssetId() {
         return assetId;
     }
 
-    public void setAssetId(String assetId) {
+    public void setAssetId(int assetId) {
         this.assetId = assetId;
     }
 
@@ -79,7 +80,7 @@ public class AssetDetailsEntity {
         this.assetMaker = assetMaker;
     }
 
-    public ArrayList<AssetAccessoryEntity> getAssetAccessory() {
+    public List<AssetAccessoryEntity> getAssetAccessory() {
         return assetAccessory;
     }
 

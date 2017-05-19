@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
-import com.ninja.ultron.adapter.AssetRecyclerAdapter;
+import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 import com.ninja.ultron.functions.CommonFunctions;
@@ -33,7 +33,7 @@ public class MyAssetsFragment extends Fragment {
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     RecyclerView recyclerView;
-    AssetRecyclerAdapter adapter;
+    AssetListRecyclerAdapter adapter;
     AssetMiniEntity assetMini;
     @Nullable
     @Override
@@ -60,7 +60,7 @@ public class MyAssetsFragment extends Fragment {
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
                         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
-                        adapter=new AssetRecyclerAdapter(myAssetList);
+                        adapter=new AssetListRecyclerAdapter(myAssetList);
                         recyclerView.setAdapter(adapter);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
@@ -69,7 +69,7 @@ public class MyAssetsFragment extends Fragment {
                         Log.d("","commited om");
                     }
                 } else {
-                    if(assetMiniEntity.getStausCode() == 401) {
+                    if(assetMiniEntity.getStatusCode() == 401) {
                         CommonFunctions.toastString("Unauthorized",getActivity());
                     }
                 }

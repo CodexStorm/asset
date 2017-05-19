@@ -222,4 +222,95 @@ public class UserDetails {
         return (settings.getString("facilityName", ""));
     }
 
+    public static void setAssetId(Context context, int assetId) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("assetId", assetId);
+        editor.commit();
+    }
+
+    public static String getAssetId(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetId", ""));
+    }
+
+    public static void setAssetName(Context context, String assetName) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetName", assetName);
+        editor.commit();
+    }
+
+    public static String getAssetName(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetName", ""));
+    }
+
+    public static void setAssetSpecification(Context context, String assetSpecification) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetSpecification", assetSpecification);
+        editor.commit();
+    }
+
+    public static String getAssetSpecification(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetSpecification", ""));
+    }
+
+    public static void setAssetMaker(Context context, String assetMaker) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetMaker", assetMaker);
+        editor.commit();
+    }
+
+    public static String getAssetMaker(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetMaker", ""));
+    }
+
+    public static void setAssetCategory(Context context, String assetCategory) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetCategory", assetCategory);
+        editor.commit();
+    }
+
+    public static String getAssetCategory(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetCategory", ""));
+    }
+
+    public static void setAssetType(Context context, String assetType) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetType", assetType);
+        editor.commit();
+    }
+
+    public static String getAssetType(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetType", ""));
+    }
+
+    public static void setAssetAccessoryList(Context context, String assetAccessoryList) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("assetAccessoryList", assetAccessoryList);
+        editor.commit();
+    }
+
+    public static String getAssetAccessoryList(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return (settings.getString("assetAccessoryList", ""));
+    }
+
+
+
+
+
+
+
+
 }

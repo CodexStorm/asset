@@ -38,8 +38,8 @@ public class HomescreenActivity extends AppCompatActivity {
         adapter=new HomeScreenViewPagerAdapter(getSupportFragmentManager());
         //add the fragments with titles here
 
-        adapter.addFragments(new MyAssetsFragment(),"Tab1");
-        adapter.addFragments(new fragment2(),"Tab 2");
+        adapter.addFragments(new MyAssetsFragment(),"My Assets");
+        adapter.addFragments(new AssetDetailsFragment(),"Pending Requests");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

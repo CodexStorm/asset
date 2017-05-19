@@ -5,17 +5,13 @@ import com.android.volley.VolleyError;
 import java.util.List;
 
 /**
- * Created by Prabhu Sivanandam on 17-May-17.
+ * Created by omprakash on 19/5/17.
  */
 
-public class AssetMiniEntity {
-
+public class AssetDetailsMiniEntity {
     int statusCode;
-    List<CodeDecodeEntity> response;
+    List<AssetDetailsEntity> response;
     String message;
-
-    public AssetMiniEntity() {
-    }
 
     public int getStatusCode() {
         return statusCode;
@@ -25,11 +21,11 @@ public class AssetMiniEntity {
         this.statusCode = statusCode;
     }
 
-    public List<CodeDecodeEntity> getResponse() {
+    public List<AssetDetailsEntity> getResponse() {
         return response;
     }
 
-    public void setResponse(List<CodeDecodeEntity> response) {
+    public void setResponse(List<AssetDetailsEntity> response) {
         this.response = response;
     }
 
@@ -41,10 +37,8 @@ public class AssetMiniEntity {
         this.message = message;
     }
 
-
-
     public interface UltronRestClientInterface {
-        void onInitialize(AssetMiniEntity assetMiniEntity, VolleyError error);
+        void onInitialize(AssetDetailsMiniEntity assetDetailsMiniEntity, VolleyError error);
     }
 
 }

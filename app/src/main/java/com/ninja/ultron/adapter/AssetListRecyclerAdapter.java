@@ -16,12 +16,12 @@ import java.util.List;
  * Created by Prabhu Sivanandam on 17-May-17.
  */
 
-public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.ViewHolder>{
+public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecyclerAdapter.ViewHolder>{
 
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
     CodeDecodeEntity asset;
 
-    public AssetRecyclerAdapter(List<CodeDecodeEntity> assetList) {
+    public AssetListRecyclerAdapter(List<CodeDecodeEntity> assetList) {
         this.assetsList=assetList;
     }
 

@@ -11,7 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.ninja.ultron.constant.Constants;
-import com.ninja.ultron.entity.AssetDetailsEntity;
+import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.LoginEntity;
@@ -139,12 +139,12 @@ public class RestClientImplementation {
                 try{
                     Gson gson = new Gson();
                     AssetMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
-                    assetMiniEntity.setStausCode(successAssetMiniEntity.getStausCode());
+                    assetMiniEntity.setStatusCode(successAssetMiniEntity.getStatusCode());
                     assetMiniEntity.setResponse(successAssetMiniEntity.getResponse());
                     assetMiniEntity.setMessage(successAssetMiniEntity.getMessage());
                     restClientInterface.onInitialize(assetMiniEntity, null);
                 }catch (Exception e){
-                    assetMiniEntity.setStausCode(500);
+                    assetMiniEntity.setStatusCode(500);
                     assetMiniEntity.setMessage("Cast exception");
                     restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
                 }
@@ -158,7 +158,7 @@ public class RestClientImplementation {
                     AssetMiniEntity newAssetMiniEntity = gson.fromJson(new String(error.networkResponse.data), AssetMiniEntity.class);
                     if (newAssetMiniEntity.getMessage() != null) {
                         assetMiniEntity.setMessage(newAssetMiniEntity.getMessage());
-                        assetMiniEntity.setStausCode(newAssetMiniEntity.getStausCode());
+                        assetMiniEntity.setStatusCode(newAssetMiniEntity.getStatusCode());
                     }
                 }
                 restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
@@ -166,44 +166,40 @@ public class RestClientImplementation {
         },30000, 0);
         queue.add(getRequest);
     }
-/*
-    public static void fetchAssetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context) {
+    public static void assetDetailsApi(final AssetDetailsMiniEntity assetDetailsMiniEntity, final AssetDetailsMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_DETAILS_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    Gson gson = new Gson();
+                    AssetDetailsMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetDetailsMiniEntity.class);
+                    assetDetailsMiniEntity.setStatusCode(successAssetMiniEntity.getStatusCode());
+                    assetDetailsMiniEntity.setResponse(successAssetMiniEntity.getResponse());
+                    assetDetailsMiniEntity.setMessage(successAssetMiniEntity.getMessage());
+                    restClientInterface.onInitialize(assetDetailsMiniEntity, null);
+                }catch (Exception e){
+                    assetDetailsMiniEntity.setStatusCode(500);
+                    assetDetailsMiniEntity.setMessage("Cast exception");
+                    restClientInterface.onInitialize(assetDetailsMiniEntity, new VolleyError());
+                }
 
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try { //op
-                            Gson gson = new Gson();
-                            AssetMiniEntity newAssetMiniSuccessEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
-                            assetMiniEntity.setStausCode(newAssetMiniSuccessEntity.getStausCode());
-                            assetMiniEntity.setResponse(newAssetMiniSuccessEntity.getResponse());
-                            Log.e("response",newAssetMiniSuccessEntity.getResponse().toString());
-                            assetMiniEntity.setMessage(newAssetMiniSuccessEntity.getMessage());
-                            restClientInterface.onInitialize(assetMiniEntity, null);
-                        }catch (Exception e){
-                            restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
-                        }
-                    }
-                }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.networkResponse != null && error.networkResponse.data != null) {
                     Gson gson = new Gson();
-                    AssetMiniEntity newAssetMiniErrorEntity = gson.fromJson(new String(error.networkResponse.data), AssetMiniEntity.class);
-                    if (newAssetMiniErrorEntity.getMessage() != null) {
-                        assetMiniEntity.setMessage(newAssetMiniErrorEntity.getMessage());
-                        assetMiniEntity.setStausCode(newAssetMiniErrorEntity.getStausCode());
+                    AssetMiniEntity newAssetMiniEntity = gson.fromJson(new String(error.networkResponse.data), AssetMiniEntity.class);
+                    if (newAssetMiniEntity.getMessage() != null) {
+                        assetDetailsMiniEntity.setMessage(newAssetMiniEntity.getMessage());
+                        assetDetailsMiniEntity.setStatusCode(newAssetMiniEntity.getStatusCode());
                     }
-                }else{
-                    Log.d("","smruthi om");
                 }
+                restClientInterface.onInitialize(assetDetailsMiniEntity, new VolleyError());
             }
-        });
+        },30000, 0);
         queue.add(getRequest);
-
     }
-*/
 
 }

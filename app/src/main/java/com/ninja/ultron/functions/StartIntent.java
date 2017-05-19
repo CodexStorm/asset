@@ -3,7 +3,6 @@ package com.ninja.ultron.functions;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.ninja.ultron.activity.HomepageActivity;
 import com.ninja.ultron.activity.HomescreenActivity;
 import com.ninja.ultron.activity.LoginActivity;
 import com.ninja.ultron.activity.SplashScreen;

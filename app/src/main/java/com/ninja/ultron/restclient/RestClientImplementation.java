@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.ninja.ultron.constant.Constants;
+import com.ninja.ultron.entity.AssetDetailsEntity;
+import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.LoginEntity;
 import com.ninja.ultron.functions.CommonFunctions;
@@ -73,6 +75,8 @@ public class RestClientImplementation {
 
     }
 
+
+
     public static void initApi(final InitApiEntity initApiEntity, final InitApiEntity.UltronRestClientInterface restClientInterface, final Context context) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = getAbsoluteUrl("/initializeConfig");
@@ -88,7 +92,7 @@ public class RestClientImplementation {
                             initApiEntity.setCurrentServerDate(newInitSuccessEntity.getCurrentServerDate());
                             initApiEntity.setAsgardUser(newInitSuccessEntity.getAsgardUser());
                             initApiEntity.setInitializeConfig(newInitSuccessEntity.getInitializeConfig());
-                            initApiEntity.setMyAssetList(newInitSuccessEntity.getMyAssetList());
+                            // initApiEntity.setMyAssetList(newInitSuccessEntity.getMyAssetList());
                             /*if (newInitSuccessEntity.getCustomer() == null) {
                                 initApiEntity.setCustomer(null);
                             } else {
@@ -126,5 +130,80 @@ public class RestClientImplementation {
         };
         queue.add(postRequest);
     }
+
+    public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_LIST_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    Gson gson = new Gson();
+                    AssetMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
+                    assetMiniEntity.setStausCode(successAssetMiniEntity.getStausCode());
+                    assetMiniEntity.setResponse(successAssetMiniEntity.getResponse());
+                    assetMiniEntity.setMessage(successAssetMiniEntity.getMessage());
+                    restClientInterface.onInitialize(assetMiniEntity, null);
+                }catch (Exception e){
+                    assetMiniEntity.setStausCode(500);
+                    assetMiniEntity.setMessage("Cast exception");
+                    restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse != null && error.networkResponse.data != null) {
+                    Gson gson = new Gson();
+                    AssetMiniEntity newAssetMiniEntity = gson.fromJson(new String(error.networkResponse.data), AssetMiniEntity.class);
+                    if (newAssetMiniEntity.getMessage() != null) {
+                        assetMiniEntity.setMessage(newAssetMiniEntity.getMessage());
+                        assetMiniEntity.setStausCode(newAssetMiniEntity.getStausCode());
+                    }
+                }
+                restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
+            }
+        },30000, 0);
+        queue.add(getRequest);
+    }
+/*
+    public static void fetchAssetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try { //op
+                            Gson gson = new Gson();
+                            AssetMiniEntity newAssetMiniSuccessEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
+                            assetMiniEntity.setStausCode(newAssetMiniSuccessEntity.getStausCode());
+                            assetMiniEntity.setResponse(newAssetMiniSuccessEntity.getResponse());
+                            Log.e("response",newAssetMiniSuccessEntity.getResponse().toString());
+                            assetMiniEntity.setMessage(newAssetMiniSuccessEntity.getMessage());
+                            restClientInterface.onInitialize(assetMiniEntity, null);
+                        }catch (Exception e){
+                            restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse != null && error.networkResponse.data != null) {
+                    Gson gson = new Gson();
+                    AssetMiniEntity newAssetMiniErrorEntity = gson.fromJson(new String(error.networkResponse.data), AssetMiniEntity.class);
+                    if (newAssetMiniErrorEntity.getMessage() != null) {
+                        assetMiniEntity.setMessage(newAssetMiniErrorEntity.getMessage());
+                        assetMiniEntity.setStausCode(newAssetMiniErrorEntity.getStausCode());
+                    }
+                }else{
+                    Log.d("","smruthi om");
+                }
+            }
+        });
+        queue.add(getRequest);
+
+    }
+*/
 
 }

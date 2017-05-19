@@ -100,7 +100,6 @@ public class InitApiEntity {
         this.appVersion = appVersion;
         this.appName = appName;
         this.asgardId = asgardId;
-
     }
 
     public JSONObject getInitAPIParams() {

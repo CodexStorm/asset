@@ -78,4 +78,8 @@ public class CommonFunctions {
         }
         return info.versionCode;
     }
+
+    public static void clearLocalPreference(Context context) {
+        UserDetails.setMyAssetList(context,null);
+    }
 }

@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
-import com.ninja.ultron.entity.AssetMiniEntity;
+import com.ninja.ultron.entity.CodeDecodeEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Prabhu Sivanandam on 17-May-17.
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 public class AssetRecyclerAdapter extends RecyclerView.Adapter<AssetRecyclerAdapter.ViewHolder>{
 
-    ArrayList<AssetMiniEntity> assetsList=new ArrayList<>();
-    AssetMiniEntity asset;
+    List<CodeDecodeEntity> assetsList=new ArrayList<>();
+    CodeDecodeEntity asset;
 
-    public AssetRecyclerAdapter(ArrayList<AssetMiniEntity> assetList) {
+    public AssetRecyclerAdapter(List<CodeDecodeEntity> assetList) {
         this.assetsList=assetList;
     }
 

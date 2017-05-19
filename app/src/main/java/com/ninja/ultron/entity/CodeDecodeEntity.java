@@ -3,22 +3,22 @@ package com.ninja.ultron.entity;
 public class CodeDecodeEntity {
 
 
-    private int code;
-    private String decode;
-    public int getCode() {
-        return code;
+    private int Id;
+    private String Name;
+    public int getId() {
+        return Id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(int id) {
+        this.Id = id;
     }
 
-    public String getDecode() {
-        return decode;
+    public String getName() {
+        return Name;
     }
 
-    public void setDecode(String decode) {
-        this.decode = decode;
+    public void setName(String name) {
+        this.Name = name;
     }
 
 }

@@ -131,9 +131,9 @@ public class UserDetails {
         editor.commit();
     }
 
-    public static int getMyAssetList(Context context) {
+    public static String getMyAssetList(Context context) {
         SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
-        return settings.getInt("roleType", 0);
+        return settings.getString("myAssetList","");
     }
 
     public static void setUserCityId(Context context, String vendorId) {

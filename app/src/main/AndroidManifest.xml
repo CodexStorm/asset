@@ -30,13 +30,8 @@
         android:theme="@style/MyMaterialTheme">
         <activity android:name=".activity.LoginActivity"/>
         <activity
-            android:name=".activity.HomepageActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/MyMaterialTheme" />
-        <activity
             android:name=".activity.AssetDetailsActivity"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".activity.MyAssetsActivity" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

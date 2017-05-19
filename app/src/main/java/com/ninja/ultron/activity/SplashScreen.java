@@ -177,13 +177,13 @@ public class SplashScreen extends AppCompatActivity {
                             UserDetails.setInitializeConfig(SplashScreen.this, (new Gson()).toJson(initializeConfig));
                         }
 
-                        if (initApiEntity.getMyAssetList() != null && initApiEntity.getMyAssetList().size() > 0) {
+                        /*if (initApiEntity.getMyAssetList() != null && initApiEntity.getMyAssetList().size() > 0) {
                              myAssetList = initApiEntity.getMyAssetList();
                             String getMyAssetListAsString = gs.toJson(myAssetList);
                             UserDetails.setMyAssetList(SplashScreen.this, getMyAssetListAsString);
                         } else {
                             UserDetails.setMyAssetList(SplashScreen.this, "");
-                        }
+                        }*/
 
                         if (initApiEntity.getAsgardUser().getAsgardUserPropertyMap().getFacility() != null) {
                             UserDetails.setFacilityId(SplashScreen.this, initApiEntity.getAsgardUser().getAsgardUserPropertyMap().getFacility().getId());
@@ -215,6 +215,11 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }
         }, SplashScreen.this);
+
+
+
+
+
     }
 
     public void hideOrShowOfflineView() {

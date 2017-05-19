@@ -1,5 +1,11 @@
 package com.ninja.ultron.entity;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -80,4 +86,6 @@ public class AssetDetailsEntity {
     public void setAssetAccessory(ArrayList<AssetAccessoryEntity> assetAccessory) {
         this.assetAccessory = assetAccessory;
     }
+
+
 }

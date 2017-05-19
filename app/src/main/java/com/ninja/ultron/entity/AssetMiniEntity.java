@@ -1,32 +1,53 @@
 package com.ninja.ultron.entity;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 /**
  * Created by Prabhu Sivanandam on 17-May-17.
  */
 
 public class AssetMiniEntity {
 
-        String Name;
-        String Id;
+    int stausCode;
 
-        public AssetMiniEntity(String name, String id) {
-            Name = name;
-            Id = id;
-        }
+    public AssetMiniEntity() {
+    }
 
-        public String getName() {
-            return Name;
-        }
+    public int getStausCode() {
+        return stausCode;
+    }
 
-        public void setName(String name) {
-            Name = name;
-        }
+    public void setStausCode(int stausCode) {
+        this.stausCode = stausCode;
+    }
 
-        public String getId() {
-            return Id;
-        }
+    public List<CodeDecodeEntity> getResponse() {
+        return response;
+    }
 
-        public void setId(String id) {
-            Id = id;
-        }
+    public void setResponse(List<CodeDecodeEntity> response) {
+        this.response = response;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    List<CodeDecodeEntity> response;
+    String message;
+
+    public interface UltronRestClientInterface {
+        void onInitialize(AssetMiniEntity assetMiniEntity, VolleyError error);
+    }
+
 }

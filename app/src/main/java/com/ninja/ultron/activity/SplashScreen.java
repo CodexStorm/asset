@@ -1,19 +1,13 @@
 package com.ninja.ultron.activity;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -24,7 +18,6 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.CodeDecodeEntity;
@@ -197,7 +190,7 @@ public class SplashScreen extends AppCompatActivity {
                             UserDetails.setFacilityName(SplashScreen.this, initApiEntity.getAsgardUser().getAsgardUserPropertyMap().getFacility().getName());
                         }
 
-                        StartIntent.startMainActivity(SplashScreen.this);
+                        StartIntent.HomescreenActivity(SplashScreen.this);
                         //StartIntent.startTestActivity(SplashScreen.this);
                         finish();
                     }

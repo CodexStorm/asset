@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setViewId();
         if(UserDetails.isUserLoggedIn(LoginActivity.this)) {
-            //go to homepage activity
+            StartIntent.HomescreenActivity(LoginActivity.this);
         }
         userName = etLoginUserName.getText().toString();
         userPassword = etLoginPassword.getText().toString();

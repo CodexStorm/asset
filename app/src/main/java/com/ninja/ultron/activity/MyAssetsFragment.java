@@ -1,12 +1,14 @@
 package com.ninja.ultron.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,23 +30,24 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * Created by Prabhu Sivanandam on 17-May-17.
+ * Created by Prabhu Sivanandam on 18-May-17.
  */
 
-public class MyAssetsActivity extends AppCompatActivity{
+public class MyAssetsFragment extends Fragment {
+
     private final String URL="http://10.0.0.46:8080/api/web/assets?userId=1";
     ArrayList<AssetMiniEntity> assetList=new ArrayList<>();
     RecyclerView recyclerView;
     AssetRecyclerAdapter adapter;
     AssetMiniEntity assetMini;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_assets);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.my_assets,container,false);
         assetList=new ArrayList<>();
-        RequestQueue queue= Volley.newRequestQueue(MyAssetsActivity.this);
-        recyclerView=(RecyclerView)findViewById(R.id.rvMyAssets);
-        LinearLayoutManager manager=new LinearLayoutManager(this);
+        RequestQueue queue= Volley.newRequestQueue(getContext());
+        recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
+        LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -75,15 +78,7 @@ public class MyAssetsActivity extends AppCompatActivity{
         recyclerView.setAdapter(adapter);
         recyclerView.hasFixedSize();
         adapter.notifyDataSetChanged();
-    }
 
-    public void onNextClick(View v)
-    {
-        startActivity(new Intent(MyAssetsActivity.this,AssetDetailsActivity.class));
-    }
-
-    public void onCardClick(View v)
-    {
-        startActivity(new Intent(MyAssetsActivity.this,AssetDetailsActivity.class));
+        return v;
     }
 }

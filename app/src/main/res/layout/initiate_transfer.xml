@@ -20,19 +20,19 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="35dp"
         android:text="Asset Name  :"
         android:textSize="18dp"
-        android:textColor="@android:color/background_dark"/>
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/tvassetid"
+        android:layout_toStartOf="@+id/tvassetid" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="32dp"
         android:text="Transfer To  :"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp"
@@ -75,13 +75,13 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView4"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="34dp"
         android:text="Employee ID :"
         android:textColor="@android:color/background_dark"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
 
     <TextView
         android:id="@+id/tvemployeeid"
@@ -97,7 +97,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:text="Department  :"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp"
@@ -109,7 +109,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="34dp"
         android:text="Status  :"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp"
@@ -136,4 +136,65 @@
         android:layout_alignStart="@+id/tvdepartment"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/tvTypeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:text="Type  :"
+        android:layout_below="@+id/textView10"
+        android:layout_alignRight="@+id/textView10"
+        android:layout_alignEnd="@+id/textView10" />
+
+    <Spinner
+        android:id="@+id/spinnerRequestType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvstatus"
+        android:layout_alignStart="@+id/tvstatus"
+        android:layout_alignTop="@+id/tvTypeHeader" />
+
+    <TextView
+        android:id="@+id/tvCommentsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvTypeHeader"
+        android:layout_alignRight="@+id/tvTypeHeader"
+        android:layout_below="@+id/spinnerRequestType"
+        android:layout_marginTop="21dp"
+        android:text="Comment  :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:id="@+id/etCommentsBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spinnerRequestType"
+        android:layout_alignStart="@+id/spinnerRequestType"
+        android:layout_alignTop="@+id/tvCommentsHeader"
+        android:ems="10"
+        android:textColor="@android:color/background_dark"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/tvInitiate"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/background_light"
+        android:background="@drawable/background_green_button"
+        android:layout_marginBottom="26dp"
+        android:text="     Initiate    "
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tvTypeHeader"
+        android:layout_alignStart="@+id/tvTypeHeader"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp" />
+
 </RelativeLayout>

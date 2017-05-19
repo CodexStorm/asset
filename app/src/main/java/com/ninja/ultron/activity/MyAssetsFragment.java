@@ -38,7 +38,7 @@ public class MyAssetsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.my_assets,container,false);
+        View v=inflater.inflate(R.layout.fragment_my_assets,container,false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);

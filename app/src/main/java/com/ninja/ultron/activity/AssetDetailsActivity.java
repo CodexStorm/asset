@@ -1,7 +1,6 @@
 package com.ninja.ultron.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetAccessoryAdapter;
@@ -49,7 +47,7 @@ public class AssetDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asset_details);
+        setContentView(R.layout.fragment_asset_details);
         tvName1 = (TextView)findViewById(R.id.tvName1);
         tvId1 = (TextView)findViewById(R.id.tvId1);
         tvCategory1 = (TextView)findViewById(R.id.tvCategory1);

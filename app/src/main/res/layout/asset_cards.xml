@@ -59,6 +59,16 @@
                 android:layout_alignTop="@+id/asset_name"
                 app:srcCompat="@drawable/item_name"
                 android:layout_alignLeft="@+id/imageView" />
+            <ImageView
+                android:id="@+id/ivMoreDetails"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/more_details"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 

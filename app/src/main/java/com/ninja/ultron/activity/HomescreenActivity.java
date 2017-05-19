@@ -3,6 +3,7 @@ package com.ninja.ultron.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,7 @@ public class HomescreenActivity extends AppCompatActivity {
         //add the fragments with titles here
 
         adapter.addFragments(new MyAssetsFragment(),"My Assets");
-        adapter.addFragments(new AssetDetailsFragment(),"Pending Requests");
+        adapter.addFragments(new fragment2(),"Pending Requests");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

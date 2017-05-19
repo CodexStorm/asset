@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by Prabhu Sivanandam on 18-May-17.
  */
 
-public class MyAssetsFragment extends Fragment {
+public class MyAssetsFragment extends Fragment{
 
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
@@ -60,13 +61,19 @@ public class MyAssetsFragment extends Fragment {
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
                         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
-                        adapter=new AssetListRecyclerAdapter(myAssetList);
+                        adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
+                            @Override
+                            public void CallAssetDetailsFragment() {
+                                AssetDetailsFragment fragment = new AssetDetailsFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
+                            }
+                        });
                         recyclerView.setAdapter(adapter);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
 
                     }else{
-                        Log.d("","commited om");
+                        Log.d("","commited");
                     }
                 } else {
                     if(assetMiniEntity.getStatusCode() == 401) {
@@ -76,4 +83,6 @@ public class MyAssetsFragment extends Fragment {
             }
         },getActivity());
     }
+
+
 }

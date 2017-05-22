@@ -1,13 +1,18 @@
-package com.ninja.ultron.activity;
+package com.ninja.ultron.Fragments;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -49,6 +54,7 @@ public class AssetDetailsFragment extends Fragment {
     AssetAccessoryEntity assetAccessory;
     List<AssetDetailsEntity> assetDetailsList;
     AssetAccessoryAdapter adapter;
+    BottomNavigationView bottomNavigationView;
 
     @Nullable
     @Override
@@ -61,6 +67,23 @@ public class AssetDetailsFragment extends Fragment {
         tvMaker1 = (TextView)view.findViewById(R.id.tvMaker1);
         tvSpecifiaction1 = (TextView)view.findViewById(R.id.tvSpecification1);
         lvAccessories = (ListView) view.findViewById(R.id.lvAccessories);
+        bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_request:
+                        Toast.makeText(getActivity(),"Transfer Request",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_report:
+                        Toast.makeText(getActivity(),"Asset Report",Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+                return true;
+            }
+        });
+
 
         callAssetDetailsApi();
         return view;
@@ -86,7 +109,7 @@ public class AssetDetailsFragment extends Fragment {
                         String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
                         UserDetails.setAssetAccessoryList(getContext(),myAssetAccessoryListAsString);
                         assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
-                        adapter= new AssetAccessoryAdapter(getContext(),assetAccessoryList);
+                        adapter= new AssetAccessoryAdapter(getActivity(),assetAccessoryList);
                         lvAccessories.setAdapter(adapter);
                     }
                 } else {

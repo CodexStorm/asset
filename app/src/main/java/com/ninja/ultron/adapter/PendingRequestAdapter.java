@@ -10,6 +10,7 @@ import com.ninja.ultron.R;
 import com.ninja.ultron.entity.PendingRequestEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Prabhu Sivanandam on 18-May-17.
@@ -17,10 +18,10 @@ import java.util.ArrayList;
 
 public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAdapter.ViewHolder> {
 
-    ArrayList<PendingRequestEntity> pendingRequestEntityArrayList=new ArrayList<>();
+    List<PendingRequestEntity> pendingRequestEntityArrayList=new ArrayList<>();
     PendingRequestEntity pendingRequestEntity;
 
-    public PendingRequestAdapter(ArrayList<PendingRequestEntity> pendingRequestEntityArrayList)
+    public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList)
     {
         this.pendingRequestEntityArrayList=pendingRequestEntityArrayList;
     }
@@ -35,9 +36,9 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         pendingRequestEntity=pendingRequestEntityArrayList.get(position);
-        holder.tvAssetStatus.setText(pendingRequestEntity.getRequestStatus());
-        holder.tvAssetMake.setText(pendingRequestEntity.getAssetMakeName());
-        holder.tvAssetRequestMadeDate.setText(pendingRequestEntity.getRequestRaisedDate());
+        holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
+        holder.tvAssetMake.setText(pendingRequestEntity.getAssetName());
+        holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
     }
 
     @Override
@@ -47,12 +48,12 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvAssetMake,tvAssetStatus,tvAssetRequestMadeDate;
+        TextView tvAssetMake,tvAssetStatus,tvAssetRequestId;
         public ViewHolder(View itemView) {
             super(itemView);
             tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
-            tvAssetRequestMadeDate=(TextView)itemView.findViewById(R.id.tvAssetRequestMadeDate);
+            tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
         }
     }
 

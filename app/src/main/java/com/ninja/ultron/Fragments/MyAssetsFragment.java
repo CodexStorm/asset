@@ -1,4 +1,4 @@
-package com.ninja.ultron.activity;
+package com.ninja.ultron.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ninja.ultron.Fragments.AssetDetailsFragment;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
@@ -46,7 +46,7 @@ public class MyAssetsFragment extends Fragment{
         callMyAssetListApi();
         Log.d("val",UserDetails.getMyAssetList(getActivity()));
         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
-                return v;
+        return v;
     }
 
     private void callMyAssetListApi() {
@@ -60,7 +60,7 @@ public class MyAssetsFragment extends Fragment{
                         myAssetList = assetMiniEntity.getResponse();
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
-                        myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
+                     //   myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
                         adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
                             @Override
                             public void CallAssetDetailsFragment() {
@@ -68,9 +68,9 @@ public class MyAssetsFragment extends Fragment{
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
                             }
                         });
-                        recyclerView.setAdapter(adapter);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(adapter);
 
                     }else{
                         Log.d("","commited");

@@ -22,8 +22,8 @@
     <color name="col_4400">#44000000</color>
 
     <color name="themegrayDark">#616161</color>
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorPrimary">#388E3C</color>
+    <color name="colorPrimaryDark">#388E3C</color>
     <color name="colorAccent">#000</color>
     <color name="textColorPrimary">#ffffff</color>
     <color name="windowBackground">#FFFFFF</color>

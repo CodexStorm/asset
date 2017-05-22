@@ -18,7 +18,7 @@ public class InitiateTransferFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.initiate_transfer,container,false);
+        View view=inflater.inflate(R.layout.fragment_initiate_transfer,container,false);
         return view;
     }
 }

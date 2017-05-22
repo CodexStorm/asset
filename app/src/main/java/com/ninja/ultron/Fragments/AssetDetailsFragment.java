@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,7 +110,7 @@ public class AssetDetailsFragment extends Fragment {
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
                         String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
                         UserDetails.setAssetAccessoryList(getContext(),myAssetAccessoryListAsString);
-                        assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
+                        //assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
                         adapter= new AssetAccessoryAdapter(getActivity(),assetAccessoryList);
                         lvAccessories.setAdapter(adapter);
                     }

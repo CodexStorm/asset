@@ -1,16 +1,13 @@
 package com.ninja.ultron.activity;
 
 import android.content.Intent;
-import android.graphics.Outline;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -34,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-                /*Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(LoginActivity.this,HomescreenActivity.class);
+                startActivity(intent);
             }
         });
     }

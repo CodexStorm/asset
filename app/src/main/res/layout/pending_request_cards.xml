@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginLeft="3dp"
+    android:id="@+id/cardPendingRequest"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="3dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/item_name"
+            android:id="@+id/image_asset_make" />
+
+        <TextView
+            android:id="@+id/tvAssetMake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/image_asset_make"
+            android:layout_marginLeft="34dp"
+            android:textSize="30dp"
+            android:layout_marginStart="34dp"
+            android:layout_toEndOf="@+id/image_asset_make"
+            android:layout_toRightOf="@+id/image_asset_make" />
+
+        <ImageView
+            android:id="@+id/image_asset_status"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/image_asset_make"
+            android:layout_marginTop="25dp"
+            app:srcCompat="@drawable/status_icon" />
+
+        <TextView
+            android:id="@+id/tvAssetStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/image_asset_status"
+            android:layout_alignLeft="@+id/tvAssetMake"
+            android:layout_alignStart="@+id/tvAssetMake"
+            android:textColor="@android:color/background_dark"
+            android:textSize="30dp" />
+
+        <ImageView
+            android:id="@+id/image_request_raised_on"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@+id/image_asset_status"
+            android:layout_alignRight="@+id/image_asset_status"
+            android:layout_below="@+id/image_asset_status"
+            android:layout_marginTop="27dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/date_icon" />
+
+        <TextView
+            android:id="@+id/tvAssetRequestMadeDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/image_request_raised_on"
+            android:layout_alignLeft="@+id/tvAssetStatus"
+            android:layout_alignStart="@+id/tvAssetStatus"
+            android:textColor="@android:color/background_dark"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -6,38 +6,38 @@ package com.ninja.ultron.entity;
 
 public class PendingRequestEntity {
 
-    String assetMakeName;
-    String requestStatus;
-    String requestRaisedDate;
+    String assetName;
+    String status;
+    int requestId;
 
-    public PendingRequestEntity(String assetMakeName, String requestStatus, String requestRaisedDate) {
-        this.assetMakeName = assetMakeName;
-        this.requestStatus = requestStatus;
-        this.requestRaisedDate = requestRaisedDate;
+    public PendingRequestEntity(String assetName, String status, int requestId) {
+        this.assetName = assetName;
+        this.status = status;
+        this.requestId = requestId;
     }
 
-    public String getAssetMakeName() {
-        return assetMakeName;
+    public String getAssetName() {
+        return assetName;
     }
 
-    public void setAssetMakeName(String assetMakeName) {
-        this.assetMakeName = assetMakeName;
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
-    public String getRequestStatus() {
-        return requestStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRequestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getRequestRaisedDate() {
-        return requestRaisedDate;
+    public int getRequestId() {
+        return requestId;
     }
 
-    public void setRequestRaisedDate(String requestRaisedDate) {
-        this.requestRaisedDate = requestRaisedDate;
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 
 }

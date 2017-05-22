@@ -46,7 +46,7 @@ public class MyAssetsFragment extends Fragment{
         callMyAssetListApi();
         Log.d("val",UserDetails.getMyAssetList(getActivity()));
         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
-                return v;
+        return v;
     }
 
     private void callMyAssetListApi() {
@@ -60,7 +60,7 @@ public class MyAssetsFragment extends Fragment{
                         myAssetList = assetMiniEntity.getResponse();
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
-                        myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
+                     //   myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
                         adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
                             @Override
                             public void CallAssetDetailsFragment() {

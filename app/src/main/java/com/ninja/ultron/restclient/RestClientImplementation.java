@@ -15,6 +15,7 @@ import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.LoginEntity;
+import com.ninja.ultron.entity.PendingRequestMiniEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 
@@ -199,6 +200,48 @@ public class RestClientImplementation {
                 restClientInterface.onInitialize(assetDetailsMiniEntity, new VolleyError());
             }
         },30000, 0);
+        queue.add(getRequest);
+    }
+
+    public static void pendingRequestsApi(final PendingRequestMiniEntity pendingRequestMiniEntity,final PendingRequestMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context)
+    {
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        JsonBaseRequest getRequest=new JsonBaseRequest(Request.Method.GET, Constants.PENDING_REQUESTS_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try
+                {
+                    Gson gson=new Gson();
+                    PendingRequestMiniEntity successEntity=gson.fromJson(response.toString(),PendingRequestMiniEntity.class);
+                    pendingRequestMiniEntity.setMessage((String)successEntity.getMessage());
+                    pendingRequestMiniEntity.setStatusCode((int)successEntity.getStatusCode());
+                    pendingRequestMiniEntity.setResponse(successEntity.getResponse());
+                    ultronRestClientInterface.onInitialize(pendingRequestMiniEntity,null);
+                }
+                catch (Exception e)
+                {
+                    pendingRequestMiniEntity.setStatusCode(500);
+                    pendingRequestMiniEntity.setMessage("Cast Exception");
+                    ultronRestClientInterface.onInitialize(pendingRequestMiniEntity,new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                if(error.networkResponse!=null && error.networkResponse.data!=null)
+                {
+                    Gson gson=new Gson();
+                    PendingRequestMiniEntity failureEntity=gson.fromJson(new String(error.networkResponse.data),PendingRequestMiniEntity.class );
+                    if(failureEntity.getMessage()!=null)
+                    {
+                        pendingRequestMiniEntity.setMessage(failureEntity.getMessage());
+                        pendingRequestMiniEntity.setStatusCode(failureEntity.getStatusCode());
+                    }
+                }
+                ultronRestClientInterface.onInitialize(pendingRequestMiniEntity,new VolleyError());
+            }
+        },3000,0);
         queue.add(getRequest);
     }
 

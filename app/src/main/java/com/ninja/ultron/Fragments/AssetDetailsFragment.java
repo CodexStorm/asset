@@ -73,8 +73,9 @@ public class AssetDetailsFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_request:
-                        Toast.makeText(getActivity(),"Transfer Request",Toast.LENGTH_SHORT).show();
-                        break;
+                         InitiateTransferFragment initiateTransferFragment=new InitiateTransferFragment();
+                         getFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,initiateTransferFragment).addToBackStack(null).commit();
+                         break;
                     case R.id.action_report:
                         Toast.makeText(getActivity(),"Asset Report",Toast.LENGTH_SHORT).show();
                         break;

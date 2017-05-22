@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="85dp"
+        android:text="Asset ID  :"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="    Asset Name:"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/tvAssetId"
+        android:layout_toStartOf="@+id/tvAssetId" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Transfer To  :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tvAssetId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:id="@+id/tvAssetName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/tvAssetId"
+        android:layout_alignStart="@+id/tvAssetId"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Employee ID :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvEmployeeId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView7"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_alignLeft="@+id/tvAssetName"
+        android:layout_alignStart="@+id/tvAssetName" />
+
+
+    <TextView
+        android:id="@+id/tvTypeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:text="Damage Type  :"
+        android:layout_below="@+id/textView7"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+
+
+    <TextView
+        android:id="@+id/tvCommentsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comment  :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@+id/etCommentsBox"
+        android:layout_alignBottom="@+id/etCommentsBox"
+        android:layout_alignRight="@+id/tvTypeHeader"
+        android:layout_alignEnd="@+id/tvTypeHeader" />
+
+    <EditText
+        android:id="@+id/etCommentsBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@android:color/background_dark"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/tvTypeHeader"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/tvAssetName"
+        android:layout_alignStart="@+id/tvAssetName" />
+
+    <TextView
+        android:id="@+id/tvTranferTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvAssetName"
+        android:layout_alignStart="@+id/tvAssetName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_above="@+id/textView7" />
+
+    <Spinner
+        android:id="@+id/spinnerRequestType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvTypeHeader"
+        android:layout_alignLeft="@+id/etCommentsBox"
+        android:layout_alignStart="@+id/etCommentsBox" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state"
+        app:menu="@menu/damage_report_menu"
+        />
+
+</RelativeLayout>

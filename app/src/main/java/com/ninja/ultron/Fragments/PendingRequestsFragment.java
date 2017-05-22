@@ -1,4 +1,4 @@
-package com.ninja.ultron.activity;
+package com.ninja.ultron.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

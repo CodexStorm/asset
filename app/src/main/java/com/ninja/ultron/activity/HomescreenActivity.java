@@ -3,11 +3,12 @@ package com.ninja.ultron.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.ninja.ultron.Fragments.MyAssetsFragment;
+import com.ninja.ultron.Fragments.PendingRequestsFragment;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.HomeScreenViewPagerAdapter;
 import com.ninja.ultron.entity.CodeDecodeEntity;
@@ -31,6 +32,7 @@ public class HomescreenActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homescreen);
+
         CommonFunctions.clearLocalPreference(getApplicationContext());
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

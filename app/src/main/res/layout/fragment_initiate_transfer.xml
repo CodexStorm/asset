@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="85dp"
+        android:text="Asset ID  :"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Asset Name  :"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/tvassetid"
+        android:layout_toStartOf="@+id/tvassetid" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Transfer To  :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tvassetid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:id="@+id/tvassetname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/tvassetid"
+        android:layout_alignStart="@+id/tvassetid"
+        android:textSize="18dp"
+        android:textColor="@android:color/background_dark"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Employee ID :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvemployeeid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView7"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_alignLeft="@+id/tvassetname"
+        android:layout_alignStart="@+id/tvassetname" />
+
+
+    <TextView
+        android:id="@+id/tvTypeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:text="RequestType  :"
+        android:layout_below="@+id/textView7"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+
+
+    <TextView
+        android:id="@+id/tvCommentsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comment  :"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@+id/etCommentsBox"
+        android:layout_alignBottom="@+id/etCommentsBox"
+        android:layout_alignRight="@+id/tvTypeHeader"
+        android:layout_alignEnd="@+id/tvTypeHeader" />
+
+    <EditText
+        android:id="@+id/etCommentsBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@android:color/background_dark"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/tvTypeHeader"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/tvassetname"
+        android:layout_alignStart="@+id/tvassetname" />
+
+    <TextView
+        android:id="@+id/tvInitiate"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/background_light"
+        android:background="@drawable/background_green_button"
+        android:text="     Initiate    "
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_below="@+id/etCommentsBox"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="37dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvassetname"
+        android:layout_alignStart="@+id/tvassetname"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_above="@+id/textView7" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvTypeHeader"
+        android:layout_alignLeft="@+id/etCommentsBox"
+        android:layout_alignStart="@+id/etCommentsBox" />
+
+</RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,8 +74,9 @@ public class AssetDetailsFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_request:
-                        Toast.makeText(getActivity(),"Transfer Request",Toast.LENGTH_SHORT).show();
-                        break;
+                         InitiateTransferFragment initiateTransferFragment=new InitiateTransferFragment();
+                         getFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,initiateTransferFragment).addToBackStack(null).commit();
+                         break;
                     case R.id.action_report:
                         Toast.makeText(getActivity(),"Asset Report",Toast.LENGTH_SHORT).show();
                         break;
@@ -108,7 +110,7 @@ public class AssetDetailsFragment extends Fragment {
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
                         String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
                         UserDetails.setAssetAccessoryList(getContext(),myAssetAccessoryListAsString);
-                        assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
+                        //assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
                         adapter= new AssetAccessoryAdapter(getActivity(),assetAccessoryList);
                         lvAccessories.setAdapter(adapter);
                     }

@@ -3,6 +3,7 @@ package com.ninja.ultron.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,10 +41,25 @@ public class HomescreenActivity extends AppCompatActivity {
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         adapter=new HomeScreenViewPagerAdapter(getSupportFragmentManager());
         //add the fragments with titles here
-
         adapter.addFragments(new MyAssetsFragment(),"My Assets");
         adapter.addFragments(new PendingRequestsFragment(),"Pending Requests");
         viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         tabLayout.setupWithViewPager(viewPager);
     }
 

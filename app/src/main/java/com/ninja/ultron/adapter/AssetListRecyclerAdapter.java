@@ -1,6 +1,7 @@
 package com.ninja.ultron.adapter;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import com.ninja.ultron.functions.CommonFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.View.GONE;
 
 /**
  * Created by Prabhu Sivanandam on 17-May-17.
@@ -72,6 +75,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
+        TabLayout layout;
         TextView AssetId,AssetName;
         ImageView ivMoreDetails;
         public ViewHolder(View itemView) {
@@ -79,7 +83,6 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
             AssetName=(TextView)itemView.findViewById(R.id.asset_name);
             ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivMoreDetails);
-
         }
     }
 }

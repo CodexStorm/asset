@@ -78,7 +78,7 @@
         android:layout_alignStart="@+id/textView4" />
 
     <TextView
-        android:id="@+id/tvemployeeid"
+        android:id="@+id/tvEmployeeId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView7"
@@ -138,7 +138,7 @@
         android:layout_above="@+id/textView7" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerRequestType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tvTypeHeader"

@@ -9,76 +9,80 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
-import com.ninja.ultron.adapter.AssetRecyclerAdapter;
+import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
+import com.ninja.ultron.entity.CodeDecodeEntity;
+import com.ninja.ultron.functions.CommonFunctions;
+import com.ninja.ultron.functions.UserDetails;
+import com.ninja.ultron.restclient.RestClientImplementation;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Prabhu Sivanandam on 18-May-17.
  */
 
-public class MyAssetsFragment extends Fragment {
+public class MyAssetsFragment extends Fragment{
 
-    private final String URL="http://10.0.0.46:8080/api/web/assets?userId=1";
-    ArrayList<AssetMiniEntity> assetList=new ArrayList<>();
+
+    List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     RecyclerView recyclerView;
-    AssetRecyclerAdapter adapter;
+    AssetListRecyclerAdapter adapter;
     AssetMiniEntity assetMini;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.my_assets,container,false);
-        assetList=new ArrayList<>();
-        RequestQueue queue= Volley.newRequestQueue(getContext());
+        View v=inflater.inflate(R.layout.fragment_my_assets,container,false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Log.d("sds",response.toString());
-                    Gson gson=new Gson();
-                    JSONArray array=response.getJSONArray("response");
-                    Log.d("array",array.toString());
-                    Type T=new TypeToken<ArrayList<AssetMiniEntity>>(){}.getType();
-                    assetList=gson.fromJson(array.toString(),T);
-                    adapter=new AssetRecyclerAdapter(assetList);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.hasFixedSize();
-                    adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        callMyAssetListApi();
+        Log.d("val",UserDetails.getMyAssetList(getActivity()));
+        myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
+                return v;
+    }
+
+    private void callMyAssetListApi() {
+        AssetMiniEntity assetMiniEntity = new AssetMiniEntity();
+        RestClientImplementation.assetListApi(assetMiniEntity, new AssetMiniEntity.UltronRestClientInterface() {
+            @Override//return call
+            public void onInitialize(AssetMiniEntity assetMiniEntity, VolleyError error) {
+                if(error == null) {
+                    if(assetMiniEntity.getResponse() != null) {
+                        Gson gs = new Gson();
+                        myAssetList = assetMiniEntity.getResponse();
+                        String myAssetListAsString = gs.toJson(myAssetList);
+                        UserDetails.setMyAssetList(getContext(),myAssetListAsString);
+                        myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
+                        adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
+                            @Override
+                            public void CallAssetDetailsFragment() {
+                                AssetDetailsFragment fragment = new AssetDetailsFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
+                            }
+                        });
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.hasFixedSize();
+                        adapter.notifyDataSetChanged();
+
+                    }else{
+                        Log.d("","commited");
+                    }
+                } else {
+                    if(assetMiniEntity.getStatusCode() == 401) {
+                        CommonFunctions.toastString("Unauthorized",getActivity());
+                    }
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        queue.add(request);
-        adapter=new AssetRecyclerAdapter(assetList);
-        recyclerView.setAdapter(adapter);
-        recyclerView.hasFixedSize();
-        adapter.notifyDataSetChanged();
-
-        return v;
+        },getActivity());
     }
+
+
 }

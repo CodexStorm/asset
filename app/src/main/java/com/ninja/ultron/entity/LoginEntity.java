@@ -13,14 +13,22 @@ import org.json.JSONObject;
 public class LoginEntity {
     private String userName;
     private String password;
+    private AsgardUser asgardUser;
+    private int code;
+    private String message;
+
+    public AsgardUser getAsgardUser() {
+        return asgardUser;
+    }
+
+    public void setAsgardUser(AsgardUser asgardUser) {
+        this.asgardUser = asgardUser;
+    }
 
     public LoginEntity(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-
-    private int code;
-    private String message;
 
     public int getCode() {
         return code;

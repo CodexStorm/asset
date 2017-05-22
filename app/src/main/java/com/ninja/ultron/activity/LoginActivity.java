@@ -1,24 +1,38 @@
 package com.ninja.ultron.activity;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
 import com.ninja.ultron.entity.LoginEntity;
+import com.ninja.ultron.functions.CommonFunctions;
+import com.ninja.ultron.functions.StartIntent;
+import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
 public class LoginActivity extends AppCompatActivity {
-    Button bLogin;
+    TextView tvLogin;
     RelativeLayout rlProgress;
+    InputMethodManager imm;
+    EditText etLoginUserName, etLoginPassword;
+    String userName,userPassword;
+    RelativeLayout rlLogin;
+    ProgressBar splashCentreProgressBar;
+    Boolean isLoginInProcess;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -27,35 +41,102 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.act_login);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setViewId();
-        bLogin.setOnClickListener(new View.OnClickListener() {
+        if(UserDetails.isUserLoggedIn(LoginActivity.this)) {
+            StartIntent.HomescreenActivity(LoginActivity.this);
+        }
+        userName = etLoginUserName.getText().toString();
+        userPassword = etLoginPassword.getText().toString();
+
+        etLoginPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                login();
-                Intent intent = new Intent(LoginActivity.this,HomescreenActivity.class);
-                startActivity(intent);
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    userName = etLoginUserName.getText().toString();
+                    userPassword = etLoginPassword.getText().toString();
+                    if (userPassword == null || userPassword.length() < 1) {
+                        CommonFunctions.toastString("password should not be empty", LoginActivity.this);
+                    } else {
+                        loginValidation(v);
+                    }
+                }
+                return false;
             }
         });
+
+    }
+
+    public void loginValidation(View v) {
+        userName = etLoginUserName.getText().toString();
+        userPassword = etLoginPassword.getText().toString();
+        tvLogin.setText("Retry");
+        if (userName == null || userName.length()<3 ) {
+            CommonFunctions.toastString("Enter a Valid User Name",LoginActivity.this);
+        }else if(userPassword == null || userPassword.length()<1){
+            CommonFunctions.toastString("password should not be empty",LoginActivity.this);
+        }else{
+            tvLogin.setVisibility(View.GONE);
+            tvLogin.setVisibility(View.GONE);
+            login();
+        }
     }
 
     public void setViewId() {
         rlProgress = (RelativeLayout) findViewById(R.id.rlProgress);
-        bLogin = (Button) findViewById(R.id.bLogin);
-
+        tvLogin = (TextView) findViewById(R.id.tvLogin);
+        imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        etLoginUserName =  (EditText)findViewById(R.id.etLoginUserName);
+        etLoginPassword = (EditText)findViewById(R.id.etLoginPassword);
+        rlLogin = (RelativeLayout) findViewById(R.id.rlLogin);
+        splashCentreProgressBar = (ProgressBar) findViewById(R.id.splashCentreProgressBar);
     }
 
     public void login() {
-        LoginEntity loginEntity = new LoginEntity("sarath", "123456");
+        rlLogin.setVisibility(View.GONE);
         rlProgress.setVisibility(View.VISIBLE);
+        isLoginInProcess = true;
+        LoginEntity loginEntity = new LoginEntity(userName,userPassword);
+        splashCentreProgressBar.setVisibility(View.VISIBLE);
+
         RestClientImplementation.userLogin(loginEntity, new LoginEntity.RestClientInterface() {
             @Override
             public void onLogin(LoginEntity loginEntity, VolleyError error) {
-                if (error == null) {
-                    Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
-                } else if (error != null) {
-                    Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
-                }
-                rlProgress.setVisibility(View.GONE);
+                   isLoginInProcess = false;
+                    if(error == null){
+                        tvLogin.setVisibility(View.VISIBLE);
+                        splashCentreProgressBar.setVisibility(View.GONE);
+                        if(loginEntity.getAsgardUser()==null){
+                            CommonFunctions.toastString("Your access is denied. Please contact your admin.",LoginActivity.this);
+                        }else {
+                            UserDetails.serAsgardUserId(LoginActivity.this, loginEntity.getAsgardUser().getId());
+                            UserDetails.setUserName(LoginActivity.this, userName);
+                            UserDetails.setUserPassword(LoginActivity.this, userPassword);
+                            UserDetails.setUserLoggedIn(LoginActivity.this, true);
+                            StartIntent.startSplashScreen(LoginActivity.this);
+                        }
+                    } else {
+                        tvLogin.setVisibility(View.VISIBLE);
+                        tvLogin.setText("Retry");
+                        splashCentreProgressBar.setVisibility(View.GONE);
+                        rlLogin.setVisibility(View.VISIBLE);
+                        if(loginEntity.getCode() == 401){//404 == authentication error
+                            CommonFunctions.toastString("Invalid Username or Password",LoginActivity.this);
+                        }else if(loginEntity.getMessage()!=null){
+                            CommonFunctions.toastString(loginEntity.getMessage(),LoginActivity.this);
+                        }else{
+                            CommonFunctions.toastString("We are revamping our system for giving you a better performance. Kindly try again later.",LoginActivity.this);
+                        }
+                    }
             }
-        }, LoginActivity.this);
+        },LoginActivity.this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isLoginInProcess) {
+
+        }else{
+            StartIntent.exitApplication(LoginActivity.this);
+        }
     }
 }

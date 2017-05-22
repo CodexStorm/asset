@@ -10,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.HomeScreenViewPagerAdapter;
+import com.ninja.ultron.entity.CodeDecodeEntity;
+import com.ninja.ultron.functions.CommonFunctions;
+
+import java.util.List;
 
 
 /**
@@ -22,10 +26,12 @@ public class HomescreenActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     HomeScreenViewPagerAdapter adapter;
+    List<CodeDecodeEntity> myAssetList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homescreen);
+        setContentView(R.layout.act_homescreen);
+        CommonFunctions.clearLocalPreference(getApplicationContext());
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
@@ -33,9 +39,11 @@ public class HomescreenActivity extends AppCompatActivity {
         adapter=new HomeScreenViewPagerAdapter(getSupportFragmentManager());
         //add the fragments with titles here
 
-        adapter.addFragments(new MyAssetsFragment(),"Tab1");
-        adapter.addFragments(new fragment2(),"Tab 2");
+        adapter.addFragments(new MyAssetsFragment(),"My Assets");
+        adapter.addFragments(new fragment2(),"Pending Requests");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+
 }

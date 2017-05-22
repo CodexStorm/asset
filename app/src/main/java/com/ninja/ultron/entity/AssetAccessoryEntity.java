@@ -1,8 +1,5 @@
 package com.ninja.ultron.entity;
 
-/**
- * Created by manoj on 17-05-2017.
- */
 
 public class AssetAccessoryEntity {
     private String name;

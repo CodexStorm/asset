@@ -15,6 +15,9 @@
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:id="@+id/rlLogin"
             android:layout_gravity="center">
 
             <TextView
@@ -23,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ninjacart"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/actionbarcolor"
                 android:textSize="60sp"
                 android:textStyle="bold"
                 android:typeface="sans" />
@@ -34,16 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvNinjacart"
                 android:padding="15dp"
-                android:textColorHint="@color/colorPrimary">
+                android:textColorHint="@color/actionbarcolor">
 
                 <EditText
-                    android:id="@+id/etUserName"
+                    android:id="@+id/etLoginUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_username"
                     android:isScrollContainer="false"
                     android:singleLine="true"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="#000" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -52,29 +55,37 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tilUserName"
                 android:padding="15dp"
-                android:textColorHint="@color/colorPrimary">
+                android:textColorHint="@color/actionbarcolor">
 
                 <EditText
-                    android:id="@+id/etPassword"
+                    android:id="@+id/etLoginPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
                     android:singleLine="true"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="#000" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/bLogin"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/tvLogin"
                 android:layout_below="@+id/tilPassword"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ripple"
-                android:elevation="4dp"
-                android:padding="5dp"
-                android:text="@string/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:clickable="true"
+                android:layout_alignParentBottom="true"
+                android:onClick="loginValidation"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="@color/actionbarcolor"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:textSize="25dp"
+                android:visibility="visible"
                 tools:targetApi="lollipop" />
         </RelativeLayout>
     </ScrollView>
@@ -85,13 +96,26 @@
         android:layout_height="match_parent"
         android:visibility="gone"
         android:clickable="true"
+        android:layout_centerInParent="true"
         android:background="#cc000000">
         <ProgressBar
             android:layout_width="50dp"
             android:layout_height="50dp"
-            style="?android:attr/progressBarStyle"
+            android:id="@+id/splashCentreProgressBar"
+            android:layout_centerInParent="true"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/copyRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="7dp"
+        android:text="\u00a9 ninjacart 2016"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:textColor="#d3d3d3"/>
 </RelativeLayout>
 

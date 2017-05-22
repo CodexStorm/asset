@@ -31,6 +31,7 @@ public class HomescreenActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homescreen);
+
         CommonFunctions.clearLocalPreference(getApplicationContext());
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

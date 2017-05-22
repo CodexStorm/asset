@@ -118,7 +118,7 @@
         android:layout_marginTop="35dp"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp"
-        android:text="Type  :"
+        android:text="RequestType  :"
         android:layout_below="@+id/textView9"
         android:layout_alignRight="@+id/textView9"
         android:layout_alignEnd="@+id/textView9" />
@@ -163,10 +163,8 @@
         android:textStyle="bold"
         android:fontFamily="sans-serif"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/tvTypeHeader"
-        android:layout_alignStart="@+id/tvTypeHeader"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp" />
+        android:layout_toRightOf="@+id/tvCommentsHeader"
+        android:layout_toEndOf="@+id/tvCommentsHeader" />
 
     <TextView
         android:id="@+id/textView5"
@@ -179,14 +177,12 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_above="@+id/textView7" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvTypeHeader"
         android:layout_alignLeft="@+id/etCommentsBox"
-        android:layout_alignStart="@+id/etCommentsBox"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/etCommentsBox" />
+        android:layout_alignStart="@+id/etCommentsBox" />
 
 </RelativeLayout>

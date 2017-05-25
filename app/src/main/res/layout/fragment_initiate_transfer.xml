@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@android:color/background_light">
 
         <TextView
@@ -123,12 +122,12 @@
             android:ems="10"
             android:textColor="@android:color/background_dark"
             android:inputType="textMultiLine"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="47dp"
             android:layout_below="@+id/tvTypeHeader"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/tvAssetName"
-            android:layout_alignStart="@+id/tvAssetName" />
+            android:layout_alignLeft="@+id/tvEmployeeId"
+            android:layout_alignStart="@+id/tvEmployeeId" />
 
         <TextView
             android:id="@+id/tvInitiate"
@@ -140,15 +139,14 @@
             android:text="     Initiate    "
             android:textStyle="bold"
             android:fontFamily="sans-serif"
-            android:layout_marginLeft="38dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/etCommentsBox"
-            android:layout_alignLeft="@+id/tvTypeHeader"
-            android:layout_alignStart="@+id/tvTypeHeader" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp" />
 
         <TextView
             android:id="@+id/tvTranferTo"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tvAssetName"
@@ -158,13 +156,16 @@
             android:layout_alignTop="@+id/textView4"
             android:layout_above="@+id/textView7" />
 
-        <Spinner
-            android:id="@+id/spinnerRequestType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/etCommentsBox"
-            android:layout_alignLeft="@+id/etCommentsBox"
-            android:layout_alignStart="@+id/etCommentsBox" />
-    </RelativeLayout>
+    <Spinner
+        android:id="@+id/spinnerRequestType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTypeHeader"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/etCommentsBox"
+        android:layout_alignStart="@+id/etCommentsBox" />
 
-</ScrollView>
+
+</RelativeLayout>
+

@@ -1,5 +1,6 @@
 package com.ninja.ultron.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -38,6 +39,7 @@ public class HomescreenActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homescreen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         CommonFunctions.clearLocalPreference(getApplicationContext());
         toolbar=(Toolbar)findViewById(R.id.toolbar);

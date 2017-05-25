@@ -25,6 +25,10 @@ public class PendingRequestDetailsEntity {
         this.dateOfRequest = dateOfRequest;
     }
 
+    public PendingRequestDetailsEntity() {
+
+    }
+
     public String getAssetName() {
         return assetName;
     }

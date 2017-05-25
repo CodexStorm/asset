@@ -20,6 +20,9 @@ public class PendingRequestDetailsMiniEntity {
         this.message = message;
     }
 
+    public PendingRequestDetailsMiniEntity() {
+    }
+
     public int getStatusCode() {
         return statusCode;
     }

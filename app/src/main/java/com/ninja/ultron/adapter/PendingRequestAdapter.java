@@ -27,9 +27,10 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         public void callDetailsFragment();
     }
 
-    public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList)
+    public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList,mCallback callback)
     {
         this.pendingRequestEntityArrayList=pendingRequestEntityArrayList;
+        this.callback=callback;
     }
 
     @Override

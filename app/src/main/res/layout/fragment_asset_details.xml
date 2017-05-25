@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="49dp"
         android:layout_marginStart="49dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="55dp"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"
         android:text="Name"
@@ -42,7 +42,7 @@
         android:layout_alignLeft="@+id/tvName"
         android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Asset ID"
         android:textStyle="bold"/>
 
@@ -54,7 +54,7 @@
         android:layout_alignLeft="@+id/tvId"
         android:layout_alignStart="@+id/tvId"
         android:layout_below="@+id/tvId"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Category"
         android:textStyle="bold"/>
 
@@ -66,7 +66,7 @@
         android:layout_alignLeft="@+id/tvCategory"
         android:layout_alignStart="@+id/tvCategory"
         android:layout_below="@id/tvCategory"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Type"
         android:textStyle="bold"/>
 
@@ -78,7 +78,7 @@
         android:layout_alignLeft="@+id/tvType"
         android:layout_alignStart="@+id/tvType"
         android:layout_below="@+id/tvType"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Maker"
         android:textStyle="bold"/>
 
@@ -90,7 +90,7 @@
         android:layout_alignLeft="@+id/tvMaker"
         android:layout_alignStart="@+id/tvMaker"
         android:layout_below="@+id/tvMaker"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Specification"
         android:textStyle="bold"/>
 
@@ -101,7 +101,7 @@
         android:layout_alignLeft="@+id/tvSpecification"
         android:layout_alignStart="@+id/tvSpecification"
         android:layout_below="@+id/tvSpecification"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Accessories"
         android:textColor="@android:color/background_dark"
         android:textStyle="bold"/>

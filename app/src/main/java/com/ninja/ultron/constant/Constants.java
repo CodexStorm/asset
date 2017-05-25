@@ -28,7 +28,7 @@ public class Constants {
     public static final String ASSET_LIST_URL="http://10.1.19.141:8080/api/web/assets?userId=1";
     public static final String ASSET_DETAILS_URL="http://10.1.19.141:8080/api/web/details/asset?assetId=4";
     public static final String PENDING_REQUESTS_URL="http://10.1.19.141:8080/api/web/request/pending?userId=1";
-    public static final String PENDING_REQUESTS_DETAILS_URL="http://10.1.19.141:8080/api/web/request/?assetRequestId=10";
+    public static final String PENDING_REQUESTS_DETAILS_URL="http://10.1.19.141:8080/api/web/request/?assetRequestId=11";
     public static final String INITIATE_TRANSFER_URL="http://10.1.19.141:8080/api/web/request/transfer";
     public static final String TRANSFER_REASONS_API="http://10.1.19.141:8080/api/web/find/asset/issueReason";
 

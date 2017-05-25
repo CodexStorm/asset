@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
@@ -20,10 +22,16 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     List<PendingRequestEntity> pendingRequestEntityArrayList=new ArrayList<>();
     PendingRequestEntity pendingRequestEntity;
+    private mCallback callback;
+    public interface mCallback
+    {
+        public void callDetailsFragment();
+    }
 
-    public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList)
+    public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList,mCallback callback)
     {
         this.pendingRequestEntityArrayList=pendingRequestEntityArrayList;
+        this.callback=callback;
     }
 
     @Override
@@ -39,21 +47,32 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
         holder.tvAssetMake.setText(pendingRequestEntity.getAssetName());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
+        holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.callDetailsFragment();
+            }
+        });
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return pendingRequestEntityArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         TextView tvAssetMake,tvAssetStatus,tvAssetRequestId;
+        RelativeLayout layout;
+        ImageView ivMoreDetails;
         public ViewHolder(View itemView) {
             super(itemView);
             tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
+            layout=(RelativeLayout)itemView.findViewById(R.id.layout);
+            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivMoreDetails);
         }
     }
 

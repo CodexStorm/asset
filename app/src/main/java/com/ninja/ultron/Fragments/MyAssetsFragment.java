@@ -1,7 +1,9 @@
 package com.ninja.ultron.Fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.Fragments.AssetDetailsFragment;
 import com.ninja.ultron.R;
+import com.ninja.ultron.activity.HomescreenActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
@@ -29,8 +32,7 @@ import java.util.List;
  * Created by Prabhu Sivanandam on 18-May-17.
  */
 
-public class MyAssetsFragment extends Fragment{
-
+public class MyAssetsFragment extends Fragment {
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     RecyclerView recyclerView;
@@ -63,7 +65,8 @@ public class MyAssetsFragment extends Fragment{
                      //   myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
                         adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
                             @Override
-                            public void CallAssetDetailsFragment() {
+                            public void CallAssetDetailsFragment(int id,String name,String toName) {
+                                Log.d("dascsa",name+"  "+toName+"  "+id);
                                 AssetDetailsFragment fragment = new AssetDetailsFragment();
                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
                             }
@@ -71,6 +74,7 @@ public class MyAssetsFragment extends Fragment{
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);
+
 
                     }else{
                         Log.d("","commited");
@@ -83,6 +87,5 @@ public class MyAssetsFragment extends Fragment{
             }
         },getActivity());
     }
-
 
 }

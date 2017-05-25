@@ -56,7 +56,14 @@ public class PendingRequestsFragment extends Fragment {
                         pendingRequestEntities=pendingRequestMiniEntity.getResponse();
                         Gson gson=new Gson();
                         String myPendingRequestsString=gson.toJson(pendingRequestEntities);
-                        adapter=new PendingRequestAdapter(pendingRequestEntities);
+                        adapter=new PendingRequestAdapter(pendingRequestEntities,new PendingRequestAdapter.mCallback()
+                        {
+                            @Override
+                            public void callDetailsFragment() {
+                                PendingRequestDetailsFragment pendingRequestDetailsFragment=new PendingRequestDetailsFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlPendingRequestList,pendingRequestDetailsFragment).addToBackStack(null).commit();
+                            }
+                        });
                         recyclerView.setAdapter(adapter);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();

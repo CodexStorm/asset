@@ -1,4 +1,5 @@
 package com.ninja.ultron.Fragments;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.internal.BottomNavigationMenu;
@@ -6,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +43,6 @@ import java.util.List;
 
 public class AssetDetailsFragment extends Fragment {
 
-
-    private final String URL ="http://10.0.0.46:8080/api/web/details/asset?assetId=4";
     TextView tvName1;
     TextView tvId1;
     TextView tvCategory1;
@@ -55,6 +55,7 @@ public class AssetDetailsFragment extends Fragment {
     List<AssetDetailsEntity> assetDetailsList;
     AssetAccessoryAdapter adapter;
     BottomNavigationView bottomNavigationView;
+    InitiateTransferFragment initiateTransferFragment;
 
     @Nullable
     @Override
@@ -73,8 +74,12 @@ public class AssetDetailsFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_request:
-                        Toast.makeText(getActivity(),"Transfer Request",Toast.LENGTH_SHORT).show();
-                        break;
+                         initiateTransferFragment=new InitiateTransferFragment();
+                         initiateTransferFragment.selectedName=tvName1.getText().toString();
+                         initiateTransferFragment.selectedId=Integer.parseInt(tvId1.getText().toString());
+                         initiateTransferFragment.selectedToName="Admin";
+                         getFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,initiateTransferFragment).addToBackStack(null).commit();
+                         break;
                     case R.id.action_report:
                         Toast.makeText(getActivity(),"Asset Report",Toast.LENGTH_SHORT).show();
                         break;
@@ -106,11 +111,15 @@ public class AssetDetailsFragment extends Fragment {
                         tvType1.setText(assetDetailsEntity.getAssetType());
                         tvSpecifiaction1.setText(assetDetailsEntity.getAssetSpecification());
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
-                        String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
-                        UserDetails.setAssetAccessoryList(getContext(),myAssetAccessoryListAsString);
-                        assetAccessoryList = gs.fromJson(assetDetailsEntity.getAssetAccessory().toString(),new TypeToken<ArrayList<AssetAccessoryEntity>>(){}.getType());
-                        adapter= new AssetAccessoryAdapter(getActivity(),assetAccessoryList);
-                        lvAccessories.setAdapter(adapter);
+                        if(assetAccessoryList.size() != 0) {
+                            String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
+                            UserDetails.setAssetAccessoryList(getContext(), myAssetAccessoryListAsString);
+                            adapter = new AssetAccessoryAdapter(getActivity(), assetAccessoryList);
+                            lvAccessories.setAdapter(adapter);
+                        }
+                        else {
+                            lvAccessories.setVisibility(View.GONE);
+                        }
                     }
                 } else {
 
@@ -118,4 +127,6 @@ public class AssetDetailsFragment extends Fragment {
             }
         },getActivity());
     }
+
+
 }

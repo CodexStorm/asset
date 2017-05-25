@@ -82,4 +82,5 @@ public class CommonFunctions {
     public static void clearLocalPreference(Context context) {
         UserDetails.setMyAssetList(context,null);
     }
+
 }

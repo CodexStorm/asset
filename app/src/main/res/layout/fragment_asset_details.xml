@@ -1,78 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rlAssetDetails"
-    android:background="#fff"
-    >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rlAssetDetails"
+        android:background="#fff"
+        >
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+
+
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="51dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="55dp"
+        android:textColor="@android:color/background_dark"
         android:textStyle="bold"
-        android:text="Name" />
+        android:text="Name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvId"
+        android:textColor="@android:color/background_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvName"
         android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Asset ID"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvCategory"
+        android:textColor="@android:color/background_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvId"
         android:layout_alignStart="@+id/tvId"
         android:layout_below="@+id/tvId"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Category"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvType"
+        android:textColor="@android:color/background_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvCategory"
         android:layout_alignStart="@+id/tvCategory"
         android:layout_below="@id/tvCategory"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Type"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvMaker"
+        android:textColor="@android:color/background_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvType"
         android:layout_alignStart="@+id/tvType"
         android:layout_below="@+id/tvType"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Maker"
         android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvSpecification"
+        android:textColor="@android:color/background_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvMaker"
         android:layout_alignStart="@+id/tvMaker"
         android:layout_below="@+id/tvMaker"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Specification"
         android:textStyle="bold"/>
 
@@ -83,8 +101,9 @@
         android:layout_alignLeft="@+id/tvSpecification"
         android:layout_alignStart="@+id/tvSpecification"
         android:layout_below="@+id/tvSpecification"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Accessories"
+        android:textColor="@android:color/background_dark"
         android:textStyle="bold"/>
 
     <TextView
@@ -92,12 +111,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_above="@+id/tvId"
         android:layout_toRightOf="@+id/tvSpecification"
-        android:layout_toEndOf="@+id/tvSpecification"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp" />
+        android:layout_toEndOf="@+id/tvSpecification" />
 
     <TextView
         android:id="@+id/tvId1"
@@ -147,24 +165,48 @@
     <ListView
         android:id="@+id/lvAccessories"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/tvAccessories"
+        android:layout_marginTop="19dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignLeft="@+id/tvAccessories"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/tvAccessories"
-        android:layout_below="@+id/tvAccessories" />
+        android:layout_alignStart="@+id/tvAccessories" />
 
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottomNavigation"
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/nav_item_color_state"
-        app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/bottom_navigation_menu"
-        >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    </android.support.design.widget.BottomNavigationView>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/colorPrimary"
+            app:itemIconTint="@drawable/nav_item_color_state"
+            app:itemTextColor="@drawable/nav_item_color_state"
+            app:menu="@menu/asset_details_menu"
+            ></android.support.design.widget.BottomNavigationView>
 
-</RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+

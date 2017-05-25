@@ -1,6 +1,7 @@
 package com.ninja.ultron.adapter;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.ninja.ultron.functions.CommonFunctions;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+
 /**
  * Created by Prabhu Sivanandam on 17-May-17.
  */
@@ -26,8 +29,9 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     CodeDecodeEntity asset;
     Context context;
     private CallBack mCallBack;
+
     public interface CallBack{
-        void CallAssetDetailsFragment();
+        void CallAssetDetailsFragment(int id,String name,String toName);
 
     }
 
@@ -36,11 +40,6 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
         this.assetsList=assetList;
         this.context = context;
         this.mCallBack = callback;
-    }
-
-
-        public interface OnItemClickListener {
-        void OnItemClick(CodeDecodeEntity codeDecodeEntity);
     }
 
 
@@ -59,7 +58,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
         holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mCallBack.CallAssetDetailsFragment();
+               mCallBack.CallAssetDetailsFragment(asset.getId(),asset.getName(),"Admin");
                 //CommonFunctions.toastString("View ",context);
             }
         });
@@ -72,6 +71,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
+        TabLayout layout;
         TextView AssetId,AssetName;
         ImageView ivMoreDetails;
         public ViewHolder(View itemView) {
@@ -79,7 +79,6 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
             AssetName=(TextView)itemView.findViewById(R.id.asset_name);
             ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivMoreDetails);
-
         }
     }
 }

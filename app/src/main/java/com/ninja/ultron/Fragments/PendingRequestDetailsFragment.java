@@ -71,18 +71,27 @@ public class PendingRequestDetailsFragment extends Fragment {
                     {
                         pendingRequestDetailsEntities=pendingRequestDetailsMiniEntity.getResponse();
                         entity=pendingRequestDetailsEntities.get(0);
-                        tvPendingAssetId.setText(String.valueOf(entity.getAssetId()));
+                        Log.d("tag",entity.getAssetName()+"  "+entity.getAssetId()+"  "+entity.getDateOfRequest()+"  "+entity.getReason()+"  "+entity.getStatus());
+                        tvPendingAssetId.setText(""+(entity.getAssetId()));
                         tvPendingAssetName.setText(entity.getAssetName());
-                        tvPendingRequestType.setText(String.valueOf(entity.getAssetRequestId()));
-                        tvPendingRequestTo.setText(String.valueOf(entity.getRequestTo()));
-                        tvPendingRequestDate.setText(String.valueOf(entity.getDateOfRequest()));
+                        tvPendingRequestType.setText(""+entity.getAssetRequestId());
+                        tvPendingRequestTo.setText(""+(entity.getRequestTo()));
+                        tvPendingRequestDate.setText(""+(entity.getDateOfRequest()));
                         tvPendingReason.setText(entity.getReason());
                         tvPendingStatus.setText(entity.getStatus());
                         comments=entity.getComment();
-                        adapter=new PendingRequestCommentsAdapter(comments);
-                        rvComments.setAdapter(adapter);
-                        rvComments.hasFixedSize();
-                        adapter.notifyDataSetChanged();
+                        Log.d("tag2",comments.size()+"");
+                        if(comments.size()==0)
+                        {
+
+                        }
+                        else
+                        {
+                            adapter = new PendingRequestCommentsAdapter(comments);
+                            rvComments.setAdapter(adapter);
+                            rvComments.hasFixedSize();
+                            adapter.notifyDataSetChanged();
+                        }
                     }
 
                     else

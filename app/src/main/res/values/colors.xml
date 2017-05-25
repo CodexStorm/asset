@@ -6,7 +6,7 @@
     <color name="green">#00ff00</color>
     <color name="darkGrey">#9E9E9E</color>
     <color name="lightGrey">#B6B6B6</color>
-    <color name="actionbarcolor">#4CAF50</color>
+    <color name="actionbarcolor">#309229</color>
     <color name="dialog_bg">#cc000000</color>
 
     <color name="my_customer_active_not_ordered">#D32F2F</color>
@@ -23,7 +23,7 @@
 
     <color name="themegrayDark">#616161</color>
     <color name="colorPrimary">#388E3C</color>
-    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorPrimaryDark">#309229</color>
     <color name="colorAccent">#000</color>
     <color name="textColorPrimary">#ffffff</color>
     <color name="windowBackground">#FFFFFF</color>

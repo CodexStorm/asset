@@ -29,8 +29,9 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     CodeDecodeEntity asset;
     Context context;
     private CallBack mCallBack;
+
     public interface CallBack{
-        void CallAssetDetailsFragment();
+        void CallAssetDetailsFragment(int id,String name,String toName);
 
     }
 
@@ -39,11 +40,6 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
         this.assetsList=assetList;
         this.context = context;
         this.mCallBack = callback;
-    }
-
-
-        public interface OnItemClickListener {
-        void OnItemClick(CodeDecodeEntity codeDecodeEntity);
     }
 
 
@@ -62,7 +58,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
         holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mCallBack.CallAssetDetailsFragment();
+               mCallBack.CallAssetDetailsFragment(asset.getId(),asset.getName(),"Admin");
                 //CommonFunctions.toastString("View ",context);
             }
         });

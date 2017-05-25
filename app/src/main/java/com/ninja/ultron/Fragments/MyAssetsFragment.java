@@ -37,7 +37,6 @@ public class MyAssetsFragment extends Fragment {
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     RecyclerView recyclerView;
     AssetListRecyclerAdapter adapter;
-    AssetMiniEntity assetMini;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -3,21 +3,19 @@ package com.ninja.ultron.adapter;
 import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
+import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.CodeDecodeEntity;
-import com.ninja.ultron.functions.CommonFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.view.View.GONE;
 
 /**
  * Created by Prabhu Sivanandam on 17-May-17.
@@ -26,7 +24,6 @@ import static android.view.View.GONE;
 public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecyclerAdapter.ViewHolder>{
 
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
-    CodeDecodeEntity asset;
     Context context;
     private CallBack mCallBack;
 
@@ -51,15 +48,19 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        asset=assetsList.get(position);
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        final CodeDecodeEntity asset =assetsList.get(position);
         holder.AssetName.setText(asset.getName());
         holder.AssetId.setText(asset.getId()+"");
-        holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
+        Log.d("ASSET",""+asset.getId());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               mCallBack.CallAssetDetailsFragment(asset.getId(),asset.getName(),"Admin");
-                //CommonFunctions.toastString("View ",context);
+                Log.d("Check AssetID",asset.getId()+"");
+                AlterMyAssetDetailURL(""+asset.getId());
+                Log.d("pos ",position + "");
+               mCallBack.CallAssetDetailsFragment(assetsList.get(position).getId(),assetsList.get(position).getName(),"Admin");
             }
         });
 
@@ -71,14 +72,21 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TabLayout layout;
         TextView AssetId,AssetName;
         ImageView ivMoreDetails;
+        View cardView;
         public ViewHolder(View itemView) {
             super(itemView);
+            cardView=itemView;
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
             AssetName=(TextView)itemView.findViewById(R.id.asset_name);
-            ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivMoreDetails);
+            ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivCMoreDetails);
         }
+
     }
+    public void AlterMyAssetDetailURL(String AssetID) {
+        Constants.ASSET_DETAILS_URL = Constants.ASSET_DETAILS_MODEL_URL + AssetID;
+        Log.d("Check Asset_detail_url",Constants.ASSET_DETAILS_URL);
+    }
+
 }

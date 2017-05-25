@@ -51,7 +51,7 @@
              />
 
         <ImageView
-            android:id="@+id/ivMoreDetails"
+            android:id="@+id/ivCardMoreDetails"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"

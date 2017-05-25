@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
+import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.PendingRequestEntity;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAdapter.ViewHolder> {
 
     List<PendingRequestEntity> pendingRequestEntityArrayList=new ArrayList<>();
-    PendingRequestEntity pendingRequestEntity;
+
     private mCallback callback;
     public interface mCallback
     {
@@ -43,16 +44,22 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        pendingRequestEntity=pendingRequestEntityArrayList.get(position);
+
+        final PendingRequestEntity pendingRequestEntity=pendingRequestEntityArrayList.get(position);
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
         holder.tvAssetMake.setText(pendingRequestEntity.getAssetName());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
-        holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
+        holder.pendingRequestCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlterPendingRequestDetailsURL(""+pendingRequestEntity.getRequestId());
                 callback.callDetailsFragment();
             }
         });
+    }
+
+    private void AlterPendingRequestDetailsURL(String s) {
+        Constants.PENDING_REQUESTS_DETAILS_URL=Constants.PENDING_REQUESTS_DETAILS_MODEL_URL+s;
     }
 
     @Override
@@ -66,13 +73,15 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         TextView tvAssetMake,tvAssetStatus,tvAssetRequestId;
         RelativeLayout layout;
         ImageView ivMoreDetails;
+        View pendingRequestCardView;
         public ViewHolder(View itemView) {
             super(itemView);
+            pendingRequestCardView=itemView;
             tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
-            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivMoreDetails);
+            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivCardMoreDetails);
         }
     }
 

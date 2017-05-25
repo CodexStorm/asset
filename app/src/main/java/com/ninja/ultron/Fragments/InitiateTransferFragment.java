@@ -139,8 +139,8 @@ public class InitiateTransferFragment extends Fragment{
             comments=this.comments;
         }
         CommentEntity commentEntity=new CommentEntity(loggedUserId,comments);
-        Calendar calendar=Calendar.getInstance();
-        dateOfRequest=calendar.get(Calendar.YEAR)+"/"+calendar.get(Calendar.MONTH)+"/"+calendar.get(Calendar.DAY_OF_MONTH);
+        java.util.Calendar calendar= java.util.Calendar.getInstance();
+        dateOfRequest=calendar.get(java.util.Calendar.DATE)+"/"+calendar.get(java.util.Calendar.MONTH)+"/"+calendar.get(java.util.Calendar.YEAR);
         initiateTransferEntity=new InitiateTransferEntity(issueTypeId,assetId,requestedBy,approver,dateOfRequest,commentEntity,reasonTypeId);
         Log.d("test",initiateTransferEntity.getDateOfRequest()+"");
     }

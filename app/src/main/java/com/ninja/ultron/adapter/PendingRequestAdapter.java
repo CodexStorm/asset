@@ -55,7 +55,8 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return pendingRequestEntityArrayList.size();
     }
 

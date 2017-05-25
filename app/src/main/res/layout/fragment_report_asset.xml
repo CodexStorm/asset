@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvAssetIdHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="51dp"
@@ -19,14 +19,14 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvAssetNameHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:text="    Asset Name:"
         android:textSize="18dp"
         android:textColor="@android:color/background_dark"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/tvAssetIdHeader"
         android:layout_toLeftOf="@+id/tvAssetId"
         android:layout_toStartOf="@+id/tvAssetId" />
 
@@ -38,9 +38,9 @@
         android:text="Transfer To  :"
         android:textColor="@android:color/background_dark"
         android:textSize="18dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_below="@+id/tvAssetNameHeader"
+        android:layout_alignRight="@+id/tvAssetNameHeader"
+        android:layout_alignEnd="@+id/tvAssetNameHeader" />
 
     <TextView
         android:id="@+id/tvAssetId"
@@ -48,10 +48,10 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:textColor="@android:color/background_dark"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
+        android:layout_alignBaseline="@+id/tvAssetIdHeader"
+        android:layout_alignBottom="@+id/tvAssetIdHeader"
+        android:layout_toRightOf="@+id/tvAssetIdHeader"
+        android:layout_toEndOf="@+id/tvAssetIdHeader"
         android:layout_marginLeft="22dp"
         android:layout_marginStart="22dp" />
 
@@ -59,7 +59,7 @@
         android:id="@+id/tvAssetName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignBottom="@+id/tvAssetNameHeader"
         android:layout_alignLeft="@+id/tvAssetId"
         android:layout_alignStart="@+id/tvAssetId"
         android:textSize="18dp"
@@ -100,8 +100,6 @@
         android:layout_alignLeft="@+id/textView7"
         android:layout_alignStart="@+id/textView7" />
 
-
-
     <TextView
         android:id="@+id/tvCommentsHeader"
         android:layout_width="wrap_content"
@@ -129,7 +127,7 @@
         android:layout_alignStart="@+id/tvAssetName" />
 
     <TextView
-        android:id="@+id/tvTranferTo"
+        android:id="@+id/tvTransferredTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvAssetName"

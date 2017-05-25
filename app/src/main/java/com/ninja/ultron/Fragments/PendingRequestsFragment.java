@@ -61,7 +61,7 @@ public class PendingRequestsFragment extends Fragment {
                             @Override
                             public void callDetailsFragment() {
                                 PendingRequestDetailsFragment pendingRequestDetailsFragment=new PendingRequestDetailsFragment();
-                                getFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,pendingRequestDetailsFragment).addToBackStack(null).commit();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlPendingRequestList,pendingRequestDetailsFragment).addToBackStack(null).commit();
                             }
                         });
                         recyclerView.setAdapter(adapter);

@@ -86,10 +86,8 @@ public class PendingRequestDetailsEntity {
     }
 
     public String getDateOfRequest() {
-        StringBuilder builder=new StringBuilder(dateOfRequest);
-        builder.deleteCharAt(10);
-        builder.deleteCharAt(23);
-        return builder.toString();
+        String date=dateOfRequest.substring(0,10);
+        return date;
     }
 
     public void setDateOfRequest(String dateOfRequest) {

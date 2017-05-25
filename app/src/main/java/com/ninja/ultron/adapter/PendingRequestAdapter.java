@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -46,7 +47,7 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
         holder.tvAssetMake.setText(pendingRequestEntity.getAssetName());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
-        holder.layout.setOnClickListener(new View.OnClickListener() {
+        holder.ivMoreDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.callDetailsFragment();
@@ -55,7 +56,8 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return pendingRequestEntityArrayList.size();
     }
 
@@ -63,12 +65,14 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
     {
         TextView tvAssetMake,tvAssetStatus,tvAssetRequestId;
         RelativeLayout layout;
+        ImageView ivMoreDetails;
         public ViewHolder(View itemView) {
             super(itemView);
             tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
+            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivMoreDetails);
         }
     }
 

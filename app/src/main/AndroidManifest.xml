@@ -39,7 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomescreenActivity"/>
+        <activity android:name=".activity.HomescreenActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.ninja.ultron.Fragments.AssetDetailsFragment;
+import com.ninja.ultron.Fragments.InitiateTransferFragment;
 import com.ninja.ultron.Fragments.MyAssetsFragment;
 import com.ninja.ultron.Fragments.PendingRequestsFragment;
 import com.ninja.ultron.R;
@@ -22,8 +24,11 @@ import java.util.List;
  * Created by Prabhu Sivanandam on 18-May-17.
  */
 
-public class HomescreenActivity extends AppCompatActivity {
+public class HomescreenActivity extends AppCompatActivity{
 
+    String id;
+    String name;
+    String toName;
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -57,7 +62,6 @@ public class HomescreenActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         tabLayout.setupWithViewPager(viewPager);

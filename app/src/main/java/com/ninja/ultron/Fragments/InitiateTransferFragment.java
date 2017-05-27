@@ -36,8 +36,8 @@ import java.util.List;
 
 public class InitiateTransferFragment extends Fragment{
 
-    String selectedName,selectedToName,comments;
-    int selectedId;
+    public String selectedName,selectedToName,comments;
+    public int selectedId;
     int loggedUserId;
     TextView tvAssetId,tvAssetName,tvTransferTo,tvEmployeeId,tvInitiate;
     Spinner spinnerReason;

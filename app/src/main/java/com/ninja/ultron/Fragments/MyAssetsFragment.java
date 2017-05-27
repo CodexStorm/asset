@@ -1,9 +1,8 @@
 package com.ninja.ultron.Fragments;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +14,8 @@ import android.view.ViewGroup;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ninja.ultron.Fragments.AssetDetailsFragment;
 import com.ninja.ultron.R;
-import com.ninja.ultron.activity.HomescreenActivity;
+import com.ninja.ultron.activity.AssetDetailsActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
@@ -66,8 +64,10 @@ public class MyAssetsFragment extends Fragment {
                             @Override
                             public void CallAssetDetailsFragment(int id,String name,String toName) {
                                 Log.d("dascsa",name+"  "+toName+"  "+id);
-                                AssetDetailsFragment fragment = new AssetDetailsFragment();
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
+                                //AssetDetailsFragment fragment = new AssetDetailsFragment();
+                                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
+                                Intent intent=new Intent(getActivity(), AssetDetailsActivity.class);
+                                startActivity(intent);
                             }
                         });
                         recyclerView.hasFixedSize();

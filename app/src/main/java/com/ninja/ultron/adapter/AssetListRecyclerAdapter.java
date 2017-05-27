@@ -1,6 +1,7 @@
 package com.ninja.ultron.adapter;
 
 import android.content.Context;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
     Context context;
     private CallBack mCallBack;
+
 
     public interface CallBack{
         void CallAssetDetailsFragment(int id,String name,String toName);

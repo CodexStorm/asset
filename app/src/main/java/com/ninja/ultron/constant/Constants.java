@@ -25,7 +25,7 @@ public class Constants {
     public static final String BASE_URL = "http://88.99.31.206" +HEZNER_DELTA; //GAMMA-HEZNER
 
 
-    public static final String ASSET_LIST_URL="http://10.1.19.141:8080/api/web/assets?userId=1";
+    public static final String ASSET_LIST_URL="http://10.1.19.141:8080/api/web/find/asset?userId=1";
     public static final String ASSET_DETAILS_MODEL_URL="http://10.1.19.141:8080/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
     public static final String PENDING_REQUESTS_URL="http://10.1.19.141:8080/api/web/request/pending?userId=1";

@@ -3,30 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/toolbarlayout"/>
-        <android.support.design.widget.TabLayout
-            android:layout_width="match_parent"
-            app:theme="@style/MyMaterialTheme"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"
-            android:background="@color/colorPrimary"
-            app:tabMode="fixed"
-            app:tabGravity="center"/>
-    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/mainActivityBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/actionbarcolor">
+
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ultron"
+                android:textSize="40dp"
+                android:textColor="#fff"
+                android:textAlignment="center"/>
+        </android.support.v7.widget.Toolbar>
+
     <android.support.v4.view.ViewPager
-        android:layout_marginTop="115dp"
-        android:padding="3dp"
+        android:id="@+id/viewPager"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewPager">
+        android:padding="3dp">
 
     </android.support.v4.view.ViewPager>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/actionbarcolor"
+        app:tabGravity="center"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#fff"
+        app:theme="@style/MyMaterialTheme" />
+
 
 </android.support.design.widget.CoordinatorLayout>

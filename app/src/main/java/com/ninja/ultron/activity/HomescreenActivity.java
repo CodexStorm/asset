@@ -3,14 +3,15 @@ package com.ninja.ultron.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
-import com.ninja.ultron.Fragments.AssetDetailsFragment;
-import com.ninja.ultron.Fragments.InitiateTransferFragment;
 import com.ninja.ultron.Fragments.MyAssetsFragment;
 import com.ninja.ultron.Fragments.PendingRequestsFragment;
 import com.ninja.ultron.R;
@@ -27,12 +28,15 @@ import java.util.List;
 
 public class HomescreenActivity extends AppCompatActivity{
 
+    public static boolean fabVisible;
     String id;
     String name;
     String toName;
     Toolbar toolbar;
     TabLayout tabLayout;
+    TextView title;
     ViewPager viewPager;
+    Toolbar mainActivityBar;
     HomeScreenViewPagerAdapter adapter;
     List<CodeDecodeEntity> myAssetList;
     @Override
@@ -40,9 +44,10 @@ public class HomescreenActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homescreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        mainActivityBar = (Toolbar) findViewById(R.id.mainActivityBar);
         CommonFunctions.clearLocalPreference(getApplicationContext());
         toolbar=(Toolbar)findViewById(R.id.toolbar);
+        title=(TextView)findViewById(R.id.title);
         setSupportActionBar(toolbar);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
@@ -60,13 +65,21 @@ public class HomescreenActivity extends AppCompatActivity{
             @Override
             public void onPageSelected(int position) {
 
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
+
             }
         });
+
+
+
+
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setVisibility(View.VISIBLE);
     }
 
 

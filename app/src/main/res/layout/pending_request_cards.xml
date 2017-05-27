@@ -8,7 +8,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:id="@+id/cardPendingRequest"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="1dp"
     card_view:cardMaxElevation="1dp"
     app:cardPreventCornerOverlap="false"
@@ -23,8 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/bg_bodergreen_inside_white"
+        android:background="@drawable/bg_boderbrown_inside_white"
         android:layout_marginBottom="1dp">
 
         <ImageView

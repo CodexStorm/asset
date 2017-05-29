@@ -47,6 +47,7 @@
             android:id="@+id/tvAssetId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:textColor="@android:color/background_dark"
             android:layout_alignBaseline="@+id/textView2"
             android:layout_alignBottom="@+id/textView2"
@@ -120,25 +121,39 @@
             android:textColor="@android:color/background_dark"
             android:inputType="textMultiLine"
             android:layout_marginTop="47dp"
+            android:layout_marginRight="20dp"
             android:layout_below="@+id/tvTypeHeader"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignLeft="@+id/tvEmployeeId"
             android:layout_alignStart="@+id/tvEmployeeId" />
+<RelativeLayout
+    android:id="@+id/rlInitiateButton"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/actionbarcolor"
+
+    >
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_transfer"
+        android:layout_centerHorizontal="true"/>
 
         <TextView
             android:id="@+id/tvInitiate"
-            android:textSize="30dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:background="@drawable/background_green_button"
-            android:text="     Initiate    "
-            android:textStyle="bold"
-            android:fontFamily="sans-serif"
+            android:layout_marginBottom="5dp"
+            android:text="Initiate"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp" />
+            >
+            </TextView>
+</RelativeLayout>
 
         <TextView
             android:id="@+id/tvTranferTo"
@@ -160,6 +175,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
         android:layout_alignLeft="@+id/tvEmployeeId"
         android:layout_alignStart="@+id/tvEmployeeId" />
 

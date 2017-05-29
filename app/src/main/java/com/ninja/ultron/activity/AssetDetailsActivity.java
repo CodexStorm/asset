@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.ninja.ultron.Fragments.InitiateTransferFragment;
+import com.ninja.ultron.Fragments.ReportAssetFragment;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetAccessoryAdapter;
 import com.ninja.ultron.entity.AssetAccessoryEntity;
@@ -38,6 +39,7 @@ public class AssetDetailsActivity extends AppCompatActivity {
     AssetAccessoryAdapter adapter;
     BottomNavigationView bottomNavigationView;
     InitiateTransferFragment initiateTransferFragment;
+    ReportAssetFragment reportAssetFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,9 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails, initiateTransferFragment).addToBackStack(null).commit();
                         break;
                     case R.id.action_report:
-                        initiateTransferFragment = new InitiateTransferFragment();
+                        reportAssetFragment = new ReportAssetFragment();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails, reportAssetFragment).addToBackStack(null).commit();
+
 
                         break;
 

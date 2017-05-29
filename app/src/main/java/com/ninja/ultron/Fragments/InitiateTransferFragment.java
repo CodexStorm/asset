@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class InitiateTransferFragment extends Fragment{
     public int selectedId;
     int loggedUserId;
     TextView tvAssetId,tvAssetName,tvTransferTo,tvEmployeeId,tvInitiate;
+    RelativeLayout rlInitateButton;
     Spinner spinnerReason;
     EditText etComments;
     TransferReasonsMiniEntity transferReasonsMiniEntity;
@@ -66,9 +68,10 @@ public class InitiateTransferFragment extends Fragment{
         spinnerReason=(Spinner)view.findViewById(R.id.spinnerRequestType);
         etComments=(EditText)view.findViewById(R.id.etCommentsBox);
         comments=etComments.getText().toString();
+        rlInitateButton = (RelativeLayout)view.findViewById(R.id.rlInitiateButton);
         createTransferEntity();
 
-        tvInitiate.setOnClickListener(new View.OnClickListener() {
+        rlInitateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -148,7 +151,7 @@ public class InitiateTransferFragment extends Fragment{
         }
         CommentEntity commentEntity=new CommentEntity(loggedUserId,comments);
         java.util.Calendar calendar= java.util.Calendar.getInstance();
-        dateOfRequest=calendar.get(java.util.Calendar.DATE)+"/"+calendar.get(java.util.Calendar.MONTH)+"/"+calendar.get(java.util.Calendar.YEAR);
+        dateOfRequest=calendar.get(java.util.Calendar.YEAR)+"/"+calendar.get(java.util.Calendar.MONTH)+"/"+calendar.get(java.util.Calendar.DAY_OF_MONTH);
         initiateTransferEntity=new InitiateTransferEntity(issueTypeId,assetId,requestedBy,approver,dateOfRequest,commentEntity,reasonTypeId);
         Log.d("test",initiateTransferEntity.getDateOfRequest()+"");
     }

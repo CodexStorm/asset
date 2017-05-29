@@ -28,9 +28,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.LoginActivity" />
-        <activity
-            android:name=".Fragments.AssetDetailsFragment"
-            android:theme="@style/MyMaterialTheme" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

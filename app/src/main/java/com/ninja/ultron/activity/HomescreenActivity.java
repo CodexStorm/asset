@@ -27,32 +27,29 @@ import java.util.List;
  */
 
 public class HomescreenActivity extends AppCompatActivity{
-
-    public static boolean fabVisible;
-    String id;
-    String name;
-    String toName;
     Toolbar toolbar;
     TabLayout tabLayout;
     TextView title;
     ViewPager viewPager;
     Toolbar mainActivityBar;
     HomeScreenViewPagerAdapter adapter;
-    List<CodeDecodeEntity> myAssetList;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_homescreen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         mainActivityBar = (Toolbar) findViewById(R.id.mainActivityBar);
-        CommonFunctions.clearLocalPreference(getApplicationContext());
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
         title=(TextView)findViewById(R.id.title);
-        setSupportActionBar(toolbar);
+        toolbar=(Toolbar)findViewById(R.id.toolbar);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
+
+        setSupportActionBar(toolbar);
+        CommonFunctions.clearLocalPreference(getApplicationContext());
+
         adapter=new HomeScreenViewPagerAdapter(getSupportFragmentManager());
-        //add the fragments with titles here
         adapter.addFragments(new MyAssetsFragment(),"My Assets");
         adapter.addFragments(new PendingRequestsFragment(),"Pending Requests");
         viewPager.setAdapter(adapter);

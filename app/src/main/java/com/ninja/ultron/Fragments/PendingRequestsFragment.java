@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.ninja.ultron.R;
-import com.ninja.ultron.activity.AssetDetailsActivity;
 import com.ninja.ultron.activity.PendingRequestDetailsActivity;
 import com.ninja.ultron.adapter.PendingRequestAdapter;
 import com.ninja.ultron.entity.PendingRequestEntity;
@@ -38,7 +37,7 @@ public class PendingRequestsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.my_pending_requests,container,false);
+        View view=inflater.inflate(R.layout.fragment_pending_requests,container,false);
         recyclerView=(RecyclerView)view.findViewById(R.id.rvMyPendingRequests);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);

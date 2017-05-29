@@ -42,7 +42,6 @@ public class HomescreenActivity extends AppCompatActivity{
 
         mainActivityBar = (Toolbar) findViewById(R.id.mainActivityBar);
         title=(TextView)findViewById(R.id.title);
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
 

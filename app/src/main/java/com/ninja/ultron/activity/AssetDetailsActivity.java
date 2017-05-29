@@ -61,7 +61,7 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         initiateTransferFragment.selectedName = tvName1.getText().toString();
                         initiateTransferFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
                         initiateTransferFragment.selectedToName = "Admin";
-                        getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList, initiateTransferFragment,initiateTransferFragment.getClass().getSimpleName()).addToBackStack(null).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails, initiateTransferFragment).addToBackStack(null).commit();
                         break;
                     case R.id.action_report:
                         initiateTransferFragment = new InitiateTransferFragment();

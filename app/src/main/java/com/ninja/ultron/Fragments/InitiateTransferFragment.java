@@ -67,6 +67,15 @@ public class InitiateTransferFragment extends Fragment{
         etComments=(EditText)view.findViewById(R.id.etCommentsBox);
         comments=etComments.getText().toString();
         createTransferEntity();
+
+        tvInitiate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                callInitiateTransferApi();
+
+            }
+        });
         RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity,new TransferReasonsMiniEntity.UltronRestClientInterface()
         {
             @Override
@@ -118,7 +127,6 @@ public class InitiateTransferFragment extends Fragment{
 
             }
         },getContext());
-        callInitiateTransferApi();
         return view;
     }
 

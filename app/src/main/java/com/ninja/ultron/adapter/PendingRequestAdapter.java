@@ -81,7 +81,6 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
-            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivCardMoreDetails);
         }
     }
 

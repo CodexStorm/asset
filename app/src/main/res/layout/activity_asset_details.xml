@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rlAssetDetails"
-    android:background="#fff"
+    android:background="#eeeeee"
     >
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -18,17 +18,26 @@
             android:layout_height="510dp">
 
 
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rlDetails"
+    android:layout_marginTop="80dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:background="@drawable/bg_diplay"
+    >
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="49dp"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="90dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@android:color/background_dark"
                 android:textStyle="bold"
-                android:text="Name"
+                android:text="Name  :"
+                android:textAlignment="textEnd"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -36,74 +45,70 @@
             <TextView
                 android:id="@+id/tvId"
                 android:textColor="@android:color/background_dark"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvName"
                 android:layout_alignStart="@+id/tvName"
                 android:layout_below="@+id/tvName"
                 android:layout_marginTop="20dp"
-                android:text="Asset ID"
+                android:text="Asset ID  :"
+                android:textAlignment="textEnd"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvCategory"
                 android:textColor="@android:color/background_dark"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvId"
                 android:layout_alignStart="@+id/tvId"
                 android:layout_below="@+id/tvId"
                 android:layout_marginTop="20dp"
-                android:text="Category"
+                android:text="Category  :"
+                android:textAlignment="textEnd"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvType"
                 android:textColor="@android:color/background_dark"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvCategory"
                 android:layout_alignStart="@+id/tvCategory"
                 android:layout_below="@id/tvCategory"
                 android:layout_marginTop="20dp"
-                android:text="Type"
+                android:text="Type  :"
+                android:textAlignment="textEnd"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvMaker"
                 android:textColor="@android:color/background_dark"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvType"
                 android:layout_alignStart="@+id/tvType"
                 android:layout_below="@+id/tvType"
                 android:layout_marginTop="20dp"
-                android:text="Maker"
+                android:text="Maker  :"
+                android:textAlignment="textEnd"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tvSpecification"
                 android:textColor="@android:color/background_dark"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvMaker"
                 android:layout_alignStart="@+id/tvMaker"
                 android:layout_below="@+id/tvMaker"
                 android:layout_marginTop="20dp"
-                android:text="Specification"
+                android:text="Specification  :"
+                android:textAlignment="textEnd"
+                android:layout_marginBottom="20dp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tvAccessories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvSpecification"
-                android:layout_alignStart="@+id/tvSpecification"
-                android:layout_below="@+id/tvSpecification"
-                android:layout_marginTop="20dp"
-                android:text="Accessories"
-                android:textColor="@android:color/background_dark"
-                android:textStyle="bold"/>
+
 
             <TextView
                 android:id="@+id/tvName1"
@@ -112,6 +117,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_above="@+id/tvId"
+                android:textColor="#000"
                 android:layout_toRightOf="@+id/tvSpecification"
                 android:layout_toEndOf="@+id/tvSpecification" />
 
@@ -120,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/tvCategory"
+                android:textColor="#000"
                 android:layout_alignLeft="@+id/tvName1"
                 android:layout_alignStart="@+id/tvName1" />
 
@@ -128,6 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvId1"
+                android:textColor="#000"
                 android:layout_alignStart="@+id/tvId1"
                 android:layout_alignTop="@+id/tvCategory" />
 
@@ -136,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvCategory1"
+                android:textColor="#000"
                 android:layout_alignStart="@+id/tvCategory1"
                 android:layout_alignTop="@+id/tvType" />
 
@@ -144,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvType1"
+                android:textColor="#000"
                 android:layout_alignStart="@+id/tvType1"
                 android:layout_alignTop="@+id/tvMaker"/>
 
@@ -152,23 +162,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/tvMaker1"
+                android:textColor="#000"
                 android:layout_alignStart="@+id/tvMaker1"
                 android:layout_alignTop="@+id/tvSpecification" />
+</RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rlAccessories"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_diplay"
+                android:layout_below="@+id/rlDetails"
+                android:layout_alignLeft="@+id/rlDetails"
+                android:layout_alignStart="@+id/rlDetails">
+            <TextView
+                android:id="@+id/tvAccessories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Accessories"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="bold"/>
 
             <ListView
                 android:id="@+id/lvAccessories"
                 android:layout_width="match_parent"
-                android:layout_height="165dp"
+                android:layout_height="100dp"
                 android:layout_below="@+id/tvAccessories"
                 android:layout_marginTop="19dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
+                android:layout_marginBottom="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignLeft="@+id/tvAccessories"
                 android:layout_alignStart="@+id/tvAccessories" />
 
-
+</RelativeLayout>
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
@@ -176,7 +209,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 

@@ -82,7 +82,6 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
             cardView=itemView;
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
             AssetName=(TextView)itemView.findViewById(R.id.asset_name);
-            ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivCMoreDetails);
         }
 
     }

@@ -34,6 +34,16 @@
             >
         </TextView>
     </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rlReportButton">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
     <TextView
         android:id="@+id/textView"
@@ -169,16 +179,68 @@
         android:ems="10"
         android:inputType="date"
         android:layout_above="@+id/textView23"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/textView17" />
     <ImageButton
         android:id="@+id/setDate"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_date"
+        android:layout_alignBottom="@+id/tvDate"
+        android:layout_alignRight="@+id/tvDate"
+        android:layout_alignEnd="@+id/tvDate" />
+
+    <TextView
+        android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_date"
-        android:layout_below="@+id/textView18"
-        android:layout_centerHorizontal="true"
-        android:onClick="setDate"/>
+        android:layout_above="@+id/textView24"
+        android:layout_alignLeft="@+id/tvDate"
+        android:layout_alignStart="@+id/tvDate"
+        />
+    <ImageButton
+        android:id="@+id/setTime"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_time"
+        android:layout_alignBottom="@+id/tvTime"
+        android:layout_alignLeft="@+id/setDate"
+        android:layout_alignStart="@+id/setDate" />
 
+    <EditText
+        android:id="@+id/etCommentsBox"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:ems="10"
+        android:gravity="top"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:inputType="textMultiLine"
+        android:background="@drawable/bg_comment_box"
+        android:layout_below="@+id/textView24"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toLeftOf="@+id/setDate"
+        android:layout_toStartOf="@+id/setDate"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp" />
+
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView17"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignStart="@+id/tvName"
+         />
+    </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

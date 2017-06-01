@@ -10,8 +10,10 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
     app:cardElevation="1dp"
+    android:layout_marginBottom="5dp"
     card_view:cardMaxElevation="1dp"
     app:cardPreventCornerOverlap="false"
+    android:background="#fff"
     app:cardUseCompatPadding="true"
     android:layout_alignParentTop="true"
     android:layout_alignParentRight="true"
@@ -23,16 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layout"
-        android:background="@drawable/bg_boderbrown_inside_white"
         android:layout_marginBottom="1dp">
 
         <ImageView
             android:id="@+id/image_asset_make"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/item_name"
+            android:src="@drawable/ic_tag"
             android:layout_below="@+id/imageAssetRequestId"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -44,40 +45,31 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image_asset_make"
             android:layout_marginLeft="34dp"
+            android:textColor="#000"
             android:layout_marginStart="34dp"
             android:layout_toEndOf="@+id/image_asset_make"
             android:layout_toRightOf="@+id/image_asset_make"
              />
 
-        <ImageView
-            android:id="@+id/ivCardMoreDetails"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_action_more"
-            android:layout_alignParentRight="true" />
 
         <ImageView
             android:id="@+id/image_asset_status"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/image_asset_make"
             android:layout_marginTop="1dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/status_icon" />
+            app:srcCompat="@drawable/ic_status" />
 
         <TextView
             android:id="@+id/tvAssetStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000"
             android:layout_alignBottom="@+id/image_asset_status"
             android:layout_alignLeft="@+id/tvAssetMake"
             android:layout_alignStart="@+id/tvAssetMake"
@@ -85,14 +77,14 @@
 
         <ImageView
             android:id="@+id/imageAssetRequestId"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            app:srcCompat="@drawable/id_icon" />
+            app:srcCompat="@drawable/ic_id" />
 
         <TextView
             android:id="@+id/tvAssetRequestId"
@@ -101,7 +93,7 @@
             android:layout_alignBottom="@+id/imageAssetRequestId"
             android:layout_alignLeft="@+id/imageAssetRequestId"
             android:layout_alignStart="@+id/tvAssetMake"
-            android:textColor="@android:color/background_dark" />
+            android:textColor="#000" />
 
     </RelativeLayout>
 

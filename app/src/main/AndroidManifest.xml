@@ -38,7 +38,8 @@
         <activity
             android:name=".activity.HomescreenActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.AssetDetailsActivity" />
+        <activity android:name=".activity.AssetDetailsActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.PendingRequestDetailsActivity"></activity>
     </application>
 

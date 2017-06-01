@@ -67,7 +67,9 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         break;
                     case R.id.action_report:
                         reportAssetFragment = new ReportAssetFragment();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails, reportAssetFragment).addToBackStack(null).commit();
+                        reportAssetFragment.selectedName = tvName1.getText().toString();
+                        reportAssetFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
+                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails,reportAssetFragment).addToBackStack(null).commit();
 
 
                         break;

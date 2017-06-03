@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.ninja.ultron.activity.AssetActivity;
+import com.ninja.ultron.activity.HomescreenActivity;
 import com.ninja.ultron.activity.LoginActivity;
 import com.ninja.ultron.activity.SplashScreen;
 
@@ -16,10 +17,16 @@ public class StartIntent {
     }
 
     public static void HomescreenActivity(Activity act) {
-        Intent myIntent = new Intent(act, AssetActivity.class);
+        Intent myIntent = new Intent(act, HomescreenActivity.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         act.startActivity(myIntent);
         act.finish();
+    }
+
+    public static void MyAssetActivity(Activity activity){
+        Intent myIntent = new Intent(activity, AssetActivity.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(myIntent);
     }
 
     public static void startSplashScreen(Activity activity) {
@@ -27,6 +34,13 @@ public class StartIntent {
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//FLAG_ACTIVITY_NEW_TASK
         activity.startActivity(myIntent);
         activity.finish();
+    }
+
+    public static void Attendance(Activity activity){
+        Intent myIntent = new Intent("com.ninja.flash.labourattendance.ATTENDANCE");
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(myIntent);
+
     }
 
     public static void exitApplication(Activity act) {

@@ -4,24 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eeeeee"
     tools:context="com.ninja.ultron.activity.HomescreenActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbarcolor">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Homescreen"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            />
+
+    </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/Asset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
+    <TextView
+        android:id="@+id/bMyAssets"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
         android:text="My Assets"
+        android:background="@drawable/bg_green_border_white_solid"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:textColor="#60a844"
+        android:textSize="16dp"/>
 
-    <Button
-        android:id="@+id/Attendance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/bAttendance"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
         android:layout_marginTop="101dp"
         android:text="My Attendance"
-        android:layout_below="@+id/Asset"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/bMyAssets"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:textColor="#60a844"
+        android:textSize="16dp"
+        android:background="@drawable/bg_green_border_white_solid"
+        />
 </RelativeLayout>

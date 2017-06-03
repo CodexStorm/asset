@@ -3,7 +3,6 @@ package com.ninja.ultron.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -16,10 +15,7 @@ import com.ninja.ultron.Fragments.MyAssetsFragment;
 import com.ninja.ultron.Fragments.PendingRequestsFragment;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.HomeScreenViewPagerAdapter;
-import com.ninja.ultron.entity.CodeDecodeEntity;
 import com.ninja.ultron.functions.CommonFunctions;
-
-import java.util.List;
 
 
 /**
@@ -37,7 +33,7 @@ public class AssetActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_homescreen);
+        setContentView(R.layout.act_asset);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mainActivityBar = (Toolbar) findViewById(R.id.mainActivityBar);

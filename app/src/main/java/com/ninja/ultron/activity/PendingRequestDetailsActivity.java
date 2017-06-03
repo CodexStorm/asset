@@ -31,6 +31,7 @@ public class PendingRequestDetailsActivity extends AppCompatActivity {
     TextView tvPendingRequestDate;
     TextView tvPendingReason;
     TextView tvPendingStatus;
+    TextView tvNomenclature;
     RecyclerView rvComments;
     PendingRequestCommentsAdapter adapter;
 
@@ -40,12 +41,13 @@ public class PendingRequestDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pending_request_details);
 
         tvPendingAssetId=(TextView)findViewById(R.id.tvPendingAssetId);
-        tvPendingAssetName=(TextView)findViewById(R.id.tvPendingAssetName);
+        tvPendingAssetName=(TextView)findViewById(R.id.tvAssetMake);
         tvPendingRequestType=(TextView)findViewById(R.id.tvPendingRequestType);
         tvPendingRequestTo=(TextView)findViewById(R.id.tvPendingRequestTo);
         tvPendingRequestDate=(TextView)findViewById(R.id.tvPendingRequestDate);
         tvPendingReason=(TextView)findViewById(R.id.tvPendingReason);
         tvPendingStatus=(TextView)findViewById(R.id.tvPendingStatus);
+        tvNomenclature = (TextView)findViewById(R.id.tvNomenclature);
         rvComments=(RecyclerView)findViewById(R.id.rvComments);
         pendingRequestDetailsEntities=new ArrayList<>();
         comments=new ArrayList<>();
@@ -68,9 +70,10 @@ public class PendingRequestDetailsActivity extends AppCompatActivity {
                     {
                         pendingRequestDetailsEntities=pendingRequestDetailsMiniEntity.getResponse();
                         entity=pendingRequestDetailsEntities.get(0);
-                        Log.d("tag",entity.getAssetName()+"  "+entity.getAssetId()+"  "+entity.getDateOfRequest()+"  "+entity.getReason()+"  "+entity.getStatus());
+                        Log.d("tag",entity.getAssetMake()+"  "+entity.getAssetId()+"  "+entity.getDateOfRequest()+"  "+entity.getReason()+"  "+entity.getStatus());
                         tvPendingAssetId.setText(""+(entity.getAssetId()));
-                        tvPendingAssetName.setText(entity.getAssetName());
+                        tvPendingAssetName.setText(entity.getAssetMake());
+                        tvNomenclature.setText(""+entity.getNomenclature());
                         tvPendingRequestType.setText(""+entity.getAssetRequestId());
                         tvPendingRequestTo.setText(""+(entity.getRequestTo()));
                         tvPendingRequestDate.setText(""+(entity.getDateOfRequest()));

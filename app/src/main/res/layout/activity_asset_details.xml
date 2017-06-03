@@ -73,9 +73,9 @@
                 android:textColor="@android:color/background_dark"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvCategory"
-                android:layout_alignStart="@+id/tvCategory"
-                android:layout_below="@id/tvCategory"
+                android:layout_alignLeft="@+id/tvhAssetMake"
+                android:layout_alignStart="@+id/tvhAssetMake"
+                android:layout_below="@id/tvhAssetMake"
                 android:layout_marginTop="20dp"
                 android:text="Type  :"
                 android:textAlignment="textEnd"
@@ -165,6 +165,27 @@
                 android:textColor="#000"
                 android:layout_alignStart="@+id/tvMaker1"
                 android:layout_alignTop="@+id/tvSpecification" />
+    <TextView
+        android:id="@+id/tvAssetMake1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvhAssetMake"
+        android:layout_below="@+id/tvCategory1"
+        android:layout_alignStart="@+id/tvCategory1"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+                android:id="@+id/tvhAssetMake"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCategory"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Asset Make  :"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textAlignment="textEnd"
+                />
 </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -225,13 +246,15 @@
             ></android.support.design.widget.BottomNavigationView>
 
 
+
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/actionbarcolor"
-        >
+        android:id="@+id/relativeLayout">
 
         <TextView
             android:layout_width="match_parent"
@@ -243,6 +266,8 @@
             />
 
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>

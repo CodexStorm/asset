@@ -33,6 +33,7 @@ public class AssetDetailsActivity extends AppCompatActivity {
     TextView tvMaker1;
     TextView tvSpecifiaction1;
     ListView lvAccessories;
+    TextView tvAssetMake;
     List<AssetAccessoryEntity> assetAccessoryList = new ArrayList<>();
     AssetAccessoryEntity assetAccessory;
     List<AssetDetailsEntity> assetDetailsList;
@@ -51,6 +52,7 @@ public class AssetDetailsActivity extends AppCompatActivity {
         tvCategory1 = (TextView) findViewById(R.id.tvCategory1);
         tvType1 = (TextView) findViewById(R.id.tvType1);
         tvMaker1 = (TextView) findViewById(R.id.tvMaker1);
+        tvAssetMake = (TextView)findViewById(R.id.tvAssetMake1);
         tvSpecifiaction1 = (TextView) findViewById(R.id.tvSpecification1);
         lvAccessories = (ListView) findViewById(R.id.lvAccessories);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
@@ -94,11 +96,12 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         assetDetailsList = assetDetailsMiniEntity.getResponse();
                         AssetDetailsEntity assetDetailsEntity = assetDetailsList.get(0);
                         tvId1.setText("" + assetDetailsEntity.getAssetId());
-                        tvName1.setText(assetDetailsEntity.getAssetName());
+                        tvName1.setText(assetDetailsEntity.getNomenclature());
                         tvCategory1.setText(assetDetailsEntity.getAssetCategory());
                         tvMaker1.setText(assetDetailsEntity.getAssetMaker());
                         tvType1.setText(assetDetailsEntity.getAssetType());
                         tvSpecifiaction1.setText(assetDetailsEntity.getAssetSpecification());
+                        tvAssetMake.setText(assetDetailsEntity.getAssetMake());
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
                         if (assetAccessoryList.size() != 0) {
                             String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);

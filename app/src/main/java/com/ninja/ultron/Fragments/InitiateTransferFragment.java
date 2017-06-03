@@ -1,7 +1,6 @@
 package com.ninja.ultron.Fragments;
 
 import android.annotation.TargetApi;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,7 +55,7 @@ public class InitiateTransferFragment extends Fragment{
         transferReasonsMiniEntity=new TransferReasonsMiniEntity();
         tvAssetId=(TextView)view.findViewById(R.id.tvAssetId);
         tvAssetName=(TextView)view.findViewById(R.id.tvAssetName);
-        tvTransferTo=(TextView)view.findViewById(R.id.tvTranferTo);
+        tvTransferTo=(TextView)view.findViewById(R.id.tvTransferTo);
         tvInitiate=(TextView)view.findViewById(R.id.tvInitiate);
         tvEmployeeId=(TextView)view.findViewById(R.id.tvEmployeeId);
         tvAssetName.setText(selectedName);

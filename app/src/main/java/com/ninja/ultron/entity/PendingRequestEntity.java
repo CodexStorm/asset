@@ -1,27 +1,40 @@
 package com.ninja.ultron.entity;
 
+import java.lang.ref.SoftReference;
+
 /**
  * Created by Prabhu Sivanandam on 18-May-17.
  */
 
 public class PendingRequestEntity {
 
-    String assetName;
+    String assetMake;
     String status;
     int requestId;
+    String nomenclature;
 
-    public PendingRequestEntity(String assetName, String status, int requestId) {
-        this.assetName = assetName;
+    public PendingRequestEntity(String assetMake, String status, int requestId,String nomenclature) {
+        this.assetMake = assetMake;
         this.status = status;
         this.requestId = requestId;
+        this.nomenclature = nomenclature;
     }
 
-    public String getAssetName() {
-        return assetName;
+    public void setNomenclature(String nomenclature) {
+        this.nomenclature = nomenclature;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public String getNomenclature() {
+
+        return nomenclature;
+    }
+
+    public String getAssetMake() {
+        return assetMake;
+    }
+
+    public void setAssetMake(String assetMake) {
+        this.assetMake = assetMake;
     }
 
     public String getStatus() {

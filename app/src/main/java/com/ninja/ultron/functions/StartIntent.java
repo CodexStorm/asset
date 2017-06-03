@@ -3,7 +3,7 @@ package com.ninja.ultron.functions;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.ninja.ultron.activity.HomescreenActivity;
+import com.ninja.ultron.activity.AssetActivity;
 import com.ninja.ultron.activity.LoginActivity;
 import com.ninja.ultron.activity.SplashScreen;
 
@@ -16,7 +16,7 @@ public class StartIntent {
     }
 
     public static void HomescreenActivity(Activity act) {
-        Intent myIntent = new Intent(act, HomescreenActivity.class);
+        Intent myIntent = new Intent(act, AssetActivity.class);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         act.startActivity(myIntent);
         act.finish();

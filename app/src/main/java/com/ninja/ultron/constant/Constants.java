@@ -25,13 +25,13 @@ public class Constants {
     public static final String BASE_URL = "http://88.99.31.206" +HEZNER_DELTA; //GAMMA-HEZNER
 
 
-    public static final String ASSET_LIST_URL="http://10.1.19.141:1111/api/web/find/asset?userId=1";
-    public static final String ASSET_DETAILS_MODEL_URL="http://10.1.19.141:1111/api/web/details/asset?assetId=";
+    public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=1";
+    public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
-    public static final String PENDING_REQUESTS_URL="http://10.1.19.141:1111/api/web/request/pending?userId=1";
-    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://10.1.19.141:1111/api/web/request/?assetRequestId=";
+    public static final String PENDING_REQUESTS_URL="http://88.99.31.206:1111/api/web/request/pending?userId=1";
+    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request/?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
-    public static final String INITIATE_TRANSFER_URL="http://10.1.19.141:1111/api/web/request/transfer";
-    public static final String TRANSFER_REASONS_API="http://10.1.19.141:1111/api/web/find/asset/issueReason";
+    public static final String INITIATE_TRANSFER_URL="http://88.99.31.206:1111/api/web/request/transfer";
+    public static final String TRANSFER_REASONS_API="http://88.99.31.206:1111/api/web/find/asset/issueReason";
 
 }

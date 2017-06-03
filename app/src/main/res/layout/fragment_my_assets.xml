@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/rlMyAssetList"
     android:layout_height="match_parent"
-    tools:context="com.ninja.ultron.activity.HomescreenActivity"
+    tools:context="com.ninja.ultron.activity.AssetActivity"
     android:background="#eeeeee"
     android:clickable="true">
     <android.support.v7.widget.RecyclerView

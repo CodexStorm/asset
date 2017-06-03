@@ -4,7 +4,19 @@ public class CodeDecodeEntity {
 
 
     private int Id;
-    private String Name;
+    private String nomenclature;
+    private String assetMake;
+
+
+    public void setAssetMake(String assetMake) {
+        this.assetMake = assetMake;
+    }
+
+    public String getAssetMake() {
+
+        return assetMake;
+    }
+
     public int getId() {
         return Id;
     }
@@ -13,12 +25,12 @@ public class CodeDecodeEntity {
         this.Id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getNomenclature() {
+        return nomenclature;
     }
 
-    public void setName(String name) {
-        this.Name = name;
+    public void setNomenclature(String nomenclature) {
+        this.nomenclature = nomenclature;
     }
 
 }

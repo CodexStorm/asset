@@ -14,17 +14,21 @@ import java.util.List;
  */
 
 public class AssetDetailsEntity {
-    private String assetName;
+    private String nomenclature;
     private int assetId;
     private String assetSpecification;
     private String assetCategory;
     private String assetType;
     private String assetMaker;
+    private String assetMake;
     private List<AssetAccessoryEntity> assetAccessory;
 
-    public AssetDetailsEntity(String assetName, int assetId, String assetSpecification, String assetCategory, String assetType, String assetMaker, List<AssetAccessoryEntity> assetAccessory) {
-        this.assetName = assetName;
+
+
+    public AssetDetailsEntity(String nomenclature , int assetId, String assetSpecification, String assetCategory, String assetType, String assetMaker, String assetMake, List<AssetAccessoryEntity> assetAccessory) {
+        this.nomenclature = nomenclature;
         this.assetId = assetId;
+        this.assetMake = assetMake;
         this.assetSpecification = assetSpecification;
         this.assetCategory = assetCategory;
         this.assetType = assetType;
@@ -32,14 +36,22 @@ public class AssetDetailsEntity {
         this.assetAccessory = assetAccessory;
     }
 
-    public String getAssetName() {
-        return assetName;
+    public String getNomenclature() {
+        return nomenclature;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public void setNomenclature(String nomenclature) {
+        this.nomenclature = nomenclature;
     }
 
+    public void setAssetMake(String assetMake) {
+        this.assetMake = assetMake;
+    }
+
+    public String getAssetMake() {
+
+        return assetMake;
+    }
     public int getAssetId() {
         return assetId;
     }

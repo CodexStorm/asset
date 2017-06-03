@@ -1,5 +1,6 @@
 package com.ninja.ultron.Fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -68,6 +69,7 @@ public class MyAssetsFragment extends Fragment {
                                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
                                 Intent intent=new Intent(getActivity(), AssetDetailsActivity.class);
                                 startActivity(intent);
+                                getActivity().overridePendingTransition(R.anim.from_middle, R.anim.to_middle);
                             }
                         });
                         recyclerView.hasFixedSize();

@@ -36,11 +36,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.HomescreenActivity"
+            android:name=".activity.AssetActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.ninja.ultron.activity.HOMESCREEN_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AssetDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.AssetDetailsActivity"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.PendingRequestDetailsActivity"></activity>
+        <activity android:name=".activity.PendingRequestDetailsActivity" />
+        <activity android:name=".activity.HomescreenActivity"></activity>
     </application>
 
 </manifest>

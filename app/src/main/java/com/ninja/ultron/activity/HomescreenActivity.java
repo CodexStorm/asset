@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
+import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.functions.StartIntent;
+import com.ninja.ultron.functions.UserDetails;
 
 public class HomescreenActivity extends AppCompatActivity {
 
@@ -20,6 +22,14 @@ public class HomescreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_homescreen);
         bMyAssets = (TextView) findViewById(R.id.bMyAssets);
         bAttendnace = (TextView) findViewById(R.id.bAttendance);
+        String role= UserDetails.getRole(this);
+
+        /*if(role== Constants.USER_ROLE_DC_SUPERVISOR){
+
+        }
+        else{
+            bAttendnace.setVisibility(View.GONE);
+        }*/
 
         bMyAssets.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,8 +41,8 @@ public class HomescreenActivity extends AppCompatActivity {
         bAttendnace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StartIntent.Attendance(HomescreenActivity.this);
-
+                //StartIntent.Attendance(HomescreenActivity.this);
+                    StartIntent.commonStartActivity(HomescreenActivity.this, LabourAttendanceMainActivity.class, null);
             }
         });
     }

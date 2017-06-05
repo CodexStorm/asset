@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlLabourLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e9e9e9"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/abMarkAttendance"
+            layout="@layout/actionbar_common_search" />
+
+        <ListView
+            android:id="@+id/lvLabour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/abMarkAttendance"
+            android:divider="@null"
+            android:dividerHeight="0dp">
+
+        </ListView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlLabourSearchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/rlAbSearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_56"
+            android:background="@color/actionbarcolor">
+
+            <ImageView
+                android:id="@+id/ivBackInSearch"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/background_green_button_sharp_corner"
+                android:clickable="true"
+                android:onClick="icnBackPressInSearch"
+                android:paddingBottom="18dp"
+                android:paddingTop="18dp"
+                android:src="@drawable/icn_back" />
+
+            <EditText
+                android:id="@+id/etSearchLabour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_toRightOf="@+id/ivBackInSearch"
+                android:background="@drawable/bg_search_edit"
+                android:drawableLeft="@drawable/icn_search_dark"
+                android:drawablePadding="10dp"
+                android:hint="Enter labour id"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000" />
+
+            <RelativeLayout
+                android:id="@+id/rlClearSearchEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:onClick="clearSearchEditText"
+                android:background="@drawable/background_white_button_sharp_corner_different_click_color"
+                android:layout_marginRight="@dimen/dp_20">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/pbSmall"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_below="@+id/rlAbSearch"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@anim/progress_small"
+            android:visibility="visible" />
+
+        <ListView
+            android:id="@+id/lvLabourSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rlAbSearch"
+            android:divider="@null"
+            android:dividerHeight="0dp">
+
+        </ListView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlLoader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cc000000"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarSmall"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@anim/progress_small"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressBarSmall"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Loading..."
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

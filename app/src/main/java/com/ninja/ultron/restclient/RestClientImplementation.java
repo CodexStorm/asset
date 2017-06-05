@@ -10,11 +10,18 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.constant.Constants;
+import com.ninja.ultron.entity.AsgardCodeMessageEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
+import com.ninja.ultron.entity.LabourAttendanceMobileDTO;
+import com.ninja.ultron.entity.LabourAttendanceMobileDTOAPI;
+import com.ninja.ultron.entity.LabourAttendanceTrackerEntity;
+import com.ninja.ultron.entity.LabourShiftDetailAPI;
+import com.ninja.ultron.entity.LabourShiftDetailEntity;
 import com.ninja.ultron.entity.LoginEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
@@ -22,6 +29,7 @@ import com.ninja.ultron.entity.TransferReasonsMiniEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +43,38 @@ public class RestClientImplementation {
 
     private static String getAbsoluteUrl(String relativeUrl) {
         return BASE_URL + relativeUrl;
+    }
+
+    public synchronized  static AsgardCodeMessageEntity processVolleyError(VolleyError error){
+        AsgardCodeMessageEntity asgardCodeMessageEntity = new AsgardCodeMessageEntity();
+        if (error.networkResponse != null && error.networkResponse.data != null) {
+            Gson gson = new Gson();
+            AsgardCodeMessageEntity erroAsgardCodeMessageEntity = gson.fromJson(new String(error.networkResponse.data), AsgardCodeMessageEntity.class);
+            if (erroAsgardCodeMessageEntity.getMessage() != null) {
+                asgardCodeMessageEntity.setMessage(erroAsgardCodeMessageEntity.getMessage());
+                asgardCodeMessageEntity.setCode(erroAsgardCodeMessageEntity.getCode());
+            }
+        } else {
+            try {
+                if (error.getCause() != null && error.getCause().getMessage() != null) {
+                    asgardCodeMessageEntity.setMessage(error.getCause().getMessage());
+                    asgardCodeMessageEntity.setCode(999);
+                }
+            } catch (Exception e) {
+                if (error.getCause() != null && error.getCause().getMessage() != null) {
+                    asgardCodeMessageEntity.setMessage(error.getCause().getMessage());
+                    asgardCodeMessageEntity.setCode(999);
+                } else {
+                    asgardCodeMessageEntity.setMessage("Error - Exception");
+                    asgardCodeMessageEntity.setCode(999);
+                }
+            }
+        }
+        if(asgardCodeMessageEntity==null){
+            asgardCodeMessageEntity.setCode(999);
+            asgardCodeMessageEntity.setMessage("Error");
+        }
+        return asgardCodeMessageEntity;
     }
 
     public static void userLogin(final LoginEntity loginEntity, final LoginEntity.RestClientInterface restclientinterface, final Context context) {
@@ -371,5 +411,194 @@ public class RestClientImplementation {
         },3000,0);
         queue.add(getRequest);
     }
+
+    public static void getLabourShiftDetail(final LabourShiftDetailAPI labourShiftDetailAPI, final LabourShiftDetailAPI.FlashRestClientInterface restclientinterface, final Context context) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        String url = "";
+        url = getAbsoluteUrl("/labourAttendanceTracker/facilityShiftDetail");
+        JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("", "" + response);
+                try {
+                    Gson gson = new Gson();
+                    List<LabourShiftDetailEntity> labourShiftDetailEntities = gson.fromJson(response.toString(), new TypeToken<List<LabourShiftDetailEntity>>() {
+                    }.getType());
+                    Log.d("", "" + labourShiftDetailEntities);
+                    labourShiftDetailAPI.setLabourShiftDetailEntityList(labourShiftDetailEntities);
+                    restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, null);
+                } catch (Exception e) {
+                    labourShiftDetailAPI.setMessage("Exception!!! something went wrong");
+                    labourShiftDetailAPI.setCode(999);
+                    restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
+                labourShiftDetailAPI.setCode(tempAsgardCodeMessageEntity.getCode());
+                labourShiftDetailAPI.setMessage(tempAsgardCodeMessageEntity.getMessage());
+                restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, new VolleyError());
+            }
+        }, 30000, 0) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
+                params.put("Authorization", auth);
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
+    public static void cancelRequest(String tag) {
+        if (queue != null) {
+            queue.cancelAll(tag);
+        }
+    }
+
+    public static void getLabourForMarkingAttendance(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context, String searchTag) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        if(searchTag!=null && !searchTag.isEmpty()) {
+            cancelRequest(searchTag);
+        }
+        String url = "";
+        int offset = labourAttendanceMobileDTOAPI.getOffset();
+        int limit = labourAttendanceMobileDTOAPI.getLimit();
+        int labourAgencyId = labourAttendanceMobileDTOAPI.getLabourAgencyId();
+        int labourId = labourAttendanceMobileDTOAPI.getLabourId();
+        url = getAbsoluteUrl("/labour/attendance");
+        url = url + "?labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit;
+        JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("", "" + response);
+                try {
+                    Gson gson = new Gson();
+                    List<LabourAttendanceMobileDTO> labourAttendanceMobileDTOList = gson.fromJson(response.toString(), new TypeToken<List<LabourAttendanceMobileDTO>>() {
+                    }.getType());
+                    Log.d("", "" + labourAttendanceMobileDTOList);
+                    labourAttendanceMobileDTOAPI.setLabourAttendanceMobileDTOList(labourAttendanceMobileDTOList);
+                    restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, null);
+                } catch (Exception e) {
+                    labourAttendanceMobileDTOAPI.setMessage("Exception!!! something went wrong");
+                    labourAttendanceMobileDTOAPI.setCode(999);
+                    restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
+                labourAttendanceMobileDTOAPI.setCode(tempAsgardCodeMessageEntity.getCode());
+                labourAttendanceMobileDTOAPI.setMessage(tempAsgardCodeMessageEntity.getMessage());
+                restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, new VolleyError());
+            }
+        }, 30000, 0) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
+                params.put("Authorization", auth);
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
+    public static void postLabourAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restclientinterface, final Context context) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        String url = "";
+        url = getAbsoluteUrl("/labourAttendanceTracker");
+        JSONObject postParams = labourAttendanceTrackerEntity.getJsonObjectAsParams();
+        //Log.e("labourAttendanceTrackerEntity PARAMS", "" + postParams);
+        JsonBaseRequest postRequest = new JsonBaseRequest(Request.Method.POST, url, postParams,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.e("reponse", "" + response);
+                            Gson gson = new Gson();
+                            LabourAttendanceTrackerEntity newLabourAttendanceTrackerEntity = gson.fromJson(response.toString(), LabourAttendanceTrackerEntity.class);
+                            labourAttendanceTrackerEntity.setCode(newLabourAttendanceTrackerEntity.getCode());
+                            labourAttendanceTrackerEntity.setMessage(newLabourAttendanceTrackerEntity.getMessage());
+                            restclientinterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity, null);
+                        } catch (Exception e) {
+                            Log.e("reponseError", "" + e.toString());
+                            restclientinterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity, new VolleyError());
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
+                labourAttendanceTrackerEntity.setCode(tempAsgardCodeMessageEntity.getCode());
+                labourAttendanceTrackerEntity.setMessage(tempAsgardCodeMessageEntity.getMessage());
+                restclientinterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity, new VolleyError());
+            }
+        }, 30000, 0) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
+                params.put("Authorization", auth);
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
+    }
+
+    public static void getReportedLabourDetail(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        String url = "";
+
+        url = getAbsoluteUrl("/labourAttendanceTracker/reportedLabour?shiftDetailId="+labourAttendanceMobileDTOAPI.getShiftDetailId());
+        JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("", "" + response);
+                try {
+                    Gson gson = new Gson();
+                    List<LabourAttendanceMobileDTO> labourAttendanceMobileDTOList = gson.fromJson(response.toString(), new TypeToken<List<LabourAttendanceMobileDTO>>() {
+                    }.getType());
+                    Log.d("", "" + labourAttendanceMobileDTOList);
+                    labourAttendanceMobileDTOAPI.setLabourAttendanceMobileDTOList(labourAttendanceMobileDTOList);
+                    restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, null);
+                } catch (Exception e) {
+                    labourAttendanceMobileDTOAPI.setMessage("Exception!!! something went wrong");
+                    labourAttendanceMobileDTOAPI.setCode(999);
+                    restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
+                labourAttendanceMobileDTOAPI.setCode(tempAsgardCodeMessageEntity.getCode());
+                labourAttendanceMobileDTOAPI.setMessage(tempAsgardCodeMessageEntity.getMessage());
+                restclientinterface.onLabourAttendanceMobileDTO(labourAttendanceMobileDTOAPI, new VolleyError());
+            }
+        }, 30000, 0) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
+                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
+                params.put("Authorization", auth);
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
 
 }

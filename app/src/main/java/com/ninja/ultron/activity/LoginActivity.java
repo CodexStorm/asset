@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                             CommonFunctions.toastString("Your access is denied. Please contact your admin.",LoginActivity.this);
                         }else {
                             UserDetails.serAsgardUserId(LoginActivity.this, loginEntity.getAsgardUser().getId());
+                            UserDetails.setRole(LoginActivity.this,loginEntity.getAsgardUser().getRoles());
                             UserDetails.setUserName(LoginActivity.this, userName);
                             UserDetails.setUserPassword(LoginActivity.this, userPassword);
                             UserDetails.setUserLoggedIn(LoginActivity.this, true);

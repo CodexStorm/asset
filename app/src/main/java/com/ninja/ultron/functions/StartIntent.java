@@ -2,6 +2,7 @@ package com.ninja.ultron.functions;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.ninja.ultron.activity.AssetActivity;
 import com.ninja.ultron.activity.HomescreenActivity;
@@ -49,4 +50,24 @@ public class StartIntent {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         act.startActivity(intent);
     }
+
+    public static void commonStartActivity(Activity activity, Class nextActivity, Bundle bundle, boolean activityResultRequired, int activityResultCode, boolean finishActivityRequried) {
+        Intent intent = new Intent(activity, nextActivity);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        if (activityResultRequired) {
+            activity.startActivityForResult(intent, activityResultCode);
+        } else
+            activity.startActivity(intent);
+        if (finishActivityRequried)
+            activity.finish();
+    }
+
+    public static void commonStartActivity(Activity activity, Class className, Bundle bundle) {
+        Intent intent = new Intent(activity, className);
+        if (bundle != null)
+            intent.putExtras(bundle);
+        activity.startActivity(intent);
+    }
+
 }

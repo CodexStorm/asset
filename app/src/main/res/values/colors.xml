@@ -7,6 +7,9 @@
     <color name="darkGrey">#9E9E9E</color>
     <color name="lightGrey">#B6B6B6</color>
     <color name="actionbarcolor">#309229</color>
+    <color name="white">#ffffff</color>
+    <color name="cole9e9e9">#e9e9e9</color>
+    <color name="searchBackground">#498433</color>
     <color name="dialog_bg">#cc000000</color>
 
     <color name="my_customer_active_not_ordered">#D32F2F</color>

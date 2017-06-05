@@ -24,6 +24,24 @@ public class Constants {
 
     public static final String BASE_URL = "http://88.99.31.206" +HEZNER_DELTA; //GAMMA-HEZNER
 
+    public static final String USER_ROLE_DISPATCH_EXECUTIVE = "DISPATCH_EXECUTIVE";
+    public static final String USER_ROLE_UNIT_PICK_EXECUTIVE = "UNIT_PICK_EXECUTIVE";
+    public static final String USER_ROLE_DC_EXECUTIVE = "DC_EXECUTIVE";
+    public static final String USER_ROLE_DC_SUPERVISOR = "DC_SUPERVISOR";
+    public static final String USER_ROLE_RECOVERY_OPS_EXECUTIVE = "RECOVERY_OPS_EXECUTIVE";
+    public static final String USER_ROLE_RECOVERY_SALES_EXECUTIVE = "RECOVERY_SALES_EXECUTIVE";
+    public static final String USER_ROLE_DC_OPS_LEAD = "DC_OPS_LEAD";
+    public static final int HTTP_AUTHENTICATON_FAILURE_CODE = 401;
+    public static final String REST_FAILURE_MESSAGE = "Some thing went wrong";
+    public static final int NUMBER_FEED_FETECHED_PER_PULL = 10;
+
+    public static final int YOUR_ORDERS_FETCH_LIMIT = 10;
+
+    public static final int YOUR_ORDERS_FETCH_OFFSET = 0;
+
+    public static final int FEED_LEFT_BEFORE_NEW_ORDER_FETCH = 3;
+
+
 
     public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=1";
     public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";

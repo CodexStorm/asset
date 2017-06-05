@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvShiftDetail"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/bg_bordergreen_inside_white"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="@dimen/dp_15"
+        android:text="Shift 1"
+        android:textColor="#60a844"
+        android:textSize="16dp" />
+
+
+</LinearLayout>

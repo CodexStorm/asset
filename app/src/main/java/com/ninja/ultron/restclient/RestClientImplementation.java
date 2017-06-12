@@ -33,9 +33,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.ninja.ultron.constant.Constants.GET_LABOUR_SHIFT_DETAILS_URL;
+import static com.ninja.ultron.constant.Constants.REVOKE_ATTENDANCE_URL;
 
 public class RestClientImplementation {
     static RequestQueue queue;
@@ -415,30 +419,33 @@ public class RestClientImplementation {
     public static void getLabourShiftDetail(final LabourShiftDetailAPI labourShiftDetailAPI, final LabourShiftDetailAPI.FlashRestClientInterface restclientinterface, final Context context) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
-        url = getAbsoluteUrl("/labourAttendanceTracker/facilityShiftDetail");
-        JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
+        url = GET_LABOUR_SHIFT_DETAILS_URL;
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,url,null,new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray response) {
-                Log.d("", "" + response);
+            public void onResponse(JSONObject response) {
+                Log.d("responseCheck:", "" + response);
                 try {
                     Gson gson = new Gson();
-                    List<LabourShiftDetailEntity> labourShiftDetailEntities = gson.fromJson(response.toString(), new TypeToken<List<LabourShiftDetailEntity>>() {
+                    //labourShiftDetailAPI=gson.fromJson(response.toString(),LabourShiftDetailAPI.class);
+                    List<LabourShiftDetailEntity> labourShiftDetailEntities = gson.fromJson((response.getJSONArray("response")).toString(), new TypeToken<ArrayList<LabourShiftDetailEntity>>() {
                     }.getType());
                     Log.d("", "" + labourShiftDetailEntities);
-                    labourShiftDetailAPI.setLabourShiftDetailEntityList(labourShiftDetailEntities);
+                    labourShiftDetailAPI.setMessage(response.getString("message"));
+                    labourShiftDetailAPI.setStatusCode(response.getInt("statusCode"));
+                    labourShiftDetailAPI.setResponse(labourShiftDetailEntities);
                     restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, null);
                 } catch (Exception e) {
                     labourShiftDetailAPI.setMessage("Exception!!! something went wrong");
-                    labourShiftDetailAPI.setCode(999);
+                    labourShiftDetailAPI.setStatusCode(999);
                     restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, new VolleyError());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
-                labourShiftDetailAPI.setCode(tempAsgardCodeMessageEntity.getCode());
-                labourShiftDetailAPI.setMessage(tempAsgardCodeMessageEntity.getMessage());
+               // AsgardCodeMessageEntity tempAsgardCodeMessageEntity = processVolleyError(error);
+               // labourShiftDetailAPI.setStatusCode(tempAsgardCodeMessageEntity.getCode());
+                //labourShiftDetailAPI.setMessage(tempAsgardCodeMessageEntity.getMessage());
                 restclientinterface.onLabourShiftDetail(labourShiftDetailAPI, new VolleyError());
             }
         }, 30000, 0) {
@@ -471,7 +478,7 @@ public class RestClientImplementation {
         int limit = labourAttendanceMobileDTOAPI.getLimit();
         int labourAgencyId = labourAttendanceMobileDTOAPI.getLabourAgencyId();
         int labourId = labourAttendanceMobileDTOAPI.getLabourId();
-        url = getAbsoluteUrl("/labour/attendance");
+        url = Constants.GET_LABOUR_FOR_ATTENDANCE_URL;
         url = url + "?labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit;
         JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
             @Override
@@ -515,8 +522,9 @@ public class RestClientImplementation {
     public static void postLabourAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restclientinterface, final Context context) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
-        url = getAbsoluteUrl("/labourAttendanceTracker");
+        url = Constants.MARK_ATTENDANCE_URL;
         JSONObject postParams = labourAttendanceTrackerEntity.getJsonObjectAsParams();
+        Log.d("params",postParams.toString());
         //Log.e("labourAttendanceTrackerEntity PARAMS", "" + postParams);
         JsonBaseRequest postRequest = new JsonBaseRequest(Request.Method.POST, url, postParams,
                 new Response.Listener<JSONObject>() {
@@ -560,14 +568,14 @@ public class RestClientImplementation {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
 
-        url = getAbsoluteUrl("/labourAttendanceTracker/reportedLabour?shiftDetailId="+labourAttendanceMobileDTOAPI.getShiftDetailId());
+        url = Constants.GET_REPORTED_LABOUR_URL+labourAttendanceMobileDTOAPI.getShiftDetailId();
         JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.d("", "" + response);
                 try {
                     Gson gson = new Gson();
-                    List<LabourAttendanceMobileDTO> labourAttendanceMobileDTOList = gson.fromJson(response.toString(), new TypeToken<List<LabourAttendanceMobileDTO>>() {
+                    List<LabourAttendanceMobileDTO> labourAttendanceMobileDTOList = gson.fromJson(response.toString(), new TypeToken<ArrayList<LabourAttendanceMobileDTO>>() {
                     }.getType());
                     Log.d("", "" + labourAttendanceMobileDTOList);
                     labourAttendanceMobileDTOAPI.setLabourAttendanceMobileDTOList(labourAttendanceMobileDTOList);
@@ -598,6 +606,43 @@ public class RestClientImplementation {
             }
         };
         queue.add(getRequest);
+    }
+
+    public static void revokeAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restClientInterface, final Context context){
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        final Gson gson=new Gson();
+        JSONObject params = labourAttendanceTrackerEntity.getJsonObjectAsParams();
+        Log.d("postParams",params.toString());
+        JsonBaseRequest postRequest=new JsonBaseRequest(Request.Method.POST, REVOKE_ATTENDANCE_URL, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("respopnse",response.toString());
+                try {
+                    LabourAttendanceTrackerEntity successEntity=gson.fromJson((response.getJSONObject("response")).toString(),LabourAttendanceTrackerEntity.class);
+                    labourAttendanceTrackerEntity.setCode(successEntity.getCode());
+                    labourAttendanceTrackerEntity.setMessage(successEntity.getMessage());
+                    restClientInterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity,null);
+                } catch (JSONException e) {
+                    labourAttendanceTrackerEntity.setMessage("Something Went Wrong");
+                    labourAttendanceTrackerEntity.setCode(999);
+                    restClientInterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity,new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error!=null&&error.networkResponse!=null){
+                    Gson gson=new Gson();
+                    LabourAttendanceTrackerEntity failureEntity=gson.fromJson(error.networkResponse.toString(),LabourAttendanceTrackerEntity.class);
+                    if(failureEntity.getMessage()!=null){
+                        labourAttendanceTrackerEntity.setMessage(failureEntity.getMessage());
+                        labourAttendanceTrackerEntity.setCode(failureEntity.getCode());
+                        restClientInterface.onLabourAttendanceTracker(labourAttendanceTrackerEntity,new VolleyError());
+                    }
+                }
+            }
+        });
+        queue.add(postRequest);
     }
 
 

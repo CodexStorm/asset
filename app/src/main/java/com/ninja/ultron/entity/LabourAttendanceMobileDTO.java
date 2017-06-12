@@ -42,6 +42,4 @@ public class LabourAttendanceMobileDTO {
     public void setShiftName(String shiftName) {
         this.shiftName = shiftName;
     }
-
-
 }

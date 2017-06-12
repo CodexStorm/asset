@@ -72,8 +72,8 @@ public class LabourAttendanceMainActivity extends AppCompatActivity{
             public void onLabourShiftDetail(LabourShiftDetailAPI labourShiftDetailAPI, VolleyError error) {
                 if(error==null){
                     labourShiftDetailEntityList.clear();
-                    if(labourShiftDetailAPI.getLabourShiftDetailEntityList()!=null && labourShiftDetailAPI.getLabourShiftDetailEntityList().size()>0){
-                        labourShiftDetailEntityList.addAll(labourShiftDetailAPI.getLabourShiftDetailEntityList());
+                    if(labourShiftDetailAPI.getResponse()!=null && labourShiftDetailAPI.getResponse().size()>0){
+                        labourShiftDetailEntityList.addAll(labourShiftDetailAPI.getResponse());
                         labourShiftDetailAdapter.notifyDataSetChanged();
                     }else{
                         CommonFunctions.toastString("No shift detail", LabourAttendanceMainActivity.this);
@@ -81,7 +81,7 @@ public class LabourAttendanceMainActivity extends AppCompatActivity{
                 }else if(error!=null){
                     labourShiftDetailEntityList.clear();
                     labourShiftDetailAdapter.notifyDataSetChanged();
-                    CommonFunctions.restClientErrorValidation(labourShiftDetailAPI.getCode(), labourShiftDetailAPI.getMessage(), LabourAttendanceMainActivity.this);
+                    CommonFunctions.restClientErrorValidation(labourShiftDetailAPI.getStatusCode(), labourShiftDetailAPI.getMessage(), LabourAttendanceMainActivity.this);
                 }
                 rlLoader.setVisibility(View.GONE);
             }

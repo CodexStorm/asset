@@ -10,24 +10,24 @@ import java.util.List;
 
 public class LabourShiftDetailAPI {
 
-    private List<LabourShiftDetailEntity> labourShiftDetailEntityList;
-    private int code;
+    private List<LabourShiftDetailEntity> response;
+    private int statusCode;
     private String message;
 
-    public List<LabourShiftDetailEntity> getLabourShiftDetailEntityList() {
-        return labourShiftDetailEntityList;
+    public List<LabourShiftDetailEntity> getResponse() {
+        return response;
     }
 
-    public void setLabourShiftDetailEntityList(List<LabourShiftDetailEntity> labourShiftDetailEntityList) {
-        this.labourShiftDetailEntityList = labourShiftDetailEntityList;
+    public void setResponse(List<LabourShiftDetailEntity> response) {
+        this.response = response;
     }
 
-    public int getCode() {
-        return code;
+    public int getStatusCode() {
+        return statusCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 
     public String getMessage() {

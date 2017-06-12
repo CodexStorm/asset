@@ -7,8 +7,8 @@ package com.ninja.ultron.entity;
 public class LabourShiftDetailEntity {
 
         private int id;
-        private int hours;
-        private String shiftName;
+        private int Hours;
+        private String ShiftName;
 
         public int getId() {
             return id;
@@ -19,19 +19,19 @@ public class LabourShiftDetailEntity {
         }
 
         public int getHours() {
-            return hours;
+            return Hours;
         }
 
         public void setHours(int hours) {
-            this.hours = hours;
+            this.Hours = hours;
         }
 
         public String getShiftName() {
-            return shiftName;
+            return ShiftName;
         }
 
         public void setShiftName(String shiftName) {
-            this.shiftName = shiftName;
+            this.ShiftName = shiftName;
         }
 
 }

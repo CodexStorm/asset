@@ -138,7 +138,7 @@ public class ReportedLabourActivity extends Activity {
         labourAttendanceTrackerEntity.setFacilityId(facilityId);
         labourAttendanceTrackerEntity.setShiftDetailId(shiftDetailId);
         rlLoader.setVisibility(View.VISIBLE);
-        RestClientImplementation.postLabourAttendance(labourAttendanceTrackerEntity, new LabourAttendanceTrackerEntity.FlashRestClientInterface() {
+        /*RestClientImplementation.postLabourAttendance(labourAttendanceTrackerEntity, new LabourAttendanceTrackerEntity.FlashRestClientInterface() {
             @Override
             public void onLabourAttendanceTracker(LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, VolleyError error) {
                 if(error==null){
@@ -150,6 +150,20 @@ public class ReportedLabourActivity extends Activity {
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        }, ReportedLabourActivity.this);
+        }, ReportedLabourActivity.this);*/
+        RestClientImplementation.revokeAttendance(labourAttendanceTrackerEntity,new LabourAttendanceTrackerEntity.FlashRestClientInterface(){
+            @Override
+            public void onLabourAttendanceTracker(LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, VolleyError error) {
+                if(error==null){
+                    CommonFunctions.toastString("Done",ReportedLabourActivity.this);
+                    labourAttendanceMobileDTOList.remove(position);
+                    reportedLabourAdapter.notifyDataSetChanged();
+                }
+                else if(error!=null){
+                    CommonFunctions.restClientErrorValidation(labourAttendanceTrackerEntity.getCode(),labourAttendanceTrackerEntity.getMessage(),ReportedLabourActivity.this);
+                }
+                rlLoader.setVisibility(View.GONE);
+            }
+        },ReportedLabourActivity.this);
     }
 }

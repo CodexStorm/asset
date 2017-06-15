@@ -22,6 +22,7 @@ import java.util.List;
 public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecyclerAdapter.ViewHolder>{
 
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
+    int c;
     Context context;
     private CallBack mCallBack;
 

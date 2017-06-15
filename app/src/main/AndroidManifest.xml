@@ -20,18 +20,14 @@
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme">
-        <activity android:name=".activity.LoginActivity"/>
-        <activity
-            android:name=".Fragments.AssetDetailsFragment"
-            android:theme="@style/MyMaterialTheme" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,8 +35,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HomescreenActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".activity.AssetActivity"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.ninja.ultron.activity.HOMESCREEN_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AssetDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.PendingRequestDetailsActivity" />
+        <activity android:name=".activity.HomescreenActivity"></activity>
+        <activity android:name=".activity.LabourAttendanceMainActivity"></activity>
+        <activity android:name=".activity.MarkLabourAttendanceActivity"></activity>
+        <activity android:name=".activity.ReportedLabourActivity"></activity>
     </application>
 
 </manifest>

@@ -143,6 +143,18 @@ public class UserDetails {
         editor.commit();
     }
 
+    public static void setRole(Context context,String role){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("userRole",role);
+        editor.commit();
+    }
+
+    public static String getRole(Context context){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        return (settings.getString("userRole",""));
+    }
+
     public static String getUserCityId(Context context) {
         SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
         return (settings.getString("usercityId", ""));
@@ -306,7 +318,29 @@ public class UserDetails {
         return (settings.getString("assetAccessoryList", ""));
     }
 
+    public static void setSessionId(Context context,String sessionId){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("sessionId",sessionId);
+        editor.commit();
+    }
 
+    public static String getSessionId(Context context){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        return settings.getString("sessionId",null);
+    }
+
+    public static void setSessionToken(Context context,String sessionToken){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putString("sessionToken",sessionToken);
+        editor.commit();
+    }
+
+    public static String getSessionToken(Context context){
+        SharedPreferences settings=context.getSharedPreferences(Constants.USER_PREFERENCE,0);
+        return settings.getString("sessionToken",null);
+    }
 
 
 

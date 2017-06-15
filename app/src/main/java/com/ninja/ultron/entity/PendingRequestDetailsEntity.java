@@ -1,6 +1,5 @@
 package com.ninja.ultron.entity;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -9,15 +8,17 @@ import java.util.List;
 
 public class PendingRequestDetailsEntity {
 
-    String assetName,status,reason;
+    String assetMake,status,reason,nomenclature;
     int assetId,assetRequestId,requestTo;
     List<PendingRequestsCommentsEntity> comment;
     String dateOfRequest;
 
-    public PendingRequestDetailsEntity(String assetName, String status, String reason, int assetId, int assetRequestId, int requestTo, List<PendingRequestsCommentsEntity> comment,String dateOfRequest) {
-        this.assetName = assetName;
+
+    public PendingRequestDetailsEntity(String assetMake, String status, String reason, String nomenclature, int assetId, int assetRequestId, int requestTo, List<PendingRequestsCommentsEntity> comment, String dateOfRequest) {
+        this.assetMake = assetMake;
         this.status = status;
         this.reason = reason;
+        this.nomenclature = nomenclature;
         this.assetId = assetId;
         this.assetRequestId = assetRequestId;
         this.requestTo = requestTo;
@@ -25,16 +26,24 @@ public class PendingRequestDetailsEntity {
         this.dateOfRequest = dateOfRequest;
     }
 
+
     public PendingRequestDetailsEntity() {
 
     }
 
-    public String getAssetName() {
-        return assetName;
+    public String getNomenclature() {
+        return nomenclature;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public void setNomenclature(String nomenclature) {
+        this.nomenclature = nomenclature;
+    }
+    public String getAssetMake() {
+        return assetMake;
+    }
+
+    public void setAssetMake(String assetMake) {
+        this.assetMake = assetMake;
     }
 
     public String getStatus() {

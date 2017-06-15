@@ -1,6 +1,7 @@
 package com.ninja.ultron.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,9 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
         final PendingRequestEntity pendingRequestEntity=pendingRequestEntityArrayList.get(position);
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
-        holder.tvAssetMake.setText(pendingRequestEntity.getAssetName());
+        holder.tvAssetMake.setText(pendingRequestEntity.getAssetMake());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
+        holder.tvAssetNomenclature.setText(pendingRequestEntity.getNomenclature());
         holder.pendingRequestCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +72,8 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvAssetMake,tvAssetStatus,tvAssetRequestId;
+        TextView tvAssetMake,tvAssetStatus,tvAssetRequestId,tvAssetNomenclature;
         RelativeLayout layout;
-        ImageView ivMoreDetails;
         View pendingRequestCardView;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -80,8 +81,8 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
             tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
+            tvAssetNomenclature =(TextView) itemView.findViewById(R.id.tvAssetNomenclature);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
-            ivMoreDetails=(ImageView)itemView.findViewById(R.id.ivCardMoreDetails);
         }
     }
 

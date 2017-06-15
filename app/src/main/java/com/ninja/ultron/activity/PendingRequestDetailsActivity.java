@@ -1,20 +1,15 @@
-package com.ninja.ultron.Fragments;
+package com.ninja.ultron.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.PendingRequestCommentsAdapter;
-import com.ninja.ultron.entity.CommentEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestsCommentsEntity;
@@ -24,38 +19,42 @@ import com.ninja.ultron.restclient.RestClientImplementation;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Prabhu Sivanandam on 24-May-17.
- */
-
-public class PendingRequestDetailsFragment extends Fragment {
+public class PendingRequestDetailsActivity extends AppCompatActivity {
 
     List<PendingRequestDetailsEntity> pendingRequestDetailsEntities;
     PendingRequestDetailsEntity entity;
     List<PendingRequestsCommentsEntity> comments;
-    TextView tvPendingAssetId,tvPendingAssetName,tvPendingRequestType,tvPendingRequestTo,tvPendingRequestDate,tvPendingReason,tvPendingStatus;
+    TextView tvPendingAssetId;
+    TextView tvPendingAssetName;
+    TextView tvPendingRequestType;
+    TextView tvPendingRequestTo;
+    TextView tvPendingRequestDate;
+    TextView tvPendingReason;
+    TextView tvPendingStatus;
+    TextView tvNomenclature;
     RecyclerView rvComments;
     PendingRequestCommentsAdapter adapter;
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_pending_request_details,container,false);
-        tvPendingAssetId=(TextView)view.findViewById(R.id.tvPendingAssetId);
-        tvPendingAssetName=(TextView)view.findViewById(R.id.tvPendingAssetName);
-        tvPendingRequestType=(TextView)view.findViewById(R.id.tvPendingRequestType);
-        tvPendingRequestTo=(TextView)view.findViewById(R.id.tvPendingRequestTo);
-        tvPendingRequestDate=(TextView)view.findViewById(R.id.tvPendingRequestDate);
-        tvPendingReason=(TextView)view.findViewById(R.id.tvPendingReason);
-        tvPendingStatus=(TextView)view.findViewById(R.id.tvPendingStatus);
-        rvComments=(RecyclerView)view.findViewById(R.id.rvComments);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pending_request_details);
+
+        tvPendingAssetId=(TextView)findViewById(R.id.tvPendingAssetId);
+        tvPendingAssetName=(TextView)findViewById(R.id.tvAssetMake);
+        tvPendingRequestType=(TextView)findViewById(R.id.tvPendingRequestType);
+        tvPendingRequestTo=(TextView)findViewById(R.id.tvPendingRequestTo);
+        tvPendingRequestDate=(TextView)findViewById(R.id.tvPendingRequestDate);
+        tvPendingReason=(TextView)findViewById(R.id.tvPendingReason);
+        tvPendingStatus=(TextView)findViewById(R.id.tvPendingStatus);
+        tvNomenclature = (TextView)findViewById(R.id.tvNomenclature);
+        rvComments=(RecyclerView)findViewById(R.id.rvComments);
         pendingRequestDetailsEntities=new ArrayList<>();
         comments=new ArrayList<>();
-        LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        LinearLayoutManager manager=new LinearLayoutManager(PendingRequestDetailsActivity.this);
         rvComments.setLayoutManager(manager);
         callGetDetailsApi();
-        return view;
     }
-
     public void callGetDetailsApi()
     {
         entity=new PendingRequestDetailsEntity();
@@ -71,9 +70,10 @@ public class PendingRequestDetailsFragment extends Fragment {
                     {
                         pendingRequestDetailsEntities=pendingRequestDetailsMiniEntity.getResponse();
                         entity=pendingRequestDetailsEntities.get(0);
-                        Log.d("tag",entity.getAssetName()+"  "+entity.getAssetId()+"  "+entity.getDateOfRequest()+"  "+entity.getReason()+"  "+entity.getStatus());
+                        Log.d("tag",entity.getAssetMake()+"  "+entity.getAssetId()+"  "+entity.getDateOfRequest()+"  "+entity.getReason()+"  "+entity.getStatus());
                         tvPendingAssetId.setText(""+(entity.getAssetId()));
-                        tvPendingAssetName.setText(entity.getAssetName());
+                        tvPendingAssetName.setText(entity.getAssetMake());
+                        tvNomenclature.setText(""+entity.getNomenclature());
                         tvPendingRequestType.setText(""+entity.getAssetRequestId());
                         tvPendingRequestTo.setText(""+(entity.getRequestTo()));
                         tvPendingRequestDate.setText(""+(entity.getDateOfRequest()));
@@ -104,13 +104,15 @@ public class PendingRequestDetailsFragment extends Fragment {
                 {
                     if(pendingRequestDetailsMiniEntity.getStatusCode()==401)
                     {
-                        CommonFunctions.toastString("Unauthorized",getContext());
+                        CommonFunctions.toastString("Unauthorized",PendingRequestDetailsActivity.this);
                     }
                 }
 
 
             }
-        },getContext());
+        },PendingRequestDetailsActivity.this);
     }
 
 }
+
+

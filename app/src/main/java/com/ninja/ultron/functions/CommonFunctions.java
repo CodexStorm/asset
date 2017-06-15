@@ -83,4 +83,19 @@ public class CommonFunctions {
         UserDetails.setMyAssetList(context,null);
     }
 
+    public static void restClientErrorValidation(int statusCode, String serverResponseMessage, Context context) {
+        if (statusCode == Constants.HTTP_AUTHENTICATON_FAILURE_CODE) {
+            errorMessage(serverResponseMessage, (Activity) context);
+        } else if (serverResponseMessage != null) {
+            toastString(serverResponseMessage, context);
+        } else {
+            if (isNetworkAvailable((Activity) context)) {
+                String showErrorMessage = "Code : " + statusCode + " " + Constants.REST_FAILURE_MESSAGE;
+                toastString(showErrorMessage, context);
+            } else {
+                toastString(Constants.NO_INTERNET_CONNECTION, context);
+            }
+        }
+    }
+
 }

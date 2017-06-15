@@ -1,17 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="MyToolbarTheme" parent="Theme.AppCompat.Light"></style>
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
 
+    </style>
+    
+
+    <style name="Widget.ActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/TextAppearance.Widget.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.Widget.ActionBar.Subtitle</item>
+    </style>
+
+    <style name="TextAppearance.Widget.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="TextAppearance.Widget.ActionBar.Subtitle"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="AlertDialogBackground" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/dialog_bg</item>
     </style>
 
     <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -19,7 +38,7 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 

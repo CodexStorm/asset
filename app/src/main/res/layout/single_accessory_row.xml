@@ -6,6 +6,7 @@
         android:id="@+id/tvAccessoryId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:text="" />
     <TextView
         android:id="@+id/Space"
@@ -16,5 +17,6 @@
         android:id="@+id/tvAccessoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:text=" " />
 </LinearLayout>

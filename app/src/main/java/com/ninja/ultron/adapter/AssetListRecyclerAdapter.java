@@ -1,13 +1,11 @@
 package com.ninja.ultron.adapter;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
@@ -26,6 +24,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
     Context context;
     private CallBack mCallBack;
+
 
     public interface CallBack{
         void CallAssetDetailsFragment(int id,String name,String toName);
@@ -51,8 +50,9 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         final CodeDecodeEntity asset =assetsList.get(position);
-        holder.AssetName.setText(asset.getName());
+        holder.nomenclature.setText(asset.getNomenclature());
         holder.AssetId.setText(asset.getId()+"");
+        holder.AssetMake.setText(asset.getAssetMake());
         Log.d("ASSET",""+asset.getId());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
                 Log.d("Check AssetID",asset.getId()+"");
                 AlterMyAssetDetailURL(""+asset.getId());
                 Log.d("pos ",position + "");
-               mCallBack.CallAssetDetailsFragment(assetsList.get(position).getId(),assetsList.get(position).getName(),"Admin");
+               mCallBack.CallAssetDetailsFragment(assetsList.get(position).getId(),assetsList.get(position).getNomenclature(),"Admin");
             }
         });
 
@@ -72,15 +72,14 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView AssetId,AssetName;
-        ImageView ivMoreDetails;
+        TextView AssetId, nomenclature,AssetMake;
         View cardView;
         public ViewHolder(View itemView) {
             super(itemView);
             cardView=itemView;
+            AssetMake = (TextView)itemView.findViewById(R.id.asset_make) ;
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
-            AssetName=(TextView)itemView.findViewById(R.id.asset_name);
-            ivMoreDetails = (ImageView)itemView.findViewById(R.id.ivCMoreDetails);
+            nomenclature =(TextView)itemView.findViewById(R.id.asset_name);
         }
 
     }

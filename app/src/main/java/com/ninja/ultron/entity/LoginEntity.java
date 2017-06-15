@@ -14,6 +14,8 @@ public class LoginEntity {
     private String userName;
     private String password;
     private AsgardUser asgardUser;
+    private String token;
+    private String sessionId;
     private int code;
     private String message;
 
@@ -65,6 +67,22 @@ public class LoginEntity {
 
     public interface RestClientInterface{
         void onLogin(LoginEntity loginEntity, VolleyError error);
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public JSONObject getJsonObjectAsParams(){

@@ -1,73 +1,80 @@
 package com.ninja.ultron.activity;
 
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
+<<<<<<< HEAD
+import android.util.Log;
+=======
+import android.support.v7.widget.CardView;
+>>>>>>> fa262b693ee647142b2cfd649c71487441429674
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.ninja.ultron.Fragments.AssetDetailsFragment;
-import com.ninja.ultron.Fragments.InitiateTransferFragment;
-import com.ninja.ultron.Fragments.MyAssetsFragment;
-import com.ninja.ultron.Fragments.PendingRequestsFragment;
 import com.ninja.ultron.R;
-import com.ninja.ultron.adapter.HomeScreenViewPagerAdapter;
-import com.ninja.ultron.entity.CodeDecodeEntity;
-import com.ninja.ultron.functions.CommonFunctions;
+import com.ninja.ultron.constant.Constants;
+import com.ninja.ultron.functions.StartIntent;
+import com.ninja.ultron.functions.UserDetails;
 
-import java.util.List;
+public class HomescreenActivity extends AppCompatActivity {
 
-
-/**
- * Created by Prabhu Sivanandam on 18-May-17.
- */
-
-public class HomescreenActivity extends AppCompatActivity{
-
-    String id;
-    String name;
-    String toName;
-    Toolbar toolbar;
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    HomeScreenViewPagerAdapter adapter;
-    List<CodeDecodeEntity> myAssetList;
+    TextView bMyAssets;
+    TextView bAttendnace;
+    CardView cvMyAsset;
+    CardView cvMyAttendance;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_homescreen);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setContentView(R.layout.activity_homescreen);
+        /*bMyAssets = (TextView) findViewById(R.id.bMyAssets);
+        bAttendnace = (TextView) findViewById(R.id.bAttendance);*/
+        String role= UserDetails.getRole(this);
+<<<<<<< HEAD
+        Log.d("ROle",role);
 
-        CommonFunctions.clearLocalPreference(getApplicationContext());
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        tabLayout=(TabLayout)findViewById(R.id.tabLayout);
-        viewPager=(ViewPager)findViewById(R.id.viewPager);
-        adapter=new HomeScreenViewPagerAdapter(getSupportFragmentManager());
-        //add the fragments with titles here
-        adapter.addFragments(new MyAssetsFragment(),"My Assets");
-        adapter.addFragments(new PendingRequestsFragment(),"Pending Requests");
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        if(role.contains(Constants.USER_ROLE_DC_SUPERVISOR)){
+=======
+        cvMyAsset = (CardView) findViewById(R.id.cvMyAsset);
+        cvMyAttendance = (CardView)findViewById(R.id.cvMyAttendance);
+        /*if(role== Constants.USER_ROLE_DC_SUPERVISOR){
+>>>>>>> fa262b693ee647142b2cfd649c71487441429674
+
+        }
+        else{
+            bAttendnace.setVisibility(View.GONE);
+<<<<<<< HEAD
+        }
+
+        bMyAssets.setOnClickListener(new View.OnClickListener() {
+=======
+        }*/
+        cvMyAsset.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onClick(View v) {
+                StartIntent.MyAssetActivity(HomescreenActivity.this);
             }
         });
-        tabLayout.setupWithViewPager(viewPager);
+        cvMyAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartIntent.commonStartActivity(HomescreenActivity.this, LabourAttendanceMainActivity.class, null);
+            }
+        });
+        /*bMyAssets.setOnClickListener(new View.OnClickListener() {
+>>>>>>> fa262b693ee647142b2cfd649c71487441429674
+            @Override
+            public void onClick(View v) {
+               StartIntent.MyAssetActivity(HomescreenActivity.this);
+            }
+        });
+
+        bAttendnace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //StartIntent.Attendance(HomescreenActivity.this);
+                    StartIntent.commonStartActivity(HomescreenActivity.this, LabourAttendanceMainActivity.class, null);
+            }
+        });*/
     }
-
-
 }

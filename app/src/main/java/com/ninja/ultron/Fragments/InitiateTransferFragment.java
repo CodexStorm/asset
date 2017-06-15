@@ -1,7 +1,6 @@
 package com.ninja.ultron.Fragments;
 
 import android.annotation.TargetApi;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -36,10 +36,11 @@ import java.util.List;
 
 public class InitiateTransferFragment extends Fragment{
 
-    String selectedName,selectedToName,comments;
-    int selectedId;
+    public String selectedName,selectedToName,comments;
+    public int selectedId;
     int loggedUserId;
     TextView tvAssetId,tvAssetName,tvTransferTo,tvEmployeeId,tvInitiate;
+    RelativeLayout rlInitateButton;
     Spinner spinnerReason;
     EditText etComments;
     TransferReasonsMiniEntity transferReasonsMiniEntity;
@@ -54,7 +55,7 @@ public class InitiateTransferFragment extends Fragment{
         transferReasonsMiniEntity=new TransferReasonsMiniEntity();
         tvAssetId=(TextView)view.findViewById(R.id.tvAssetId);
         tvAssetName=(TextView)view.findViewById(R.id.tvAssetName);
-        tvTransferTo=(TextView)view.findViewById(R.id.tvTranferTo);
+        tvTransferTo=(TextView)view.findViewById(R.id.tvTransferTo);
         tvInitiate=(TextView)view.findViewById(R.id.tvInitiate);
         tvEmployeeId=(TextView)view.findViewById(R.id.tvEmployeeId);
         tvAssetName.setText(selectedName);
@@ -66,7 +67,17 @@ public class InitiateTransferFragment extends Fragment{
         spinnerReason=(Spinner)view.findViewById(R.id.spinnerRequestType);
         etComments=(EditText)view.findViewById(R.id.etCommentsBox);
         comments=etComments.getText().toString();
+        rlInitateButton = (RelativeLayout)view.findViewById(R.id.rlInitiateButton);
         createTransferEntity();
+
+        rlInitateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                callInitiateTransferApi();
+
+            }
+        });
         RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity,new TransferReasonsMiniEntity.UltronRestClientInterface()
         {
             @Override
@@ -118,7 +129,6 @@ public class InitiateTransferFragment extends Fragment{
 
             }
         },getContext());
-        callInitiateTransferApi();
         return view;
     }
 
@@ -140,7 +150,7 @@ public class InitiateTransferFragment extends Fragment{
         }
         CommentEntity commentEntity=new CommentEntity(loggedUserId,comments);
         java.util.Calendar calendar= java.util.Calendar.getInstance();
-        dateOfRequest=calendar.get(java.util.Calendar.DATE)+"/"+calendar.get(java.util.Calendar.MONTH)+"/"+calendar.get(java.util.Calendar.YEAR);
+        dateOfRequest=calendar.get(java.util.Calendar.YEAR)+"/"+calendar.get(java.util.Calendar.MONTH)+"/"+calendar.get(java.util.Calendar.DAY_OF_MONTH);
         initiateTransferEntity=new InitiateTransferEntity(issueTypeId,assetId,requestedBy,approver,dateOfRequest,commentEntity,reasonTypeId);
         Log.d("test",initiateTransferEntity.getDateOfRequest()+"");
     }

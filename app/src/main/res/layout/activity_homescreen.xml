@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context="com.ninja.ultron.activity.HomescreenActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rl"
+        android:layout_height="60dp"
+        android:background="@color/actionbarcolor">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Homescreen"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl"
+        android:weightSum="2"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:padding="2dp">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cvMyAsset"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:background="#a000"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:text="My Assets"
+                    android:padding="5dp"
+                    android:textSize="40sp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:id="@+id/cvMyAttendance"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/blur"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:background="#3000"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:text="My Attendance"
+                    android:padding="5dp"
+                    android:textSize="40sp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -2,158 +2,268 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
-    <TextView
-        android:id="@+id/tvAssetIdHeader"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbarcolor"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transfer Request"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlReportButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/actionbarcolor"
+
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_action_report"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvInitiate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:layout_marginBottom="5dp"
+            android:text="Report"
+            android:layout_alignParentBottom="true"
+            >
+        </TextView>
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="51dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="85dp"
-        android:text="Asset ID  :"
-        android:textSize="18dp"
-        android:textColor="@android:color/background_dark"
+        android:layout_above="@+id/rlReportButton">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlAssetDetails"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tvhAssetDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Asset Details" />
 
     <TextView
-        android:id="@+id/tvAssetNameHeader"
-        android:layout_width="match_parent"
+        android:id="@+id/tvhName"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="    Asset Name:"
-        android:textSize="18dp"
-        android:textColor="@android:color/background_dark"
-        android:layout_below="@+id/tvAssetIdHeader"
-        android:layout_toLeftOf="@+id/tvAssetId"
-        android:layout_toStartOf="@+id/tvAssetId" />
+        android:textAlignment="textEnd"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/tvhAssetDetails"
+        android:textStyle="bold"
+        android:text="Name  :"
+         />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvhId"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:layout_alignLeft="@+id/tvhName"
+        android:layout_alignStart="@+id/tvhName"
+        android:layout_below="@+id/tvhName"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:text="ID  :"
+        android:layout_marginBottom="10dp"/>
+
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_above="@+id/tvhId"
+                android:layout_toRightOf="@+id/tvhAssetDetails"
+                android:layout_toEndOf="@+id/tvhAssetDetails" />
+
+            <TextView
+                android:id="@+id/tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/tvhAssetDetails"
+                android:layout_toEndOf="@+id/tvhAssetDetails" />
+
+        </RelativeLayout>
+    <TextView
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Transfer To  :"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:layout_below="@+id/tvAssetNameHeader"
-        android:layout_alignRight="@+id/tvAssetNameHeader"
-        android:layout_alignEnd="@+id/tvAssetNameHeader" />
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:text="Report Details"
+        android:layout_below="@+id/rlAssetDetails"
+        android:layout_alignLeft="@+id/rlAssetDetails"
+        android:layout_alignStart="@+id/rlAssetDetails" />
 
-    <TextView
-        android:id="@+id/tvAssetId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@android:color/background_dark"
-        android:layout_alignBaseline="@+id/tvAssetIdHeader"
-        android:layout_alignBottom="@+id/tvAssetIdHeader"
-        android:layout_toRightOf="@+id/tvAssetIdHeader"
-        android:layout_toEndOf="@+id/tvAssetIdHeader"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
-
-    <TextView
-        android:id="@+id/tvAssetName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvAssetNameHeader"
-        android:layout_alignLeft="@+id/tvAssetId"
-        android:layout_alignStart="@+id/tvAssetId"
-        android:textSize="18dp"
-        android:textColor="@android:color/background_dark"/>
-
-    <TextView
-        android:id="@+id/textView7"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Employee ID :"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/textView17"
+        android:layout_marginTop="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/rbDamage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:shadowColor="#0000ff"
+            android:text="Damage" />
+
+        <RadioButton
+            android:id="@+id/rbLoss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loss" />
+        <RadioButton
+            android:id="@+id/rbTheft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theft" />
+
+
+    </RadioGroup>
 
     <TextView
-        android:id="@+id/tvEmployeeId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView7"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:layout_alignLeft="@+id/tvAssetName"
-        android:layout_alignStart="@+id/tvAssetName" />
-
-
-    <TextView
-        android:id="@+id/tvTypeHeader"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:text="Damage Type  :"
-        android:layout_below="@+id/textView7"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7" />
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Incident Details"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignStart="@+id/textView17" />
+
 
     <TextView
-        android:id="@+id/tvCommentsHeader"
+        android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comment  :"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18dp"
-        android:layout_alignBaseline="@+id/etCommentsBox"
-        android:layout_alignBottom="@+id/etCommentsBox"
-        android:layout_alignRight="@+id/tvTypeHeader"
-        android:layout_alignEnd="@+id/tvTypeHeader" />
+        android:layout_alignLeft="@+id/radioGroup"
+        android:layout_alignStart="@+id/radioGroup"
+        android:layout_below="@+id/textView18"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:text="Date  :" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:text="Time  :"
+        android:layout_below="@+id/textView22"
+        android:layout_alignLeft="@+id/textView22"
+        android:layout_alignStart="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments  :"
+        android:textStyle="bold"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/textView23"
+        android:layout_alignRight="@+id/textView23"
+        android:layout_alignEnd="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:layout_above="@+id/textView23"
+        android:layout_toRightOf="@+id/textView17" />
+    <ImageButton
+        android:id="@+id/setDate"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_date"
+        android:layout_alignBottom="@+id/tvDate"
+        android:layout_alignRight="@+id/tvDate"
+        android:layout_alignEnd="@+id/tvDate" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView24"
+        android:layout_alignLeft="@+id/tvDate"
+        android:layout_alignStart="@+id/tvDate"
+        />
+    <ImageButton
+        android:id="@+id/setTime"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_time"
+        android:layout_alignBottom="@+id/tvTime"
+        android:layout_alignLeft="@+id/setDate"
+        android:layout_alignStart="@+id/setDate" />
 
     <EditText
         android:id="@+id/etCommentsBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:ems="10"
-        android:textColor="@android:color/background_dark"
+        android:gravity="top"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
         android:inputType="textMultiLine"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/tvTypeHeader"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/tvAssetName"
-        android:layout_alignStart="@+id/tvAssetName" />
+        android:background="@drawable/bg_comment_box"
+        android:layout_below="@+id/textView24"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"/>
 
-    <TextView
-        android:id="@+id/tvTransferredTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvAssetName"
-        android:layout_alignStart="@+id/tvAssetName"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_above="@+id/textView7" />
 
-    <Spinner
-        android:id="@+id/spinnerRequestType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvTypeHeader"
-        android:layout_alignLeft="@+id/etCommentsBox"
-        android:layout_alignStart="@+id/etCommentsBox" />
+    </RelativeLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/nav_item_color_state"
-        app:itemTextColor="@drawable/nav_item_color_state"
-        app:menu="@menu/damage_report_menu"
-        />
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

@@ -81,6 +81,7 @@ public class ReportedLabourActivity extends Activity {
 
     public void loadReportedLabour(){
         rlLoader.setVisibility(View.VISIBLE);
+        int userId=UserDetails.getAsgardUserId(this);
         LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI = new LabourAttendanceMobileDTOAPI(labourShiftDetailEntity.getId());
         RestClientImplementation.getReportedLabourDetail(labourAttendanceMobileDTOAPI, new LabourAttendanceMobileDTOAPI.FlashRestClientInterface() {
             @Override
@@ -100,7 +101,7 @@ public class ReportedLabourActivity extends Activity {
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        },ReportedLabourActivity.this);
+        },ReportedLabourActivity.this,userId);
     }
 
     public void deleteReportedLabour(final int position){
@@ -164,6 +165,6 @@ public class ReportedLabourActivity extends Activity {
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        },ReportedLabourActivity.this);
+        },ReportedLabourActivity.this,UserDetails.getAsgardUserId(ReportedLabourActivity.this));
     }
 }

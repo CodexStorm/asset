@@ -43,18 +43,18 @@ public class Constants {
 
 
 
-    public static final String ASSET_LIST_URL="http://10.0.0.3:1111/api/web/find/asset?userId=8";
+    public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset";
     public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
-    public static final String PENDING_REQUESTS_URL="http://88.99.31.206:1111/api/web/request/pending?userId=1";
+    public static final String PENDING_REQUESTS_URL="http://10.0.0.3:1111/api/web/request/pending?userId=8&approver=0";
     public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request/?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
     public static final String INITIATE_TRANSFER_URL="http://88.99.31.206:1111/api/web/request/transfer";
     public static final String TRANSFER_REASONS_API="http://88.99.31.206:1111/api/web/find/asset/issueReason";
-    public static final String GET_LABOUR_FOR_ATTENDANCE_URL="http://10.0.0.11:1111/api/web/labour/attendance";
-    public static final String MARK_ATTENDANCE_URL="http://10.0.0.11:1111/api/web/labourAttendanceTracker";
-    public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://10.0.0.11:1111/api/web/labourAttendanceTracker/facilityShiftDetails";
-    public static final String GET_REPORTED_LABOUR_URL="http://10.0.0.11:1111/api/web/labourAttendanceTracker/reportedLabour?shiftDetailId=";
-    public static final String REVOKE_ATTENDANCE_URL="http://10.0.0.11:1111/api/web/labourAttendanceTracker/revokeAttendance";
+    public static final String GET_LABOUR_FOR_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labour/attendance";
+    public static final String MARK_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker";
+    public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/facilityShiftDetails";
+    public static final String GET_REPORTED_LABOUR_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/reportedLabour?shiftDetailId=";
+    public static final String REVOKE_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/revokeAttendance";
 
 }

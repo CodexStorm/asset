@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
@@ -113,6 +114,9 @@ public class LoginActivity extends AppCompatActivity {
                             UserDetails.setUserName(LoginActivity.this, userName);
                             UserDetails.setUserPassword(LoginActivity.this, userPassword);
                             UserDetails.setUserLoggedIn(LoginActivity.this, true);
+                            //Toast.makeText(LoginActivity.this,loginEntity.getToken()+"   "+loginEntity.getSessionId(),Toast.LENGTH_LONG).show();
+                            UserDetails.setSessionId(LoginActivity.this,loginEntity.getSessionId());
+                            UserDetails.setSessionToken(LoginActivity.this,loginEntity.getToken());
                             StartIntent.startSplashScreen(LoginActivity.this);
                         }
                     } else {

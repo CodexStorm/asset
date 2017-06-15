@@ -1,5 +1,6 @@
 package com.ninja.ultron.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.ninja.ultron.entity.LabourShiftDetailAPI;
 import com.ninja.ultron.entity.LabourShiftDetailEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.StartIntent;
+import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
 import java.util.ArrayList;
@@ -66,6 +68,7 @@ public class LabourAttendanceMainActivity extends AppCompatActivity{
 
     public void loadShiftDetail(){
         rlLoader.setVisibility(View.VISIBLE);
+        int userId=UserDetails.getAsgardUserId(this);
         LabourShiftDetailAPI labourShiftDetailAPI = new LabourShiftDetailAPI();
         RestClientImplementation.getLabourShiftDetail(labourShiftDetailAPI, new LabourShiftDetailAPI.FlashRestClientInterface() {
             @Override
@@ -85,7 +88,7 @@ public class LabourAttendanceMainActivity extends AppCompatActivity{
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        }, LabourAttendanceMainActivity.this);
+        }, LabourAttendanceMainActivity.this,userId);
     }
 
     public void showLabourAttendanceGatewayView(){

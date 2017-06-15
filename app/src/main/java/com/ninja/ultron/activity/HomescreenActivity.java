@@ -3,6 +3,7 @@ package com.ninja.ultron.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,13 +24,14 @@ public class HomescreenActivity extends AppCompatActivity {
         bMyAssets = (TextView) findViewById(R.id.bMyAssets);
         bAttendnace = (TextView) findViewById(R.id.bAttendance);
         String role= UserDetails.getRole(this);
+        Log.d("ROle",role);
 
-        /*if(role== Constants.USER_ROLE_DC_SUPERVISOR){
+        if(role.contains(Constants.USER_ROLE_DC_SUPERVISOR)){
 
         }
         else{
             bAttendnace.setVisibility(View.GONE);
-        }*/
+        }
 
         bMyAssets.setOnClickListener(new View.OnClickListener() {
             @Override

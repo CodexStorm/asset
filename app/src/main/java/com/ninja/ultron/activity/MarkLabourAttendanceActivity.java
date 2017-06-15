@@ -312,7 +312,7 @@ public class MarkLabourAttendanceActivity extends Activity {
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        }, MarkLabourAttendanceActivity.this);
+        }, MarkLabourAttendanceActivity.this,UserDetails.getAsgardUserId(MarkLabourAttendanceActivity.this));
 
     }
     public void removeLabourFromList(final int position){
@@ -351,6 +351,7 @@ public class MarkLabourAttendanceActivity extends Activity {
     }
 
     public void loadLabour(){
+        int userId=UserDetails.getAsgardUserId(this);
         LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI = new LabourAttendanceMobileDTOAPI(0,0,fetchOffset, fetchLimit);
         RestClientImplementation.getLabourForMarkingAttendance(labourAttendanceMobileDTOAPI, new LabourAttendanceMobileDTOAPI.FlashRestClientInterface() {
             @Override
@@ -381,11 +382,12 @@ public class MarkLabourAttendanceActivity extends Activity {
                 }
                 rlLoader.setVisibility(View.GONE);
             }
-        }, MarkLabourAttendanceActivity.this, null);
+        }, MarkLabourAttendanceActivity.this, null,userId);
     }
 
     public void loadSearchLabour(){
         int labourId = Integer.parseInt(searchString);
+        int userId=UserDetails.getAsgardUserId(this);
         LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI = new LabourAttendanceMobileDTOAPI(0,labourId,searchFetchOffset, searchFetchLimit);
         RestClientImplementation.getLabourForMarkingAttendance(labourAttendanceMobileDTOAPI, new LabourAttendanceMobileDTOAPI.FlashRestClientInterface() {
             @Override
@@ -424,6 +426,6 @@ public class MarkLabourAttendanceActivity extends Activity {
                 rlLoader.setVisibility(View.GONE);
                 pbSmall.setVisibility(View.GONE);
             }
-        }, MarkLabourAttendanceActivity.this, "SEARCH_LABOUR");
+        }, MarkLabourAttendanceActivity.this, "SEARCH_LABOUR",userId);
     }
 }

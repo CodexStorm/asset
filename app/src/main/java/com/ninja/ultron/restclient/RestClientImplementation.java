@@ -3,13 +3,16 @@ package com.ninja.ultron.restclient;
 import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
+import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AsgardCodeMessageEntity;
@@ -84,9 +87,9 @@ public class RestClientImplementation {
     public static void userLogin(final LoginEntity loginEntity, final LoginEntity.RestClientInterface restclientinterface, final Context context) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         //String url = getAbsoluteUrl("/user/login/app", context);
-        String url = Constants.BASE_URL + "/user/login/app";
+        String url = "http://88.99.31.206:1111"+"/web/login";
         JSONObject postParams = loginEntity.getJsonObjectAsParams();
-        Log.e("login_params", "" + postParams);
+        Log.d("login_params", "" + postParams);
         Log.e("login_url", "" + url);
         JsonBaseRequest postRequest = new JsonBaseRequest(Request.Method.POST, url, postParams,
                 new Response.Listener<JSONObject>() {
@@ -95,9 +98,11 @@ public class RestClientImplementation {
                         try {
                             Log.e("reponse", "" + response);
                             Gson gson = new Gson();
-                            LoginEntity newLoginSuccessEntity = gson.fromJson(response.toString(), LoginEntity.class);
+                            LoginEntity newLoginSuccessEntity = gson.fromJson((response.getJSONObject("response")).toString(), LoginEntity.class);
                             loginEntity.setAsgardUser(newLoginSuccessEntity.getAsgardUser());
                             loginEntity.setMessage("Success");
+                            loginEntity.setSessionId(newLoginSuccessEntity.getSessionId());
+                            loginEntity.setToken(newLoginSuccessEntity.getToken());
                             restclientinterface.onLogin(loginEntity, null);
                         } catch (Exception e) {
                             Log.e("reponseError", "" + e.toString());
@@ -183,7 +188,9 @@ public class RestClientImplementation {
 
     public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_LIST_URL, null, new Response.Listener<JSONObject>() {
+        String userId= String.valueOf(UserDetails.getAsgardUserId(context));
+        Log.d("UserId",userId);
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,"http://10.0.0.3:1111/api/web/find/asset?userId=" /*Constants.ASSET_LIST_URL*/, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -213,7 +220,16 @@ public class RestClientImplementation {
                 }
                 restClientInterface.onInitialize(assetMiniEntity, new VolleyError());
             }
-        },30000, 0);
+        },30000, 0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                Log.d("",params.toString());
+                return params;
+            }
+        };
         queue.add(getRequest);
     }
     public static void assetDetailsApi(final AssetDetailsMiniEntity assetDetailsMiniEntity, final AssetDetailsMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
@@ -248,7 +264,15 @@ public class RestClientImplementation {
                 }
                 restClientInterface.onInitialize(assetDetailsMiniEntity, new VolleyError());
             }
-        },30000, 0);
+        },30000, 0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(getRequest);
     }
 
@@ -261,6 +285,7 @@ public class RestClientImplementation {
                 try
                 {
                     Gson gson=new Gson();
+                    Log.d("Response_pen",response.toString());
                     PendingRequestMiniEntity successEntity=gson.fromJson(response.toString(),PendingRequestMiniEntity.class);
                     pendingRequestMiniEntity.setMessage((String)successEntity.getMessage());
                     pendingRequestMiniEntity.setStatusCode((int)successEntity.getStatusCode());
@@ -290,7 +315,15 @@ public class RestClientImplementation {
                 }
                 ultronRestClientInterface.onInitialize(pendingRequestMiniEntity,new VolleyError());
             }
-        },3000,0);
+        },3000,0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(getRequest);
     }
 
@@ -319,7 +352,15 @@ public class RestClientImplementation {
                     Log.d("cf",error.toString());
                     ultronRestClientInterface.onInitialize(initiateTransferEntity,new VolleyError());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(postRequest);
     }
 
@@ -366,7 +407,15 @@ public class RestClientImplementation {
                 }
                 ultronRestClientInterface.onInitialize(transferReasonsMiniEntity,new VolleyError());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(getRequest);
     }
 
@@ -412,14 +461,22 @@ public class RestClientImplementation {
                 }
 
             }
-        },3000,0);
+        },3000,0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(getRequest);
     }
 
-    public static void getLabourShiftDetail(final LabourShiftDetailAPI labourShiftDetailAPI, final LabourShiftDetailAPI.FlashRestClientInterface restclientinterface, final Context context) {
+    public static void getLabourShiftDetail(final LabourShiftDetailAPI labourShiftDetailAPI, final LabourShiftDetailAPI.FlashRestClientInterface restclientinterface, final Context context,int userId) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
-        url = GET_LABOUR_SHIFT_DETAILS_URL;
+        url = GET_LABOUR_SHIFT_DETAILS_URL+"?userId="+userId;
         JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,url,null,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -452,10 +509,9 @@ public class RestClientImplementation {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
-                params.put("Authorization", auth);
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
                 return params;
             }
         };
@@ -468,7 +524,7 @@ public class RestClientImplementation {
         }
     }
 
-    public static void getLabourForMarkingAttendance(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context, String searchTag) {
+    public static void getLabourForMarkingAttendance(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context, String searchTag,int userId) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         if(searchTag!=null && !searchTag.isEmpty()) {
             cancelRequest(searchTag);
@@ -478,8 +534,8 @@ public class RestClientImplementation {
         int limit = labourAttendanceMobileDTOAPI.getLimit();
         int labourAgencyId = labourAttendanceMobileDTOAPI.getLabourAgencyId();
         int labourId = labourAttendanceMobileDTOAPI.getLabourId();
-        url = Constants.GET_LABOUR_FOR_ATTENDANCE_URL;
-        url = url + "?labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit;
+        url = Constants.GET_LABOUR_FOR_ATTENDANCE_URL+"?userId="+userId;
+        url = url + "&labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit;
         JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -509,20 +565,19 @@ public class RestClientImplementation {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
-                params.put("Authorization", auth);
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
                 return params;
             }
         };
         queue.add(getRequest);
     }
 
-    public static void postLabourAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restclientinterface, final Context context) {
+    public static void postLabourAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restclientinterface, final Context context,int userId) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
-        url = Constants.MARK_ATTENDANCE_URL;
+        url = Constants.MARK_ATTENDANCE_URL+"?userId="+userId;
         JSONObject postParams = labourAttendanceTrackerEntity.getJsonObjectAsParams();
         Log.d("params",postParams.toString());
         //Log.e("labourAttendanceTrackerEntity PARAMS", "" + postParams);
@@ -553,10 +608,9 @@ public class RestClientImplementation {
         }, 30000, 0) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
-                params.put("Authorization", auth);
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
                 return params;
             }
         };
@@ -564,11 +618,11 @@ public class RestClientImplementation {
 
     }
 
-    public static void getReportedLabourDetail(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context) {
+    public static void getReportedLabourDetail(final LabourAttendanceMobileDTOAPI labourAttendanceMobileDTOAPI, final LabourAttendanceMobileDTOAPI.FlashRestClientInterface restclientinterface, final Context context,int userId) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String url = "";
 
-        url = Constants.GET_REPORTED_LABOUR_URL+labourAttendanceMobileDTOAPI.getShiftDetailId();
+        url = Constants.GET_REPORTED_LABOUR_URL+labourAttendanceMobileDTOAPI.getShiftDetailId()+"&userId="+userId;
         JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -598,22 +652,21 @@ public class RestClientImplementation {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                String creds = String.format("%s:%s", UserDetails.getUserName(context), UserDetails.getUserPassword(context));
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.NO_WRAP);
-                params.put("Authorization", auth);
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
                 return params;
             }
         };
         queue.add(getRequest);
     }
 
-    public static void revokeAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restClientInterface, final Context context){
+    public static void revokeAttendance(final LabourAttendanceTrackerEntity labourAttendanceTrackerEntity, final LabourAttendanceTrackerEntity.FlashRestClientInterface restClientInterface, final Context context,int userId){
         queue=VolleySingleton.getInstance(context).getRequestQueue();
         final Gson gson=new Gson();
         JSONObject params = labourAttendanceTrackerEntity.getJsonObjectAsParams();
         Log.d("postParams",params.toString());
-        JsonBaseRequest postRequest=new JsonBaseRequest(Request.Method.POST, REVOKE_ATTENDANCE_URL, params, new Response.Listener<JSONObject>() {
+        JsonBaseRequest postRequest=new JsonBaseRequest(Request.Method.POST, REVOKE_ATTENDANCE_URL+"?userId="+userId, params, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("respopnse",response.toString());
@@ -641,7 +694,15 @@ public class RestClientImplementation {
                     }
                 }
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(postRequest);
     }
 

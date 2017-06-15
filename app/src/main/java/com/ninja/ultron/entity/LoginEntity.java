@@ -13,14 +13,24 @@ import org.json.JSONObject;
 public class LoginEntity {
     private String userName;
     private String password;
+    private AsgardUser asgardUser;
+    private String token;
+    private String sessionId;
+    private int code;
+    private String message;
+
+    public AsgardUser getAsgardUser() {
+        return asgardUser;
+    }
+
+    public void setAsgardUser(AsgardUser asgardUser) {
+        this.asgardUser = asgardUser;
+    }
 
     public LoginEntity(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-
-    private int code;
-    private String message;
 
     public int getCode() {
         return code;
@@ -57,6 +67,22 @@ public class LoginEntity {
 
     public interface RestClientInterface{
         void onLogin(LoginEntity loginEntity, VolleyError error);
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public JSONObject getJsonObjectAsParams(){

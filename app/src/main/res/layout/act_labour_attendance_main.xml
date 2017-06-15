@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/abLabourAttendance"
+        layout="@layout/actionbar_common" />
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/abLabourAttendance"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:id="@+id/llLabourAttendanceShiftDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/lvLabourShiftDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp">
+
+            </ListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llLabourAttendanceGateway"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvReportedLabours"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/bg_bordergreen_inside_white"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="moveToReportedLabourActivity"
+                android:padding="@dimen/dp_15"
+                android:text="Reported Labours"
+                android:textColor="#60a844"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/tvMarkAttendance"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/bg_bordergreen_inside_white"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="moveToMarkAttendanceActivity"
+                android:padding="@dimen/dp_15"
+                android:text="Mark Attendace"
+                android:textColor="#60a844"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlLoader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#cc000000"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarSmall"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@anim/progress_small"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progressBarSmall"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Loading..."
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

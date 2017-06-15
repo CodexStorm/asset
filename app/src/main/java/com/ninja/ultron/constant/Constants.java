@@ -43,7 +43,11 @@ public class Constants {
 
 
 
+<<<<<<< HEAD
     public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset";
+=======
+    public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=";
+>>>>>>> fa262b693ee647142b2cfd649c71487441429674
     public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
     public static final String PENDING_REQUESTS_URL="http://10.0.0.3:1111/api/web/request/pending?userId=8&approver=0";

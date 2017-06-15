@@ -188,9 +188,13 @@ public class RestClientImplementation {
 
     public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
+<<<<<<< HEAD
         String userId= String.valueOf(UserDetails.getAsgardUserId(context));
         Log.d("UserId",userId);
         JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,"http://10.0.0.3:1111/api/web/find/asset?userId=" /*Constants.ASSET_LIST_URL*/, null, new Response.Listener<JSONObject>() {
+=======
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_LIST_URL+UserDetails.getAsgardUserId(context), null, new Response.Listener<JSONObject>() {
+>>>>>>> fa262b693ee647142b2cfd649c71487441429674
             @Override
             public void onResponse(JSONObject response) {
                 try{

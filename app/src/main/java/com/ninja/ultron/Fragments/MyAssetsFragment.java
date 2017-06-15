@@ -24,6 +24,8 @@ import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ import java.util.List;
 public class MyAssetsFragment extends Fragment {
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
+    Text t;
     RecyclerView recyclerView;
     AssetListRecyclerAdapter adapter;
     @Nullable

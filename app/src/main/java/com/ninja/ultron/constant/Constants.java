@@ -51,7 +51,7 @@ public class Constants {
     public static final String TRANSFER_REASONS_API="http://88.99.31.206:1111/api/web/find/asset/issueReason";
     public static final String GET_LABOUR_FOR_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labour/attendance";
     public static final String MARK_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker";
-    public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/facilityShiftDetails";
+    public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://10.0.0.28:1111/api/web/labourAttendanceTracker/facilityShiftDetails";
     public static final String GET_REPORTED_LABOUR_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/reportedLabour?shiftDetailId=";
     public static final String REVOKE_ATTENDANCE_URL="http://88.99.31.206:1111/api/web/labourAttendanceTracker/revokeAttendance";
 

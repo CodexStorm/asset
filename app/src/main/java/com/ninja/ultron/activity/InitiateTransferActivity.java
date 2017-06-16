@@ -1,45 +1,29 @@
-package com.ninja.ultron.Fragments;
+package com.ninja.ultron.activity;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
-import com.ninja.ultron.entity.CommentEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
-import com.ninja.ultron.entity.TransferReasonsEntity;
 import com.ninja.ultron.entity.TransferReasonsMiniEntity;
-import com.ninja.ultron.functions.CommonFunctions;
-import com.ninja.ultron.functions.UserDetails;
-import com.ninja.ultron.restclient.RestClientImplementation;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Prabhu Sivanandam on 22-May-17.
  */
 
-public class InitiateTransferFragment extends Fragment{
+public class InitiateTransferActivity extends AppCompatActivity {
 
-    public String selectedName,selectedToName,comments;
+    public String selectedName, selectedToName, comments;
     public int selectedId;
     int loggedUserId;
-    TextView tvAssetId,tvAssetName,tvTransferTo,tvEmployeeId,tvInitiate;
+    TextView tvAssetId, tvAssetName, tvTransferTo, tvEmployeeId, tvInitiate;
     RelativeLayout rlInitateButton;
     Spinner spinnerReason;
     EditText etComments;
@@ -48,27 +32,17 @@ public class InitiateTransferFragment extends Fragment{
 
     @TargetApi(Build.VERSION_CODES.N)
     @RequiresApi(api = Build.VERSION_CODES.N)
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_initiate_transfer,container,false);
-        transferReasonsMiniEntity=new TransferReasonsMiniEntity();
-        tvAssetId=(TextView)view.findViewById(R.id.tvAssetId);
-        tvAssetName=(TextView)view.findViewById(R.id.tvAssetName);
-        tvTransferTo=(TextView)view.findViewById(R.id.tvTransferTo);
-        tvInitiate=(TextView)view.findViewById(R.id.tvInitiate);
-        tvEmployeeId=(TextView)view.findViewById(R.id.tvEmployeeId);
-        tvAssetName.setText(selectedName);
-        tvAssetId.setText(selectedId+"");
-        tvTransferTo.setText(selectedToName+"");
-        loggedUserId= UserDetails.getAsgardUserId(getContext());
-        tvEmployeeId.setText(loggedUserId+"");
-        tvEmployeeId=(TextView)view.findViewById(R.id.tvEmployeeId);
-        spinnerReason=(Spinner)view.findViewById(R.id.spinnerRequestType);
-        etComments=(EditText)view.findViewById(R.id.etCommentsBox);
-        comments=etComments.getText().toString();
-        rlInitateButton = (RelativeLayout)view.findViewById(R.id.rlInitiateButton);
-        createTransferEntity();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_initiate_transfer);
+       /* transferReasonsMiniEntity = new TransferReasonsMiniEntity();
+        loggedUserId = UserDetails.getAsgardUserId(InitiateTransferFragment.this);
+        spinnerReason = (Spinner) findViewById(R.id.spinnerRequestType);
+        etComments = (EditText) findViewById(R.id.etCommentsBox);
+        comments = etComments.getText().toString();
+        rlInitateButton = (RelativeLayout) findViewById(R.id.rlInitiateButton);
+       createTransferEntity();
 
         rlInitateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +69,7 @@ public class InitiateTransferFragment extends Fragment{
                             reasons.add(transferReasonsEntities.get(i).getName());
                             Log.d("efwf",reasons.get(i));
                         }
-                        ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,reasons);
+                        ArrayAdapter<String> dataAdapter=new ArrayAdapter<String>(InitiateTransferFragment.this,android.R.layout.simple_spinner_dropdown_item,reasons);
                         spinnerReason.setAdapter(dataAdapter);
                         spinnerReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -122,14 +96,13 @@ public class InitiateTransferFragment extends Fragment{
 
                     if(transferReasonsMiniEntity.getStatusCode()==401)
                     {
-                        CommonFunctions.toastString("UnAuthorized",getContext());
+                        CommonFunctions.toastString("UnAuthorized",InitiateTransferFragment.this);
                     }
 
                 }
 
             }
-        },getContext());
-        return view;
+        },InitiateTransferFragment.this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -168,24 +141,25 @@ public class InitiateTransferFragment extends Fragment{
                     Log.d("code",code+"");
                     if(code==200)
                     {
-                        CommonFunctions.toastString("Initiated Transfer",getContext());
+                        CommonFunctions.toastString("Initiated Transfer",InitiateTransferFragment.this);
                     }
                     else
                     {
-                        CommonFunctions.toastString("Error",getContext());
+                        CommonFunctions.toastString("Error",InitiateTransferFragment.this);
                     }
                 }
                 else
                 {
                     if(initiateTransferEntity.getCode()==401)
                     {
-                        CommonFunctions.toastString("Already in Transit",getContext());
+                        CommonFunctions.toastString("Already in Transit",InitiateTransferFragment.this);
                     }
                 }
 
             }
-        },getContext());
+        },InitiateTransferFragment.this);
     }
 
-
+*/
+    }
 }

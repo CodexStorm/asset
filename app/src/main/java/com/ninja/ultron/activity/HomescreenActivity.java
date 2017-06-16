@@ -14,7 +14,9 @@ import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.functions.StartIntent;
 import com.ninja.ultron.functions.UserDetails;
 
-public class HomescreenActivity extends AppCompatActivity {
+public class
+
+HomescreenActivity extends AppCompatActivity {
 
     TextView bMyAssets;
     TextView bAttendnace;
@@ -30,7 +32,7 @@ public class HomescreenActivity extends AppCompatActivity {
         String role = UserDetails.getRole(this);
         Log.d("ROle", role);
 
-        if (role.contains(Constants.USER_ROLE_DC_SUPERVISOR)) {
+  //      if (role.contains(Constants.USER_ROLE_DC_SUPERVISOR)) {
             cvMyAsset = (CardView) findViewById(R.id.cvMyAsset);
             cvMyAttendance = (CardView) findViewById(R.id.cvMyAttendance);
         /*if(role== Constants.USER_ROLE_DC_SUPERVISOR){
@@ -74,4 +76,4 @@ public class HomescreenActivity extends AppCompatActivity {
         });*/
         }
     }
-}
+

@@ -48,10 +48,13 @@
             android:name=".activity.AssetDetailsActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.PendingRequestDetailsActivity" />
-        <activity android:name=".activity.HomescreenActivity"></activity>
-        <activity android:name=".activity.LabourAttendanceMainActivity"></activity>
-        <activity android:name=".activity.MarkLabourAttendanceActivity"></activity>
-        <activity android:name=".activity.ReportedLabourActivity"></activity>
+        <activity android:name=".activity.InitiateTransferActivity" />
+        <activity android:name=".activity.HomescreenActivity" />
+        <activity android:name=".activity.LabourAttendanceMainActivity" />
+        <activity android:name=".activity.MarkLabourAttendanceActivity" />
+        <activity android:name=".activity.ReportedLabourActivity" />
+        <activity android:name=".activity.RequestAssetActivity" />
+        <activity android:name=".activity.RequestNewAssetActivity"></activity>
     </application>
 
 </manifest>

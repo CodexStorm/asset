@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:layout_below="@+id/relativeLayout"
+    android:background="@drawable/bg_diplay"
+    android:layout_above="@+id/rlAssetDetails">
+</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlAssetDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlDetails"
+        android:layout_alignLeft="@+id/rlDetails"
+        android:layout_alignStart="@+id/rlDetails"
+        android:layout_margin="10dp"
+        android:layout_above="@id/rlInitiateButton"
+        android:background="@drawable/bg_diplay">
+        <TextView
+            android:id="@+id/tvhFaciltity"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Facility  :"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:layout_marginLeft="24dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_alignTop="@+id/spinnerFacilityType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="24dp" />
+
+
+
+        <TextView
+            android:id="@+id/tvhAssetType"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Asset Type  :"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_dark"
+            android:layout_below="@+id/tvhFaciltity"
+            android:layout_alignStart="@+id/tvhFaciltity"
+            android:layout_alignLeft="@+id/tvhFaciltity"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toStartOf="@+id/spinnerFacilityType"
+            android:layout_toLeftOf="@+id/spinnerFacilityType" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvhAssetType"
+            android:layout_marginTop="4dp"
+            android:layout_alignStart="@+id/tvhAssetType"
+            android:layout_alignLeft="@+id/tvhAssetType"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="Quantity :"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_dark"
+            android:gravity="end"
+
+            android:id="@+id/tvhQuantity" />
+        <TextView
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Add"
+            android:textColor="@color/actionbarcolor"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:background="@drawable/bg_bordergreen_inside_white"
+            android:layout_below="@+id/tvhQuantity"
+            android:layout_toRightOf="@+id/tvhQuantity"
+            android:layout_toEndOf="@+id/tvhQuantity" />
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvhQuantity"
+            android:layout_alignLeft="@+id/spinnerAssetType"
+            android:layout_alignStart="@+id/spinnerAssetType"
+            android:layout_marginLeft="73dp"
+            android:text="0"
+            android:textColor="#000"
+            android:gravity="bottom|center_horizontal"
+            android:layout_marginStart="73dp"
+            android:id="@+id/textView2" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_increement"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_toRightOf="@+id/textView2"
+            android:layout_toEndOf="@+id/textView2"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_decreement"
+            android:layout_marginStart="20dp" />
+        <Spinner
+            android:id="@+id/spinnerFacilityType"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tvhFaciltity"
+            android:layout_marginStart="14dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <Spinner
+            android:id="@+id/spinnerAssetType"
+            android:layout_width="334dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvhAssetType"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/spinnerFacilityType"
+            android:layout_alignStart="@+id/spinnerFacilityType"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlInitiateButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/actionbarcolor"
+
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_add"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvInitiate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:layout_marginBottom="5dp"
+            android:text="Request"
+            android:layout_alignParentBottom="true"
+            >
+        </TextView>
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbarcolor"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request Asset"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+

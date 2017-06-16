@@ -22,40 +22,23 @@
             android:layout_marginLeft="57dp"
             android:layout_marginStart="57dp"
             android:layout_marginTop="20dp"
-            android:text="Asset ID  :"
+            android:text="Asset ID  "
             android:textColor="@android:color/background_dark"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:id="@+id/tvhAssetName"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Asset Name  :"
-            android:textColor="@android:color/background_dark"
-            android:layout_below="@+id/tvhAssetId"
-            android:layout_toLeftOf="@+id/tvAssetId"
-            android:layout_toStartOf="@+id/tvAssetId" />
 
-        <TextView
-            android:id="@+id/tvhTransferTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Transfer To  :"
-            android:textStyle="bold"
-            android:textColor="@android:color/background_dark"
-            android:layout_below="@+id/tvhAssetName"
-            android:layout_alignRight="@+id/tvhAssetName"
-            android:layout_alignEnd="@+id/tvhAssetName" />
+
+
 
         <TextView
             android:id="@+id/tvAssetId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
+            android:text="Asset Make"
+            android:textStyle="bold"
+            android:textAlignment="center"
             android:textColor="@android:color/background_dark"
             android:layout_alignBaseline="@+id/tvhAssetId"
             android:layout_alignBottom="@+id/tvhAssetId"
@@ -63,48 +46,16 @@
             android:layout_toEndOf="@+id/tvhAssetId"
             android:layout_marginLeft="22dp"
             android:layout_marginStart="22dp" />
-
-        <TextView
-            android:id="@+id/tvAssetName"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tvhAssetName"
-            android:layout_alignLeft="@+id/tvAssetId"
-            android:layout_alignStart="@+id/tvAssetId"
-            android:textColor="@android:color/background_dark"/>
+            android:layout_height="100dp"
+            android:layout_below="@+id/tvhAssetId"
+            android:layout_alignStart="@+id/tvhAssetId"
+            android:layout_alignLeft="@+id/tvhAssetId"
+            >
 
-        <TextView
-            android:id="@+id/tvhEmployeeId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Employee ID :"
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/background_dark"
-            android:layout_below="@+id/tvhTransferTo"
-            android:layout_alignLeft="@+id/tvhTransferTo"
-            android:layout_alignStart="@+id/tvhTransferTo" />
+        </ListView>
 
-        <TextView
-            android:id="@+id/tvEmployeeId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/tvhEmployeeId"
-            android:textColor="@android:color/background_dark"
-            android:layout_alignLeft="@+id/tvAssetName"
-            android:layout_alignStart="@+id/tvAssetName" />
-        <TextView
-            android:id="@+id/tvTransferTo"
-            android:textColor="@android:color/background_dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvAssetName"
-            android:layout_alignStart="@+id/tvAssetName"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/tvhTransferTo"
-            android:layout_above="@+id/tvhEmployeeId" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -130,7 +81,7 @@
 
 
         <TextView
-            android:id="@+id/tvhComment"
+            android:id="@+id/tvhAssetType"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Comment  :"
@@ -154,13 +105,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="60dp"
-            android:layout_below="@+id/tvhComment"
+            android:layout_below="@+id/tvhAssetType"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
 
         />
             <Spinner
-                android:id="@+id/spinnerRequestType"
+                android:id="@+id/spinnerFacilityType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/tvhReason"

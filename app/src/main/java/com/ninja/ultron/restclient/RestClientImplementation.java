@@ -190,7 +190,7 @@ public class RestClientImplementation {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String userId= String.valueOf(UserDetails.getAsgardUserId(context));
         Log.d("UserId",userId);
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,"http://10.0.0.3:1111/api/web/find/asset?userId=" /*Constants.ASSET_LIST_URL*/, null, new Response.Listener<JSONObject>() {
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,"http://88.99.31.206:1111/api/web/find/asset?userId=" /*Constants.ASSET_LIST_URL*/, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{

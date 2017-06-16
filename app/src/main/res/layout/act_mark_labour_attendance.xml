@@ -10,11 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e9e9e9"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <include
             android:id="@+id/abMarkAttendance"
-            layout="@layout/actionbar_common_search" />
+            layout="@layout/actionbar_common_search"
+            android:visibility="visible"/>
 
         <ListView
             android:id="@+id/lvLabour"
@@ -31,9 +32,9 @@
     <RelativeLayout
         android:id="@+id/rlLabourSearchLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/rlAbSearch"
@@ -90,29 +91,6 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/pbSmall"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_below="@+id/rlAbSearch"
-            android:layout_centerHorizontal="true"
-            android:background="@android:color/transparent"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@anim/progress_small"
-            android:visibility="visible" />
-
-        <ListView
-            android:id="@+id/lvLabourSearch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/rlAbSearch"
-            android:divider="@null"
-            android:dividerHeight="0dp">
-
-        </ListView>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -147,4 +125,29 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/llAttendance"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1"
+        android:visibility="gone">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Present"
+            android:id="@+id/btnPresent"
+            android:textColor="#ffffff"
+            android:background="@color/actionbarcolor"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Absent"
+            android:id="@+id/btnAbsent"
+            android:textColor="#ffffff"
+            android:background="#ff0000"/>
+    </LinearLayout>
 </RelativeLayout>

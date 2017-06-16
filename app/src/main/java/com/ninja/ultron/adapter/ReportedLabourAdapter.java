@@ -42,7 +42,7 @@ public class ReportedLabourAdapter  extends ArrayAdapter<LabourAttendanceMobileD
             holder = new ViewHolder();
             holder.tvLabourName = (TextView) view.findViewById(R.id.tvLabourName);
             holder.tvLabourId = (TextView) view.findViewById(R.id.tvLabourId);
-            holder.llLabour = (LinearLayout) view.findViewById(R.id.llLabour);
+            holder.llLabour = (LinearLayout) view.findViewById(R.id.rlLabour);
             view.setTag(holder);
 
         } else {

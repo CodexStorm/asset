@@ -3,8 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/llLabour"
+
+k    <RelativeLayout
+        android:id="@+id/rlLabour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_5"
@@ -16,15 +17,23 @@
 
         <TextView
             android:id="@+id/tvLabourId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_2"
             android:text="1"/>
         <TextView
             android:id="@+id/tvLabourName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_2"
+            android:layout_below="@+id/tvLabourId"
             android:text="2"/>
-    </LinearLayout>
+    </RelativeLayout>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbIsSelected"
+        android:layout_alignTop="@+id/rlLabour"
+        android:layout_alignRight="@+id/rlLabour"/>
+
 </RelativeLayout>

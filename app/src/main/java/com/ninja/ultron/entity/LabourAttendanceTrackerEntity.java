@@ -17,6 +17,7 @@ public class LabourAttendanceTrackerEntity {
     private int shiftDetailId;
     private int shiftHours;
     private int overTimeHours;
+    private int attendanceStatus;
     private byte deleted;
 
     private int code;
@@ -28,6 +29,14 @@ public class LabourAttendanceTrackerEntity {
 
     public void setLabourAttendanceTrackerId(int labourAttendanceTrackerId) {
         this.labourAttendanceTrackerId = labourAttendanceTrackerId;
+    }
+
+    public int getAttendanceStatus() {
+        return attendanceStatus;
+    }
+
+    public void setAttendanceStatus(int attendanceStatus) {
+        this.attendanceStatus = attendanceStatus;
     }
 
     public int getFacilityId() {

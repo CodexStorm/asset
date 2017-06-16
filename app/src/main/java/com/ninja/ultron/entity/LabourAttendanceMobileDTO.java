@@ -10,6 +10,33 @@ public class LabourAttendanceMobileDTO {
     private String labourName;
     private String labourAgencyCode;
     private String shiftName;
+    private int isChecked;
+    private int overTimeHours;
+    private int attendanceStatus;
+
+    public int getAttendanceStatus() {
+        return attendanceStatus;
+    }
+
+    public void setAttendanceStatus(int attendanceStatus) {
+        this.attendanceStatus = attendanceStatus;
+    }
+
+    public int getIsChecked() {
+        return isChecked;
+    }
+
+    public int getOverTimeHours() {
+        return overTimeHours;
+    }
+
+    public void setOverTimeHours(int overTimeHours) {
+        this.overTimeHours = overTimeHours;
+    }
+
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
+    }
 
     public Number getLabourId() {
         return labourId;

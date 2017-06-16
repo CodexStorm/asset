@@ -28,6 +28,7 @@ import com.ninja.ultron.entity.LabourShiftDetailEntity;
 import com.ninja.ultron.entity.LoginEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
+import com.ninja.ultron.entity.PostBulkLaboursAttendanceAPIEntity;
 import com.ninja.ultron.entity.TransferReasonsMiniEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
@@ -41,7 +42,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.ninja.ultron.constant.Constants.GET_LABOUR_FOR_ATTENDANCE_URL;
 import static com.ninja.ultron.constant.Constants.GET_LABOUR_SHIFT_DETAILS_URL;
+import static com.ninja.ultron.constant.Constants.MARK_ATTENDANCE_URL;
 import static com.ninja.ultron.constant.Constants.REVOKE_ATTENDANCE_URL;
 
 public class RestClientImplementation {
@@ -188,13 +191,9 @@ public class RestClientImplementation {
 
     public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
-<<<<<<< HEAD
         String userId= String.valueOf(UserDetails.getAsgardUserId(context));
         Log.d("UserId",userId);
         JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,"http://10.0.0.3:1111/api/web/find/asset?userId=" /*Constants.ASSET_LIST_URL*/, null, new Response.Listener<JSONObject>() {
-=======
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_LIST_URL+UserDetails.getAsgardUserId(context), null, new Response.Listener<JSONObject>() {
->>>>>>> fa262b693ee647142b2cfd649c71487441429674
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -538,12 +537,14 @@ public class RestClientImplementation {
         int limit = labourAttendanceMobileDTOAPI.getLimit();
         int labourAgencyId = labourAttendanceMobileDTOAPI.getLabourAgencyId();
         int labourId = labourAttendanceMobileDTOAPI.getLabourId();
-        url = Constants.GET_LABOUR_FOR_ATTENDANCE_URL+"?userId="+userId;
-        url = url + "&labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit;
+        int shiftId=labourAttendanceMobileDTOAPI.getShiftDetailId();
+        //url = Constants.GET_LABOUR_FOR_ATTENDANCE_URL+"?userId="+userId;
+        url=GET_LABOUR_FOR_ATTENDANCE_URL;
+        //url = url + "&labourId=" + labourId + "&labourAgencyId=" + labourAgencyId + "&offset=" + offset + "&limit=" + limit+"&shiftId="+shiftId;
         JsonArrayBaseRequest getRequest = new JsonArrayBaseRequest(url, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("", "" + response);
+                Log.d("Labours", "" + response);
                 try {
                     Gson gson = new Gson();
                     List<LabourAttendanceMobileDTO> labourAttendanceMobileDTOList = gson.fromJson(response.toString(), new TypeToken<List<LabourAttendanceMobileDTO>>() {
@@ -710,5 +711,31 @@ public class RestClientImplementation {
         queue.add(postRequest);
     }
 
+    public static void bulkAttendanceMarker(final PostBulkLaboursAttendanceAPIEntity postBulkLaboursAttendanceAPIEntity, final PostBulkLaboursAttendanceAPIEntity.UltronRestClientInterface ultronRestClientInterface, Context context){
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        String URL=MARK_ATTENDANCE_URL;
+        Gson gson=new Gson();
+        String postParamString=gson.toJson(postBulkLaboursAttendanceAPIEntity,PostBulkLaboursAttendanceAPIEntity.class);
+        Log.d("Post params",postParamString);
+        try {
+            JSONObject postParams = new JSONObject(postParamString);
+            JsonBaseRequest postBulkAttendance=new JsonBaseRequest(Request.Method.POST,URL,postParams, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("ResponseTest",response.toString());
+                    ultronRestClientInterface.postBulkAttendance(postBulkLaboursAttendanceAPIEntity,null);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    ultronRestClientInterface.postBulkAttendance(postBulkLaboursAttendanceAPIEntity,error);
+                }
+            });
+            queue.add(postBulkAttendance);
+        }catch (Exception e){
+            ultronRestClientInterface.postBulkAttendance(postBulkLaboursAttendanceAPIEntity,new VolleyError());
+        }
+
+    }
 
 }

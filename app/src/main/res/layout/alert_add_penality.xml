@@ -13,14 +13,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="LABOUR ID"
+            android:text="  LABOUR ID"
             android:textColor="#000000"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Labour id"
+            android:text="  Labour id"
             android:id="@+id/tvPopupLabourId"/>
     </LinearLayout>
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="LABOUR NAME"
+            android:text="  LABOUR NAME"
             android:textColor="#000000"
             />
         <TextView
@@ -53,14 +53,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="LABOUR AGENCY"
+            android:text="  LABOUR AGENCY"
             android:textColor="#000000"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Labour agency"
+            android:text="  Labour agency"
             android:id="@+id/tvPopupLabourAgency"/>
     </LinearLayout>
 
@@ -77,7 +77,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:text="SHIFT TIME"
+            android:text="  SHIFT TIME"
             android:textColor="#000000" />
 
         <EditText
@@ -111,15 +111,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="PENALTY"
+            android:text="  PENALTY"
             android:textColor="#000000"
             />
-        <Spinner
+        <com.ninja.ultron.activity.MultiSelectionSpinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:id="@+id/spinnerPenalty">
+        </com.ninja.ultron.activity.MultiSelectionSpinner>
+        <!--<Spinner
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:id="@+id/spinnerPenalty">
-        </Spinner>
+        </Spinner>-->
     </LinearLayout>
 
 </LinearLayout>

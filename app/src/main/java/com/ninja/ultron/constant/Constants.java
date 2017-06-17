@@ -56,5 +56,6 @@ public class Constants {
     public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker/facilityShiftDetails";
     public static final String GET_REPORTED_LABOUR_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker/reportedLabour?shiftDetailId=";
     public static final String REVOKE_ATTENDANCE_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker/revokeAttendance";
+    public static final String GET_PENALTIES_URL="http://10.1.19.188:1111/api/web/penalties/get";
 
 }

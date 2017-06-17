@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninja.ultron.R;
 import com.ninja.ultron.activity.MarkLabourAttendanceActivity;
+import com.ninja.ultron.activity.MultiSelectionSpinner;
 import com.ninja.ultron.entity.LabourAttendanceMobileDTO;
 
 import java.util.ArrayList;
@@ -107,32 +110,7 @@ public class MarkLabourAttendanceAdapter extends ArrayAdapter<LabourAttendanceMo
                 }
                 else {
                     Toast.makeText(getContext(),"Inflating Fragment",Toast.LENGTH_LONG).show();
-                    final View dialogView=dialogInflator.inflate(R.layout.alert_add_penality,null,false);
-                    penalityDialog.setView(dialogView);
-                    TextView tvPopupLabourId=(TextView)dialogView.findViewById(R.id.tvPopupLabourId);
-                    TextView tvPopupLabourName=(TextView)dialogView.findViewById(R.id.tvPopupLabourName);
-                    TextView tvPopupLabourAgency=(TextView)dialogView.findViewById(R.id.tvPopupLabourAgency);
-                    EditText etStartTime=(EditText)dialogView.findViewById(R.id.etStartTime);
-                    EditText etEndTime=(EditText)dialogView.findViewById(R.id.etEndTime);
-                    tvPopupLabourId.setText(labourAttendanceMobileDTOList.get(position).getLabourId()+"");
-                    tvPopupLabourAgency.setText(labourAttendanceMobileDTOList.get(position).getLabourAgencyCode());
-                    tvPopupLabourName.setText(labourAttendanceMobileDTOList.get(position).getLabourName());
-                    etStartTime.setText(labourAttendanceMobileDTOList.get(position).getShiftName());
-                    etEndTime.setText("End Time");
-                    penalityDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(getContext(),"Posting",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    penalityDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-                    AlertDialog dialog=penalityDialog.create();
-                    dialog.show();
+                    inflatePenaltyDialog(position);
                 }
                 return false;
             }
@@ -164,6 +142,45 @@ public class MarkLabourAttendanceAdapter extends ArrayAdapter<LabourAttendanceMo
 
         return view;
     }
+
+    private void inflatePenaltyDialog(int position) {
+        final View dialogView=dialogInflator.inflate(R.layout.alert_add_penality,null,false);
+        penalityDialog.setView(dialogView);
+        TextView tvPopupLabourId=(TextView)dialogView.findViewById(R.id.tvPopupLabourId);
+        TextView tvPopupLabourName=(TextView)dialogView.findViewById(R.id.tvPopupLabourName);
+        TextView tvPopupLabourAgency=(TextView)dialogView.findViewById(R.id.tvPopupLabourAgency);
+        EditText etStartTime=(EditText)dialogView.findViewById(R.id.etStartTime);
+        EditText etEndTime=(EditText)dialogView.findViewById(R.id.etEndTime);
+        final MultiSelectionSpinner spinner=(MultiSelectionSpinner) dialogView.findViewById(R.id.spinnerPenalty);
+        List<String> list = new ArrayList<String>();
+        list.add("Penality1");
+        list.add("Penality2");
+        list.add("Penality3");
+        list.add("Penality4");
+        list.add("Pe5");
+        spinner.setItems(list);
+        tvPopupLabourId.setText(labourAttendanceMobileDTOList.get(position).getLabourId()+"");
+        tvPopupLabourAgency.setText(labourAttendanceMobileDTOList.get(position).getLabourAgencyCode());
+        tvPopupLabourName.setText(labourAttendanceMobileDTOList.get(position).getLabourName());
+        etStartTime.setText(labourAttendanceMobileDTOList.get(position).getShiftName());
+        etEndTime.setText("End Time");
+        penalityDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(getContext(),"Posting",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),spinner.getSelectedItemsAsString(),Toast.LENGTH_LONG).show();
+            }
+        });
+        penalityDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog dialog=penalityDialog.create();
+        dialog.show();
+    }
+
     public List<LabourAttendanceMobileDTO> getCheckedLabours(){
         List<LabourAttendanceMobileDTO> checkedLabours=new ArrayList<>();
 
@@ -190,7 +207,7 @@ public class MarkLabourAttendanceAdapter extends ArrayAdapter<LabourAttendanceMo
         notifyDataSetChanged();
     }
     public void setFilter(List<LabourAttendanceMobileDTO> newList){
-        labourAttendanceMobileDTOList=new ArrayList<>();
+        labourAttendanceMobileDTOList.clear();
         labourAttendanceMobileDTOList.addAll(newList);
         notifyDataSetChanged();
     }

@@ -34,4 +34,5 @@
     <string name="asset_transfer">Asset Transfer</string>
     <string name="report_asset">Report Asset</string>
     <string name="initiate_transfer">Initiate Transfer</string>
+    <string name="labour_details">Labour Details</string>
 </resources>

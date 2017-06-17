@@ -2,6 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbarcolor">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/labour_details"
+            android:textColor="#ffff"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dp_20"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -40,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="Labour nname"
+            android:text="  Labour nname"
             android:id="@+id/tvPopupLabourName"/>
     </LinearLayout>
     <LinearLayout
@@ -76,29 +90,49 @@
             android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.35"
             android:text="  SHIFT TIME"
             android:textColor="#000000" />
 
-        <EditText
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:id="@+id/etStartTime"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:paddingTop="15dp"
+            android:text="StartTime"
+            android:textAlignment="center"
+            android:id="@+id/tvStartTime"
             />
         <TextView
             android:layout_width="0dp"
-            android:paddingTop="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_15"
             android:layout_height="match_parent"
-            android:layout_weight="0.25"
+            android:layout_weight="0.05"
             android:text="to"
             android:textAlignment="center"
             android:textColor="#000000"/>
-        <EditText
+        <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:id="@+id/etEndTime"/>
+            android:layout_weight="0.1"
+            android:layout_height="match_parent"
+            android:src="@drawable/minus_icon"
+            android:id="@+id/ivMinusIcon"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:paddingTop="15dp"
+            android:textAlignment="center"
+            android:text="endTime"
+            android:id="@+id/tvEndTime"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:src="@drawable/plus_icon"
+            android:id="@+id/ivPlusIcon"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,7 +150,7 @@
             />
         <com.ninja.ultron.activity.MultiSelectionSpinner
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:id="@+id/spinnerPenalty">
         </com.ninja.ultron.activity.MultiSelectionSpinner>

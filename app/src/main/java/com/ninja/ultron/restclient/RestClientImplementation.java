@@ -18,6 +18,7 @@ import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AsgardCodeMessageEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
+import com.ninja.ultron.entity.GetPenaltyApiEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
 import com.ninja.ultron.entity.LabourAttendanceMobileDTO;
@@ -25,6 +26,7 @@ import com.ninja.ultron.entity.LabourAttendanceMobileDTOAPI;
 import com.ninja.ultron.entity.LabourAttendanceTrackerEntity;
 import com.ninja.ultron.entity.LabourShiftDetailAPI;
 import com.ninja.ultron.entity.LabourShiftDetailEntity;
+import com.ninja.ultron.entity.LabourTimeEntity;
 import com.ninja.ultron.entity.LoginEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
@@ -44,6 +46,8 @@ import java.util.Map;
 
 import static com.ninja.ultron.constant.Constants.GET_LABOUR_FOR_ATTENDANCE_URL;
 import static com.ninja.ultron.constant.Constants.GET_LABOUR_SHIFT_DETAILS_URL;
+import static com.ninja.ultron.constant.Constants.GET_LABOUR_TIME_ABSOLUTE_URL;
+import static com.ninja.ultron.constant.Constants.GET_PENALTIES_URL;
 import static com.ninja.ultron.constant.Constants.MARK_ATTENDANCE_URL;
 import static com.ninja.ultron.constant.Constants.REVOKE_ATTENDANCE_URL;
 
@@ -738,4 +742,64 @@ public class RestClientImplementation {
 
     }
 
+    public static void getPenaltyApi(final GetPenaltyApiEntity getPenaltyApiEntity, final GetPenaltyApiEntity.UltronRestClientInterface ultronRestClientInterface, Context context){
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        JsonBaseRequest getPenaltyRequest=new JsonBaseRequest(Request.Method.GET, GET_PENALTIES_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                GetPenaltyApiEntity successEntity;
+                Log.d("ResponseTestPenalty",response.toString());
+                Gson gson=new Gson();
+                try {
+                    successEntity = gson.fromJson(response.toString(), GetPenaltyApiEntity.class);
+                    getPenaltyApiEntity.setResponse(successEntity.getResponse());
+                    getPenaltyApiEntity.setStatusCode(successEntity.getStatusCode());
+                    getPenaltyApiEntity.setMessage(successEntity.getMessage());
+                    ultronRestClientInterface.onGetPenalties(getPenaltyApiEntity,null);
+                }catch (Exception e) {
+                    ultronRestClientInterface.onGetPenalties(getPenaltyApiEntity,new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Gson gson=new Gson();
+                GetPenaltyApiEntity failEntity;
+                failEntity=gson.fromJson(error.networkResponse.data.toString(),GetPenaltyApiEntity.class);
+                getPenaltyApiEntity.setMessage(failEntity.getMessage());
+                getPenaltyApiEntity.setStatusCode(failEntity.getStatusCode());
+                ultronRestClientInterface.onGetPenalties(getPenaltyApiEntity,error);
+            }
+        });
+        queue.add(getPenaltyRequest);
+    }
+    public static void getShiftTimeApi(final LabourTimeEntity entity, final LabourTimeEntity.UltronRestClientInterface ultronRestClientInterface, Context context){
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        String URL=GET_LABOUR_TIME_ABSOLUTE_URL+"?labourId="+entity.getLabourId();
+        JsonBaseRequest getTimeRequest=new JsonBaseRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("TimeResponseTest",response.toString());
+                Gson gson=new Gson();
+                try {
+                    LabourTimeEntity successEntity = gson.fromJson(response.toString(), LabourTimeEntity.class);
+                    entity.setResponse(successEntity.getResponse());
+                    entity.setStatusCode(successEntity.getStatusCode());
+                    entity.setMessage(successEntity.getMessage());
+                    ultronRestClientInterface.onGetTimeEntity(entity, null);
+                }catch (Exception e){
+                    ultronRestClientInterface.onGetTimeEntity(entity,new VolleyError());
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                LabourTimeEntity failEntity=(new Gson()).fromJson(error.networkResponse.data.toString(),LabourTimeEntity.class);
+                entity.setStatusCode(failEntity.getStatusCode());
+                entity.setMessage(failEntity.getMessage());
+                ultronRestClientInterface.onGetTimeEntity(entity,error);
+            }
+        });
+        queue.add(getTimeRequest);
+    }
 }

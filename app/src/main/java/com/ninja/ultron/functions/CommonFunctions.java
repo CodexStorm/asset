@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import com.ninja.ultron.constant.Constants;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by omprakash on 17/5/17.
  */
@@ -28,6 +31,15 @@ public class CommonFunctions {
             toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 100);
             toast.show();
         }
+    }
+
+    public static String convertEpochTimeToHumanReadableFormat(long dateFromServer, String formatDate) {
+        SimpleDateFormat formatter, FORMATTER;
+        String displayDateToUser = null;
+        Date tempDate = null;
+        FORMATTER = new SimpleDateFormat(formatDate);
+        displayDateToUser = FORMATTER.format(dateFromServer);
+        return displayDateToUser;
     }
 
     public static void errorMessage(String message, Activity act) {

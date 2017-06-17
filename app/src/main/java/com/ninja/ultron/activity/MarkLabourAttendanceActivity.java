@@ -44,14 +44,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Prabhu Sivanandam on 05-Jun-17.
+ * Created by Sangameswaran on 05-Jun-17.
  */
 
 public class MarkLabourAttendanceActivity extends Activity {
     String shiftDetailObj = "";
     LabourShiftDetailEntity labourShiftDetailEntity;
     Gson gson;
-    private RelativeLayout rlLoader, rlLabourLayout, rlLabourSearchLayout, rlAbSearch, rlClearSearchEditText;
+    public RelativeLayout rlLoader, rlLabourLayout, rlLabourSearchLayout, rlAbSearch, rlClearSearchEditText;
     private ListView lvLabour;
     LinearLayout llAttendance;
     Button btnPresent,btnAbsent;
@@ -76,7 +76,7 @@ public class MarkLabourAttendanceActivity extends Activity {
     AlertDialog.Builder alertDialogBuilder = null;
     AlertDialog alertDialog = null;
 
-    String shiftName = "";
+    public String shiftName = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -472,4 +472,5 @@ public class MarkLabourAttendanceActivity extends Activity {
             btnAbsent.setVisibility(View.GONE);
         }
     }
+
 }

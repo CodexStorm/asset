@@ -70,7 +70,11 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
             @Override
             public void onClick(DialogInterface arg0, int arg1)
             {
-
+                List<Integer> i=getSelectedIndicies();
+                if(i.isEmpty()){
+                    simple_adapter.clear();
+                    simple_adapter.add("Select Penalty");
+                }
             }
         });
 
@@ -90,6 +94,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         _items = items.toArray(new String[items.size()]);
         mSelection = new boolean[_items.length];
         simple_adapter.clear();
+        simple_adapter.add("Select penalty");
        //simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
     }

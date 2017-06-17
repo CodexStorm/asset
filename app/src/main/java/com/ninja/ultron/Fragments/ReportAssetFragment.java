@@ -65,6 +65,7 @@ public class ReportAssetFragment extends Fragment {
 
                     }
                 }, yy, mm, dd);
+
                 datePicker.show();
             }
         });
@@ -84,7 +85,6 @@ public class ReportAssetFragment extends Fragment {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                       String time = String.valueOf(hourOfDay) + " : " + String.valueOf(minute);
                         tvTime.setText(time);
-
                     }
                 },hh,mm,true);
                 timePicker.show();

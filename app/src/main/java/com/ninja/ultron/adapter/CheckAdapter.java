@@ -42,11 +42,10 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.ViewHolder> 
         holder.tvQuantity.setText(asset.getQuantity()+"");
         holder.tvAssetType.setText(asset.getAssetType());
 
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
                 ((RequestNewAssetActivity)activity).deleteSelectedAsset(position);
-                return false;
             }
         });
 

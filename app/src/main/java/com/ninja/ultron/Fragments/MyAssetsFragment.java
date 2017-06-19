@@ -1,14 +1,16 @@
 package com.ninja.ultron.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,12 +19,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
 import com.ninja.ultron.activity.AssetDetailsActivity;
+import com.ninja.ultron.activity.InitiateTransferActivity;
+import com.ninja.ultron.activity.RequestNewAssetActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +40,44 @@ import java.util.List;
 public class MyAssetsFragment extends Fragment {
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
+    Text t;
     RecyclerView recyclerView;
     AssetListRecyclerAdapter adapter;
+    BottomNavigationView bottomNavigationView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View v=inflater.inflate(R.layout.fragment_my_assets,container,false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
+        bottomNavigationView = (BottomNavigationView)v.findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_request:
+                        Intent initateTransferIntent = new Intent(getActivity(),InitiateTransferActivity.class);
+                        startActivity(initateTransferIntent);
+                        //initiateTransferFragment.selectedToName = "Admin";
+                        break;
+                    case R.id.action_report:
+                        ReportAssetFragment reportAssetFragment = new ReportAssetFragment();
+                        //reportAssetFragment.selectedName = tvName1.getText().toString();
+                        //reportAssetFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
+                        getFragmentManager().beginTransaction().replace(R.id.rlAssetDetails,reportAssetFragment).addToBackStack(null).commit();
+                    case R.id.request_asset:
+                        Intent requestNewAssetIntent = new Intent(getActivity(), RequestNewAssetActivity.class);
+                        startActivity(requestNewAssetIntent);
+
+                        break;
+
+                }
+                return true;
+            }
+        });
+
         callMyAssetListApi();
         Log.d("val",UserDetails.getMyAssetList(getActivity()));
         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
@@ -68,7 +103,6 @@ public class MyAssetsFragment extends Fragment {
                                 //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlMyAssetList,fragment).addToBackStack(null).commit();
                                 Intent intent=new Intent(getActivity(), AssetDetailsActivity.class);
                                 startActivity(intent);
-                                getActivity().overridePendingTransition(R.anim.from_middle, R.anim.to_middle);
                             }
                         });
                         recyclerView.hasFixedSize();

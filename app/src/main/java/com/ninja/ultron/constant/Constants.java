@@ -41,8 +41,6 @@ public class Constants {
 
     public static final int FEED_LEFT_BEFORE_NEW_ORDER_FETCH = 3;
 
-
-
     public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=";
     public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
@@ -58,5 +56,6 @@ public class Constants {
     public static final String REVOKE_ATTENDANCE_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker/revokeAttendance";
     public static final String GET_PENALTIES_URL="http://10.1.19.188:1111/api/web/penalties/get";
     public static final String GET_LABOUR_TIME_ABSOLUTE_URL="http://10.1.19.188:1111/api/web/labour/shiftHours";
+
 
 }

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee">
+
+    <RelativeLayout
+        android:id="@+id/rlNewAssets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_diplay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_margin="@dimen/dp_10">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvNewAsset"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="50dp"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/rvNewAsset"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/rvNewAsset"
+            android:layout_marginTop="24dp"
+            android:text="Asset Type"
+            android:textStyle="bold"
+            android:textSize="@dimen/dp_20"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/rvNewAsset"
+            android:layout_alignRight="@+id/rvNewAsset"
+            android:layout_alignTop="@+id/textView"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:text="Quantity"
+            android:textSize="@dimen/dp_20"
+
+            android:textStyle="bold"
+            android:textColor="#000"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlAssetDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_diplay"
+            android:layout_marginTop="13dp"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/rlNewAssets"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_20"
+                android:layout_toLeftOf="@+id/linearLayout"
+                android:layout_toStartOf="@+id/linearLayout">
+
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:text="Request to :"
+                    android:gravity="end"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:text="Requested by :"
+                    android:gravity="end"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvhFaciltity"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:text="Facility :"
+                    android:gravity="end"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:padding="20dp"
+                android:id="@+id/linearLayout">
+
+
+                <TextView
+                    android:id="@+id/tvvRequestedto"
+                    android:text="Admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    />
+                <TextView
+                    android:id="@+id/tvRequestedBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@android:color/black"
+                    />
+                <TextView
+                    android:id="@+id/Facility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone"
+                    android:textColor="@android:color/black"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbarcolor"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request Summary"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="#fff"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlInitiateButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/actionbarcolor"
+
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_add"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/tvInitiate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:layout_marginBottom="5dp"
+            android:text="Request"
+            android:layout_alignParentBottom="true"
+            >
+        </TextView>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

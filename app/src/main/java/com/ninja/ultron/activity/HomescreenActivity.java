@@ -15,10 +15,13 @@ import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.functions.StartIntent;
 import com.ninja.ultron.functions.UserDetails;
 
-public class HomescreenActivity extends AppCompatActivity {
+public class
+
+HomescreenActivity extends AppCompatActivity {
 
     CardView cvMyAsset;
     CardView cvMyAttendance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

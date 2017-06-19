@@ -1,17 +1,14 @@
 package com.ninja.ultron.activity;
 
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.ninja.ultron.Fragments.InitiateTransferFragment;
 import com.ninja.ultron.Fragments.ReportAssetFragment;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetAccessoryAdapter;
@@ -39,7 +36,6 @@ public class AssetDetailsActivity extends AppCompatActivity {
     List<AssetDetailsEntity> assetDetailsList;
     AssetAccessoryAdapter adapter;
     BottomNavigationView bottomNavigationView;
-    InitiateTransferFragment initiateTransferFragment;
     ReportAssetFragment reportAssetFragment;
 
     @Override
@@ -55,31 +51,6 @@ public class AssetDetailsActivity extends AppCompatActivity {
         tvAssetMake = (TextView)findViewById(R.id.tvAssetMake1);
         tvSpecifiaction1 = (TextView) findViewById(R.id.tvSpecification1);
         lvAccessories = (ListView) findViewById(R.id.lvAccessories);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_request:
-                        initiateTransferFragment = new InitiateTransferFragment();
-                        initiateTransferFragment.selectedName = tvName1.getText().toString();
-                        initiateTransferFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
-                        initiateTransferFragment.selectedToName = "Admin";
-                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails, initiateTransferFragment).addToBackStack(null).commit();
-                        break;
-                    case R.id.action_report:
-                        reportAssetFragment = new ReportAssetFragment();
-                        reportAssetFragment.selectedName = tvName1.getText().toString();
-                        reportAssetFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
-                        getSupportFragmentManager().beginTransaction().replace(R.id.rlAssetDetails,reportAssetFragment).addToBackStack(null).commit();
-
-
-                        break;
-
-                }
-                return true;
-            }
-        });
 
 
         callAssetDetailsApi();

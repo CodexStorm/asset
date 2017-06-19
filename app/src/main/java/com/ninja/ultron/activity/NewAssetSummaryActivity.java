@@ -46,7 +46,7 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
         newAssetRecyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);
         newAssetRecyclerView.setLayoutManager(layoutManager);
-        newAssetAdapter = new CheckAdapter(newAssetEntityList);
+        newAssetAdapter = new CheckAdapter(NewAssetSummaryActivity.this,newAssetEntityList);
         newAssetRecyclerView.setAdapter(newAssetAdapter);
         newAssetAdapter.notifyDataSetChanged();
 

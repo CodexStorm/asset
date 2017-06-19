@@ -1,5 +1,6 @@
 package com.ninja.ultron.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
+import com.ninja.ultron.activity.RequestNewAssetActivity;
 import com.ninja.ultron.entity.NewAssetEntity;
 
 import java.util.ArrayList;
@@ -18,9 +20,11 @@ import java.util.List;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.ViewHolder> {
 
+    Activity activity;
     List<NewAssetEntity> assetList = new ArrayList<>();
 
-    public CheckAdapter(List<NewAssetEntity> assetList) {
+    public CheckAdapter(Activity activity, List<NewAssetEntity> assetList) {
+        this.activity = activity;
         this.assetList = assetList;
     }
 
@@ -33,10 +37,18 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final NewAssetEntity asset = assetList.get(position);
         holder.tvQuantity.setText(asset.getQuantity()+"");
         holder.tvAssetType.setText(asset.getAssetType());
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ((RequestNewAssetActivity)activity).deleteSelectedAsset(position);
+                return false;
+            }
+        });
 
     }
 

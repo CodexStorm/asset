@@ -1,6 +1,10 @@
 package com.ninja.ultron.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +45,8 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     List<NewAssetEntity> newAssetEntityArrayList;
     Spinner assetTypeSpinner;
     Spinner categoryTypeSpinner;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog alertDialog = null;
 
     int Quantity;
     @Override
@@ -171,7 +177,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 else {
                     NewAssetEntity entity = new NewAssetEntity(assetType, Quantity);
                     newAssetEntityArrayList.add(entity);
-                    newAssetAdapter = new CheckAdapter(newAssetEntityArrayList);
+                    newAssetAdapter = new CheckAdapter(RequestNewAssetActivity.this,newAssetEntityArrayList);
                     newAssetRecyclerView.setAdapter(newAssetAdapter);
                     newAssetAdapter.notifyDataSetChanged();
                 }
@@ -196,7 +202,30 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         });
     }
 
-
+    public void deleteSelectedAsset(final int position){
+        String assetType = newAssetEntityArrayList.get(position).getAssetType();
+        alertDialogBuilder = new AlertDialog.Builder(RequestNewAssetActivity.this, R.style.AlertDialogBackground);
+        alertDialogBuilder
+                .setMessage("Do you want to delete this (" + assetType +") ? ")
+                .setCancelable(true)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                newAssetEntityArrayList.remove(newAssetEntityArrayList.get(position));
+                                newAssetAdapter.notifyDataSetChanged();
+                                alertDialog.dismiss();
+                            }
+                        })
+                .setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                alertDialog.dismiss();
+                            }
+                        });
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        alertDialog.show();
+    }
 
 
 }

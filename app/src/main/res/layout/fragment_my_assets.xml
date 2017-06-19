@@ -32,8 +32,5 @@
             app:menu="@menu/asset_details_menu"
             ></android.support.design.widget.BottomNavigationView>
 
-
-
-
     </RelativeLayout>
 </FrameLayout>

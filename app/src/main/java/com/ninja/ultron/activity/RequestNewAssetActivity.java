@@ -109,6 +109,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
 
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

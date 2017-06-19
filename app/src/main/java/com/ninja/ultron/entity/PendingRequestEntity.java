@@ -8,33 +8,11 @@ import java.lang.ref.SoftReference;
 
 public class PendingRequestEntity {
 
-    String assetMake;
     String status;
     int requestId;
-    String nomenclature;
-
-    public PendingRequestEntity(String assetMake, String status, int requestId,String nomenclature) {
-        this.assetMake = assetMake;
+    public PendingRequestEntity(String status, int requestId,String nomenclature) {
         this.status = status;
         this.requestId = requestId;
-        this.nomenclature = nomenclature;
-    }
-
-    public void setNomenclature(String nomenclature) {
-        this.nomenclature = nomenclature;
-    }
-
-    public String getNomenclature() {
-
-        return nomenclature;
-    }
-
-    public String getAssetMake() {
-        return assetMake;
-    }
-
-    public void setAssetMake(String assetMake) {
-        this.assetMake = assetMake;
     }
 
     public String getStatus() {

@@ -48,9 +48,7 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
         final PendingRequestEntity pendingRequestEntity=pendingRequestEntityArrayList.get(position);
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
-        holder.tvAssetMake.setText(pendingRequestEntity.getAssetMake());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
-        holder.tvAssetNomenclature.setText(pendingRequestEntity.getNomenclature());
         holder.pendingRequestCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,16 +70,14 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvAssetMake,tvAssetStatus,tvAssetRequestId,tvAssetNomenclature;
+        TextView tvAssetStatus,tvAssetRequestId;
         RelativeLayout layout;
         View pendingRequestCardView;
         public ViewHolder(View itemView) {
             super(itemView);
             pendingRequestCardView=itemView;
-            tvAssetMake=(TextView)itemView.findViewById(R.id.tvAssetMake);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
-            tvAssetNomenclature =(TextView) itemView.findViewById(R.id.tvAssetNomenclature);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
         }
     }

@@ -41,10 +41,12 @@ public class Constants {
 
     public static final int FEED_LEFT_BEFORE_NEW_ORDER_FETCH = 3;
 
-    public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=";
+    public static final String ASSET_LIST_URL="http://10.0.0.23:1111/api/web/find/asset?userId=";
     public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
     public static String ASSET_DETAILS_URL;
-    public static final String PENDING_REQUESTS_URL="http://10.0.0.3:1111/api/web/request/pending?userId=8&approver=0";
+    public static String PROFILE_ASSET_LIST = "&categoryId=3001";
+    public static String FACILITY_ASSET_LIST = "&categoryId=3002";
+    public static final String PENDING_REQUESTS_URL="http://10.0.0.23:1111/api/web/request/pending?userId=";
     public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request/?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
     public static final String INITIATE_TRANSFER_URL="http://88.99.31.206:1111/api/web/request/transfer";

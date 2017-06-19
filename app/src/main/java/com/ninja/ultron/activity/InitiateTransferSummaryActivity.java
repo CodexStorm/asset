@@ -23,6 +23,9 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
     TextView tvRequestedBy;
     TextView tvFacility;
     TextView tvhFacility;
+    TextView tvRequestReason;
+    TextView tvRequestedTo;
+    String RequestReason;
     int categoryId;
 
     @Override
@@ -36,7 +39,11 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         tvFacility = (TextView)findViewById(R.id.Facility);
         tvFacility.setText(UserDetails.getFacilityName(InitiateTransferSummaryActivity.this));
         tvhFacility = (TextView)findViewById(R.id.tvhFaciltity);
+        tvRequestedTo = (TextView)findViewById(R.id.tvRequestedto);
+        tvRequestReason = (TextView)findViewById(R.id.tvRequestReason);
         tvRequestedBy.setText(UserDetails.getUserName(InitiateTransferSummaryActivity.this));
+        tvRequestReason.setText(transferAssetSummary.getStringExtra("RequestReason"));
+        tvRequestedTo.setText(transferAssetSummary.getStringExtra("TransferTo"));
         if(transferAssetSummary.getIntExtra("category",0) == 2) {
             tvFacility.setVisibility(View.VISIBLE);
             tvhFacility.setVisibility(View.VISIBLE);

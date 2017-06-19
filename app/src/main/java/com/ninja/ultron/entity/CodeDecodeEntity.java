@@ -8,6 +8,7 @@ public class CodeDecodeEntity {
     private String assetMake;
 
 
+
     public void setAssetMake(String assetMake) {
         this.assetMake = assetMake;
     }

@@ -144,8 +144,8 @@ public class MarkLabourAttendanceAdapter extends ArrayAdapter<LabourAttendanceMo
                             }
                         }
                     },activity);
-
                 }
+
                 else {
                         CommonFunctions.toastString("Mark Present to update",activity);
                   }

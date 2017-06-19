@@ -193,15 +193,17 @@ public class RestClientImplementation {
         queue.add(postRequest);
     }
 
-    public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context){
+
+    public static void assetListApi(final AssetMiniEntity assetMiniEntity, final AssetMiniEntity.UltronRestClientInterface restClientInterface, final Context context,final String category){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String userId= String.valueOf(UserDetails.getAsgardUserId(context));
         Log.d("UserId",userId);
 
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_LIST_URL+userId, null, new Response.Listener<JSONObject>() {
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_LIST_URL+userId+category, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
+                    Log.d("RESPONSE CHECK",response.toString());
                     Gson gson = new Gson();
                     AssetMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
                     assetMiniEntity.setStatusCode(successAssetMiniEntity.getStatusCode());
@@ -287,7 +289,8 @@ public class RestClientImplementation {
     public static void pendingRequestsApi(final PendingRequestMiniEntity pendingRequestMiniEntity,final PendingRequestMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context)
     {
         queue=VolleySingleton.getInstance(context).getRequestQueue();
-        JsonBaseRequest getRequest=new JsonBaseRequest(Request.Method.GET, Constants.PENDING_REQUESTS_URL, null, new Response.Listener<JSONObject>() {
+        String userId= String.valueOf(UserDetails.getAsgardUserId(context));
+        JsonBaseRequest getRequest=new JsonBaseRequest(Request.Method.GET, Constants.PENDING_REQUESTS_URL+userId, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try

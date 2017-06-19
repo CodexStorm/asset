@@ -30,7 +30,7 @@ public class TransferAssetAdapter extends RecyclerView.Adapter<TransferAssetAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.asset_cards,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.transfer_asset_card,parent,false);
         ViewHolder holder = new ViewHolder(v);
         return holder;
     }

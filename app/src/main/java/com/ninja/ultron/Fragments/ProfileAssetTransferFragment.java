@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -22,6 +26,7 @@ import com.ninja.ultron.activity.AssetDetailsActivity;
 import com.ninja.ultron.activity.InitiateTransferSummaryActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.adapter.TransferListRecyclerAdapter;
+import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 import com.ninja.ultron.functions.CommonFunctions;
@@ -37,6 +42,9 @@ public class ProfileAssetTransferFragment extends Fragment {
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     TransferListRecyclerAdapter adapter;
     RelativeLayout rlInitiateButton;
+    Spinner spinnerRequestReason;
+    String RequestReasonText;
+    int RequestReasonId;
 
     @Nullable
     @Override
@@ -45,7 +53,25 @@ public class ProfileAssetTransferFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile_asset_transfer, container, false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
         rlInitiateButton = (RelativeLayout)v.findViewById(R.id.rlInitiateButton);
+        spinnerRequestReason = (Spinner)v.findViewById(R.id.spinnerRequestReason);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        final String[] RequestReason = {"Select Reason","Changing Department"};
+        final ArrayAdapter<String> requestReasonAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,RequestReason);
+        spinnerRequestReason.setAdapter(requestReasonAdapter);
+
+        spinnerRequestReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                RequestReasonText = parent.getItemAtPosition(position).toString();
+                RequestReasonId = parent.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         recyclerView.setLayoutManager(manager);
         callMyAssetListApi();
         Log.d("val",UserDetails.getMyAssetList(getActivity()));
@@ -53,9 +79,16 @@ public class ProfileAssetTransferFragment extends Fragment {
         rlInitiateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
-                assetTransferSummary.putExtra("category",1);
-                startActivity(assetTransferSummary);
+                if(RequestReasonId == 0) {
+                    Toast.makeText(getContext(),"Invalid Request",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
+                    assetTransferSummary.putExtra("category", 1);
+                    assetTransferSummary.putExtra("RequestReason",RequestReasonText);
+                    assetTransferSummary.putExtra("TransferTo","Admin");
+                    startActivity(assetTransferSummary);
+                }
             }
         });
         return v;
@@ -87,7 +120,6 @@ public class ProfileAssetTransferFragment extends Fragment {
                     }
                 }
             }
-        },getActivity());
+        },getActivity(), Constants.PROFILE_ASSET_LIST);
     }
-
 }

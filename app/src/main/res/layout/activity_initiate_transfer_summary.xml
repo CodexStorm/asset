@@ -56,14 +56,14 @@
             android:layout_toStartOf="@+id/linearLayout">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Request to :"
                 android:gravity="end"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"/>
             <TextView
-                android:layout_width="125dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Requested by :"
                 android:gravity="end"
@@ -78,6 +78,14 @@
                 android:gravity="end"
                 android:layout_marginTop="15dp"
                 android:visibility="gone"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Requested Reason :"
+                android:gravity="end"
+                android:layout_marginTop="15dp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"/>
 
@@ -96,7 +104,7 @@
 
 
             <TextView
-                android:id="@+id/tvvRequestedto"
+                android:id="@+id/tvRequestedto"
                 android:text="Admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,6 +125,14 @@
                 android:visibility="gone"
                 android:textColor="@android:color/black"
                 />
+            <TextView
+                android:id="@+id/tvRequestReason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/black"
+                />
+
         </LinearLayout>
 
 

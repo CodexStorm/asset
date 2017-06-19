@@ -88,7 +88,9 @@ public class MyAssetsFragment extends Fragment {
                     if(assetMiniEntity.getResponse() != null) {
                         Gson gs = new Gson();
                         myAssetList = assetMiniEntity.getResponse();
+                        Log.d("Check",myAssetList.toString());
                         String myAssetListAsString = gs.toJson(myAssetList);
+                        Log.d("Check",myAssetListAsString);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
                         adapter=new AssetListRecyclerAdapter(myAssetList, getContext(), new AssetListRecyclerAdapter.CallBack() {
                             @Override
@@ -102,6 +104,7 @@ public class MyAssetsFragment extends Fragment {
                         });
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
+                        Log.d("Check",myAssetList.size()+"");
                         recyclerView.setAdapter(adapter);
 
 
@@ -114,7 +117,7 @@ public class MyAssetsFragment extends Fragment {
                     }
                 }
             }
-        },getActivity());
+        },getActivity(),"");
     }
 
 }

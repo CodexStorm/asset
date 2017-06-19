@@ -54,7 +54,8 @@
         <activity android:name=".activity.MarkLabourAttendanceActivity" />
         <activity android:name=".activity.ReportedLabourActivity" />
         <activity android:name=".activity.RequestAssetActivity" />
-        <activity android:name=".activity.RequestNewAssetActivity"></activity>
+        <activity android:name=".activity.RequestNewAssetActivity" />
+        <activity android:name=".activity.NewAssetSummaryActivity"></activity>
     </application>
 
 </manifest>

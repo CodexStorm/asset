@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee">
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,44 @@
     android:layout_below="@+id/relativeLayout"
     android:background="@drawable/bg_diplay"
     android:layout_above="@+id/rlAssetDetails">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvNewAsset"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rvNewAsset"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/rvNewAsset"
+        android:layout_marginTop="24dp"
+        android:text="Asset Type"
+        android:textStyle="bold"
+        android:textSize="@dimen/dp_20"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/rvNewAsset"
+        android:layout_alignRight="@+id/rvNewAsset"
+        android:layout_alignTop="@+id/textView"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:text="Quantity"
+        android:textSize="@dimen/dp_20"
+
+        android:textStyle="bold"
+        android:textColor="#000"/>
 </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rlAssetDetails"
@@ -24,14 +63,14 @@
         android:background="@drawable/bg_diplay">
         <TextView
             android:id="@+id/tvhFaciltity"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Facility  :"
+            android:text="Asset Category :"
             android:textStyle="bold"
             android:gravity="end"
             android:layout_marginLeft="24dp"
             android:textColor="@android:color/background_dark"
-            android:layout_alignTop="@+id/spinnerFacilityType"
+            android:layout_alignTop="@+id/spinnerCategoryType"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginStart="24dp" />
@@ -51,23 +90,22 @@
             android:layout_alignLeft="@+id/tvhFaciltity"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
-            android:layout_toStartOf="@+id/spinnerFacilityType"
-            android:layout_toLeftOf="@+id/spinnerFacilityType" />
+            android:layout_toStartOf="@+id/spinnerCategoryType"
+            android:layout_toLeftOf="@+id/spinnerCategoryType" />
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvhAssetType"
-            android:layout_marginTop="4dp"
-            android:layout_alignStart="@+id/tvhAssetType"
-            android:layout_alignLeft="@+id/tvhAssetType"
-            android:layout_marginBottom="@dimen/dp_10"
             android:text="Quantity :"
             android:textStyle="bold"
             android:textColor="@android:color/background_dark"
             android:gravity="end"
 
-            android:id="@+id/tvhQuantity" />
+            android:id="@+id/tvhQuantity"
+            android:layout_below="@+id/tvhAssetType"
+            android:layout_alignRight="@+id/tvhAssetType"
+            android:layout_alignEnd="@+id/tvhAssetType" />
         <TextView
+            android:id="@+id/bAdd"
             android:layout_width="75dp"
             android:layout_height="25dp"
             android:layout_marginBottom="10dp"
@@ -87,30 +125,32 @@
             android:layout_alignLeft="@+id/spinnerAssetType"
             android:layout_alignStart="@+id/spinnerAssetType"
             android:layout_marginLeft="73dp"
-            android:text="0"
             android:textColor="#000"
             android:gravity="bottom|center_horizontal"
             android:layout_marginStart="73dp"
-            android:id="@+id/textView2" />
+            android:id="@+id/tvQuantity" />
 
         <ImageView
+            android:id="@+id/ivIncreement"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_increement"
-            android:layout_alignTop="@+id/textView2"
-            android:layout_centerHorizontal="true" />
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:layout_alignTop="@+id/tvQuantity"
+            android:layout_toRightOf="@+id/tvQuantity"
+            android:layout_toEndOf="@+id/tvQuantity" />
 
         <ImageView
+            android:id="@+id/ivDecreement"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_alignTop="@+id/textView2"
-            android:layout_toRightOf="@+id/textView2"
-            android:layout_toEndOf="@+id/textView2"
-            android:layout_marginLeft="20dp"
             android:src="@drawable/ic_decreement"
-            android:layout_marginStart="20dp" />
+            android:layout_alignTop="@+id/tvQuantity"
+            android:layout_alignRight="@+id/bAdd"
+            android:layout_alignEnd="@+id/bAdd" />
         <Spinner
-            android:id="@+id/spinnerFacilityType"
+            android:id="@+id/spinnerCategoryType"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
@@ -127,8 +167,8 @@
             android:layout_alignTop="@+id/tvhAssetType"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/spinnerFacilityType"
-            android:layout_alignStart="@+id/spinnerFacilityType"/>
+            android:layout_alignLeft="@+id/spinnerCategoryType"
+            android:layout_alignStart="@+id/spinnerCategoryType"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/rlInitiateButton"

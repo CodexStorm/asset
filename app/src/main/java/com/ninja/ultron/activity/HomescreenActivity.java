@@ -26,7 +26,7 @@ public class HomescreenActivity extends AppCompatActivity {
         String role= UserDetails.getRole(this);
         Log.d("ROle",role);
 
-        if(role.contains(Constants.USER_ROLE_DC_SUPERVISOR)){
+      //  if(role.contains(Constants.USER_ROLE_DC_SUPERVISOR)){
         cvMyAsset = (CardView) findViewById(R.id.cvMyAsset);
         cvMyAttendance = (CardView)findViewById(R.id.cvMyAttendance);
         cvMyAsset.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +42,8 @@ public class HomescreenActivity extends AppCompatActivity {
             }
         });
         }
-        else {
+       /* else {
             Toast.makeText(getApplicationContext(),"Session Blocked for you",Toast.LENGTH_LONG).show();
-        }
-  }
+        }*/
+  //}
 }

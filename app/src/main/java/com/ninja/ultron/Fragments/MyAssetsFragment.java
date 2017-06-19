@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
 import com.ninja.ultron.activity.AssetDetailsActivity;
-import com.ninja.ultron.activity.InitiateTransferActivity;
+import com.ninja.ultron.activity.InitiateAssetTransferActivity;
 import com.ninja.ultron.activity.RequestNewAssetActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.entity.AssetMiniEntity;
@@ -58,15 +58,10 @@ public class MyAssetsFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_request:
-                        Intent initateTransferIntent = new Intent(getActivity(),InitiateTransferActivity.class);
-                        startActivity(initateTransferIntent);
+                        Intent initatAssetTransferIntent = new Intent(getActivity(),InitiateAssetTransferActivity.class);
+                        startActivity(initatAssetTransferIntent);
                         //initiateTransferFragment.selectedToName = "Admin";
                         break;
-                    case R.id.action_report:
-                        ReportAssetFragment reportAssetFragment = new ReportAssetFragment();
-                        //reportAssetFragment.selectedName = tvName1.getText().toString();
-                        //reportAssetFragment.selectedId = Integer.parseInt(tvId1.getText().toString());
-                        getFragmentManager().beginTransaction().replace(R.id.rlAssetDetails,reportAssetFragment).addToBackStack(null).commit();
                     case R.id.request_asset:
                         Intent requestNewAssetIntent = new Intent(getActivity(), RequestNewAssetActivity.class);
                         startActivity(requestNewAssetIntent);

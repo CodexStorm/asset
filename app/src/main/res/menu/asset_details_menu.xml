@@ -9,14 +9,6 @@
         android:title="@string/asset_transfer"
         app:showAsAction="ifRoom"
         />
-
-    <item
-        android:id="@+id/action_report"
-        android:enabled="true"
-        android:icon="@drawable/ic_action_report"
-        android:title="@string/report_asset"
-        app:showAsAction="ifRoom"
-        />
     <item
         android:id="@+id/request_asset"
         android:enabled="true"
@@ -24,8 +16,4 @@
         android:title="@string/request_asset"
         app:showAsAction="ifRoom"
         />
-
-
-
-
 </menu>

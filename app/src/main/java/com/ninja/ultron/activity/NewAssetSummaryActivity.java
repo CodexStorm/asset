@@ -1,29 +1,25 @@
 package com.ninja.ultron.activity;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
-import com.ninja.ultron.adapter.CheckAdapter;
+import com.ninja.ultron.adapter.NewAssetAdapter;
 import com.ninja.ultron.entity.NewAssetEntity;
 import com.ninja.ultron.functions.UserDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewAssetSummaryActivity extends AppCompatActivity {
 
     RecyclerView.LayoutManager layoutManager;
     RecyclerView newAssetRecyclerView;
-    CheckAdapter newAssetAdapter;
+    NewAssetAdapter newAssetAdapter;
     TextView tvRequestedBy;
     TextView tvFacility;
     TextView tvhFacility;
@@ -46,7 +42,7 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
         newAssetRecyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);
         newAssetRecyclerView.setLayoutManager(layoutManager);
-        newAssetAdapter = new CheckAdapter(NewAssetSummaryActivity.this,newAssetEntityList);
+        newAssetAdapter = new NewAssetAdapter(NewAssetSummaryActivity.this,newAssetEntityList);
         newAssetRecyclerView.setAdapter(newAssetAdapter);
         newAssetAdapter.notifyDataSetChanged();
 

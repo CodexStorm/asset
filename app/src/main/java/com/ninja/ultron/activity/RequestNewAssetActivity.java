@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninja.ultron.R;
-import com.ninja.ultron.adapter.CheckAdapter;
+import com.ninja.ultron.adapter.NewAssetAdapter;
 import com.ninja.ultron.entity.NewAssetEntity;
 
 import java.io.Serializable;
@@ -38,7 +37,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     String categoryType;
     int categorySelected;
     int assetSelected;
-    CheckAdapter newAssetAdapter;
+    NewAssetAdapter newAssetAdapter;
     RelativeLayout rlInitiateButton;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView newAssetRecyclerView;
@@ -177,7 +176,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 else {
                     NewAssetEntity entity = new NewAssetEntity(assetType, Quantity);
                     newAssetEntityArrayList.add(entity);
-                    newAssetAdapter = new CheckAdapter(RequestNewAssetActivity.this,newAssetEntityArrayList);
+                    newAssetAdapter = new NewAssetAdapter(RequestNewAssetActivity.this,newAssetEntityArrayList);
                     newAssetRecyclerView.setAdapter(newAssetAdapter);
                     newAssetAdapter.notifyDataSetChanged();
                 }

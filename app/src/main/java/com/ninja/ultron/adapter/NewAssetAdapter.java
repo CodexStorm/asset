@@ -1,5 +1,6 @@
 package com.ninja.ultron.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,51 +8,62 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
+import com.ninja.ultron.activity.RequestNewAssetActivity;
 import com.ninja.ultron.entity.NewAssetEntity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by manoj on 16-06-2017.
+ * Created by manoj on 17-06-2017.
  */
 
 public class NewAssetAdapter extends RecyclerView.Adapter<NewAssetAdapter.ViewHolder> {
 
-    private List<NewAssetEntity> newAssetEntityList= new ArrayList<>();
+    Activity activity;
+    List<NewAssetEntity> assetList = new ArrayList<>();
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView tvAssetType;
-        public TextView tvQuantity;
-
-        public ViewHolder(View v){
-            super(v);
-            tvAssetType = (TextView)v.findViewById(R.id.tvAssetType);
-            tvQuantity = (TextView)v.findViewById(R.id.tvQuantity);
-        }
+    public NewAssetAdapter(Activity activity, List<NewAssetEntity> assetList) {
+        this.activity = activity;
+        this.assetList = assetList;
     }
 
-    public NewAssetAdapter(List<NewAssetEntity> newAssetEntityList) {
-        this.newAssetEntityList = newAssetEntityList;
-    }
 
-    public NewAssetAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_asset_card,parent,false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        ViewHolder holder = new ViewHolder(v);
+        return holder;
     }
 
-    public void onBindViewHolder(NewAssetAdapter.ViewHolder holder, int position){
-        NewAssetEntity newAssetEntity = newAssetEntityList.get(position);
-        holder.tvAssetType.setText(newAssetEntity.getAssetType());
-        holder.tvAssetType.setText(String.valueOf(newAssetEntity.getQuantity()));
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        final NewAssetEntity asset = assetList.get(position);
+        holder.tvQuantity.setText(asset.getQuantity()+"");
+        holder.tvAssetType.setText(asset.getAssetType());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RequestNewAssetActivity)activity).deleteSelectedAsset(position);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return newAssetEntityList.size();
+        return assetList.size();
+    }
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView tvAssetType,tvQuantity;
+        View cardView;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            cardView =itemView;
+            tvAssetType = (TextView)itemView.findViewById(R.id.tvAssetType);
+            tvQuantity = (TextView)itemView.findViewById(R.id.tvQuantity);
+        }
     }
 }

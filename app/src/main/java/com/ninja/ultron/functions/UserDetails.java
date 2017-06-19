@@ -136,6 +136,18 @@ public class UserDetails {
         return settings.getString("myAssetList","");
     }
 
+    public static void setMyProfileAssetList(Context context,String myAssetList) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("myProfileAssetList", myAssetList);
+        editor.commit();
+    }
+
+    public static String getMyProfileAssetList(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
+        return settings.getString("myProfileAssetList","");
+    }
+
     public static void setUserCityId(Context context, String vendorId) {
         SharedPreferences settings = context.getSharedPreferences(Constants.USER_PREFERENCE, 0);
         SharedPreferences.Editor editor = settings.edit();

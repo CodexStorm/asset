@@ -40,11 +40,13 @@ public class ProfileAssetTransferFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
+    List<CodeDecodeEntity> selectedAssetList=new ArrayList<>();
     TransferListRecyclerAdapter adapter;
     RelativeLayout rlInitiateButton;
     Spinner spinnerRequestReason;
     String RequestReasonText;
     int RequestReasonId;
+
 
     @Nullable
     @Override
@@ -84,6 +86,7 @@ public class ProfileAssetTransferFragment extends Fragment {
                 }
                 else {
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
+                    Log.d("Size",selectedAssetList.size()+"");
                     assetTransferSummary.putExtra("category", 1);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
                     assetTransferSummary.putExtra("TransferTo","Admin");
@@ -107,7 +110,7 @@ public class ProfileAssetTransferFragment extends Fragment {
                         myAssetList = assetMiniEntity.getResponse();
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
-                        adapter=new TransferListRecyclerAdapter (myAssetList, getContext());
+                        adapter=new TransferListRecyclerAdapter (myAssetList, getContext(),1);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);

@@ -27,6 +27,9 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
     TextView tvRequestedTo;
     String RequestReason;
     int categoryId;
+    List<CodeDecodeEntity> selectedAssetList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,6 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_initiate_transfer_summary);
         Intent transferAssetSummary = getIntent();
        // List<CodeDecodeEntity> transferAssetEntityList =(List<CodeDecodeEntity>) transferAssetSummary.getSerializableExtra("TransferAssetList");
-       // categoryId = transferAssetSummary.getIntExtra("CategoryId",0);
         tvRequestedBy = (TextView)findViewById(R.id.tvRequestedBy);
         tvFacility = (TextView)findViewById(R.id.Facility);
         tvFacility.setText(UserDetails.getFacilityName(InitiateTransferSummaryActivity.this));

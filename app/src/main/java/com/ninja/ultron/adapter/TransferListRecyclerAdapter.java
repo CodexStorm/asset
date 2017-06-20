@@ -1,6 +1,8 @@
 package com.ninja.ultron.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,10 +11,14 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.ninja.ultron.Fragments.FacilityAssetTransferFragment;
+import com.ninja.ultron.Fragments.ProfileAssetTransferFragment;
 import com.ninja.ultron.R;
+import com.ninja.ultron.activity.InitiateTransferSummaryActivity;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +30,14 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
     List<CodeDecodeEntity> assetsList=new ArrayList<>();
     Context context;
     boolean showCheckbox=false;
-
-    public TransferListRecyclerAdapter(List<CodeDecodeEntity> assetList, Context context) {
+    int type;
+    List<CodeDecodeEntity> selectedAssetList = new ArrayList<>();
+    public TransferListRecyclerAdapter(List<CodeDecodeEntity> assetList, Context context, int type) {
         this.assetsList=assetList;
         this.context = context;
+        this.type = type;
     }
+
 
 
     @Override
@@ -39,7 +48,7 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
     }
 
     @Override
-    public void onBindViewHolder(TransferListRecyclerAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final TransferListRecyclerAdapter.ViewHolder holder, final int position) {
 
         final CodeDecodeEntity asset =assetsList.get(position);
         holder.nomenclature.setText(asset.getNomenclature());
@@ -47,7 +56,17 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
         holder.AssetMake.setText(asset.getAssetMake());
         if (showCheckbox == true) {
             holder.checkBox.setVisibility(View.VISIBLE);
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(holder.checkBox.isChecked())
+                        holder.checkBox.setChecked(false);
+                    else
+                        holder.checkBox.setChecked(true);
+                }
+            });
         }
+
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -77,6 +96,7 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
         }
 
     }
+
 
 }
 

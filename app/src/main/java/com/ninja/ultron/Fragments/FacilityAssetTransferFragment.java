@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.AtomicFile;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +29,8 @@ import com.ninja.ultron.adapter.TransferListRecyclerAdapter;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
+import com.ninja.ultron.entity.TransferReasonsEntity;
+import com.ninja.ultron.entity.TransferReasonsMiniEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
@@ -40,6 +43,7 @@ public class FacilityAssetTransferFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
+    List<CodeDecodeEntity> selectedAssetList=new ArrayList<>();
     TransferListRecyclerAdapter adapter;
     RelativeLayout rlInitiateButton;
     Spinner spinnerTransferTo;
@@ -48,8 +52,7 @@ public class FacilityAssetTransferFragment extends Fragment {
     String RequestReasonText;
     int TransferToId;
     int RequestReasonId;
-
-
+    TransferReasonsMiniEntity transferReasonsMiniEntity;
 
 
     @Override
@@ -60,31 +63,56 @@ public class FacilityAssetTransferFragment extends Fragment {
         rlInitiateButton = (RelativeLayout)v.findViewById(R.id.rlInitiateButton);
         spinnerRequestReason=(Spinner)v.findViewById(R.id.spinnerRequestReason);
         spinnerTransferTo=(Spinner)v.findViewById(R.id.spinnerTransferTo);
-
+        transferReasonsMiniEntity = new TransferReasonsMiniEntity();
 
         RequestReasonId =0;
         TransferToId = 0;
-        final String[] RequestReason = {"Select Reason","Changing Department"};
         final String[] TransferTo = {"Select To","Admin","Reporting Manager"};
-
-        final ArrayAdapter<String> requestReasonAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,RequestReason);
         final ArrayAdapter<String> transferToAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,TransferTo);
-
-        spinnerRequestReason.setAdapter(requestReasonAdapter);
         spinnerTransferTo.setAdapter(transferToAdapter);
 
-        spinnerRequestReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity, new TransferReasonsMiniEntity.UltronRestClientInterface() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                RequestReasonText = parent.getItemAtPosition(position).toString();
-                RequestReasonId = parent.getSelectedItemPosition();
-            }
+            public void onInitialize(TransferReasonsMiniEntity transferReasonsMiniEntity, VolleyError error) {
+                if(error==null)
+                {
+                    if(transferReasonsMiniEntity.getReponse()!=null)
+                    {
+                        List<String> reasons = new ArrayList<String>();
+                        List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();
+                        for(int i = 0; i<transferReasonsEntities.size();i++)
+                        {
+                            reasons.add(transferReasonsEntities.get(i).getName());
+                        }
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,reasons);
+                        spinnerRequestReason.setAdapter(dataAdapter);
+                        spinnerRequestReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                RequestReasonText = parent.getItemAtPosition(position).toString();
+                                RequestReasonId = parent.getSelectedItemPosition();
+                            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
 
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Log.d("Tag","error in response");
+                    }
+                }
+                else
+                {
+                    if(transferReasonsMiniEntity.getStatusCode()==401)
+                    {
+                        CommonFunctions.toastString("Unauthorized",getContext());
+                    }
+                }
             }
-        });
+        },getContext());
 
         spinnerTransferTo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -113,6 +141,7 @@ public class FacilityAssetTransferFragment extends Fragment {
                 else {
 
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
+                    Log.d("Size",selectedAssetList.size()+"");
                     assetTransferSummary.putExtra("category", 2);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
                     assetTransferSummary.putExtra("TransferTo",TransferToText);
@@ -135,7 +164,7 @@ public class FacilityAssetTransferFragment extends Fragment {
                         myAssetList = assetMiniEntity.getResponse();
                         String myAssetListAsString = gs.toJson(myAssetList);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);
-                        adapter=new TransferListRecyclerAdapter(myAssetList, getContext());
+                        adapter=new TransferListRecyclerAdapter(myAssetList, getContext(),2);
                         recyclerView.hasFixedSize();
                         adapter.notifyDataSetChanged();
                         recyclerView.setAdapter(adapter);

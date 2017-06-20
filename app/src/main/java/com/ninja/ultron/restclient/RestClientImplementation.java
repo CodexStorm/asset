@@ -18,6 +18,7 @@ import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AsgardCodeMessageEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
+import com.ninja.ultron.entity.AssetTypeMiniEntity;
 import com.ninja.ultron.entity.GetPenaltyApiEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
@@ -418,7 +419,55 @@ public class RestClientImplementation {
                 }
                 ultronRestClientInterface.onInitialize(transferReasonsMiniEntity,new VolleyError());
             }
-        }){
+        },3000,0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
+    public static void getAssetTypeApi(final AssetTypeMiniEntity assetTypeMiniEntity,final AssetTypeMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_TYPE_API,null,new Response.Listener<JSONObject>(){
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Gson gson = new Gson();
+                    AssetTypeMiniEntity successEnitity = gson.fromJson(response.toString(),AssetTypeMiniEntity.class);
+                    assetTypeMiniEntity.setStatusCode(successEnitity.getStatusCode());
+                    assetTypeMiniEntity.setMessage(successEnitity.getMessage());
+                    assetTypeMiniEntity.setResponse(successEnitity.getResponse());
+                    ultronRestClientInterface.onInitialize(assetTypeMiniEntity,null);
+                }
+
+                catch (Exception e)
+                {
+                    assetTypeMiniEntity.setStatusCode(500);
+                    assetTypeMiniEntity.setMessage("Cast Exception");
+                    ultronRestClientInterface.onInitialize(assetTypeMiniEntity,new VolleyError());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error.networkResponse!=null && error.networkResponse.data!=null){
+                    Gson gson = new Gson();
+                    AssetTypeMiniEntity failureEntity = gson.fromJson(new String(error.networkResponse.data),AssetTypeMiniEntity.class);
+                    if(failureEntity.getMessage()!=null){
+                        assetTypeMiniEntity.setMessage(failureEntity.getMessage());
+                        assetTypeMiniEntity.setStatusCode(failureEntity.getStatusCode());
+                    }
+                }
+                ultronRestClientInterface.onInitialize(assetTypeMiniEntity,new VolleyError());
+            }
+        },3000,0){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String,String> params=new HashMap<String,String>();

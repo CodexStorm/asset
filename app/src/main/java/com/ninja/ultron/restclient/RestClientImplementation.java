@@ -29,6 +29,7 @@ import com.ninja.ultron.entity.LabourShiftDetailAPI;
 import com.ninja.ultron.entity.LabourShiftDetailEntity;
 import com.ninja.ultron.entity.LabourTimeEntity;
 import com.ninja.ultron.entity.LoginEntity;
+import com.ninja.ultron.entity.NewAssetInitateRequestEntity;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
 import com.ninja.ultron.entity.PostBulkLaboursAttendanceAPIEntity;
@@ -431,6 +432,29 @@ public class RestClientImplementation {
         queue.add(getRequest);
     }
 
+    public static void intiateNewAssetRequestApi(final NewAssetInitateRequestEntity newAssetInitateRequestEntity, final NewAssetInitateRequestEntity.UltronRestClientInterface ultronRestClientInterface,final  Context context)
+    {
+        final Gson gson = new Gson();
+        queue=VolleySingleton.getInstance(context).getRequestQueue();
+        JSONObject assetRequestJson = newAssetInitateRequestEntity.getJsonObjectAsParams();
+        Log.d("qwertt",assetRequestJson.toString());
+        JsonBaseRequest postRequest = new JsonBaseRequest(Request.Method.POST, Constants.ASSET_REQUEST_URL, assetRequestJson, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //int code = response.getInt("statusCode");
+                Log.d("CheckRespnce",response.toString());
+                ultronRestClientInterface.onInitialize(newAssetInitateRequestEntity, null);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Error",error.toString());
+                ultronRestClientInterface.onInitialize(newAssetInitateRequestEntity,new VolleyError());
+            }
+        });
+        queue.add(postRequest);
+    }
+
     public static void getAssetTypeApi(final AssetTypeMiniEntity assetTypeMiniEntity,final AssetTypeMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_TYPE_API,null,new Response.Listener<JSONObject>(){
@@ -438,6 +462,7 @@ public class RestClientImplementation {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.d("resonse",response.toString());
                     Gson gson = new Gson();
                     AssetTypeMiniEntity successEnitity = gson.fromJson(response.toString(),AssetTypeMiniEntity.class);
                     assetTypeMiniEntity.setStatusCode(successEnitity.getStatusCode());

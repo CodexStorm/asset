@@ -50,6 +50,7 @@ public class Constants {
     public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request/?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
     public static final String INITIATE_TRANSFER_URL="http://88.99.31.206:1111/api/web/request/transfer";
+    public static final String ASSET_REQUEST_URL="http://10.0.0.23:1111/api/web/request/newAsset";
     public static final String TRANSFER_REASONS_API="http://10.0.0.23:1111/api/web/find/transferReason";
     public static final String ASSET_TYPE_API="http://88.99.31.206:1111/api/web/find/asset/type";
     public static final String GET_LABOUR_FOR_ATTENDANCE_URL="http://10.1.19.188:1111/api/web/labour/attendance";

@@ -153,12 +153,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rlInitiateButton"
+        android:id="@+id/rlRequestButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:background="@color/actionbarcolor"
-
         >
         <ImageView
             android:layout_width="35dp"

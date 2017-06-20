@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.R;
 import com.ninja.ultron.activity.AssetDetailsActivity;
+import com.ninja.ultron.activity.InitiateAssetTransferActivity;
 import com.ninja.ultron.activity.InitiateTransferSummaryActivity;
 import com.ninja.ultron.adapter.AssetListRecyclerAdapter;
 import com.ninja.ultron.adapter.TransferListRecyclerAdapter;
@@ -33,6 +34,7 @@ import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,10 +88,11 @@ public class ProfileAssetTransferFragment extends Fragment {
                 }
                 else {
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
-                    Log.d("Size",selectedAssetList.size()+"");
+                    selectedAssetList = adapter.getSelectedAssetList();
                     assetTransferSummary.putExtra("category", 1);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
                     assetTransferSummary.putExtra("TransferTo","Admin");
+                    assetTransferSummary.putExtra("TransferAssetList",(Serializable)selectedAssetList);
                     startActivity(assetTransferSummary);
                 }
             }

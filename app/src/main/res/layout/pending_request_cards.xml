@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvAssetCategory"
+                android:id="@+id/tvRequestType"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="42dp"
@@ -59,8 +59,8 @@
                 android:id="@+id/tvAssetStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvAssetCategory"
-                android:layout_below="@+id/tvAssetCategory"
+                android:layout_alignLeft="@+id/tvRequestType"
+                android:layout_below="@+id/tvRequestType"
                 android:fontFamily="sans-serif"
                 android:text="Asset Status"
                 android:textSize="16dp" />

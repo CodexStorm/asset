@@ -35,6 +35,7 @@ import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,6 @@ public class FacilityAssetTransferFragment extends Fragment {
         spinnerRequestReason=(Spinner)v.findViewById(R.id.spinnerRequestReason);
         spinnerTransferTo=(Spinner)v.findViewById(R.id.spinnerTransferTo);
         transferReasonsMiniEntity = new TransferReasonsMiniEntity();
-
         RequestReasonId =0;
         TransferToId = 0;
         final String[] TransferTo = {"Select To","Admin","Reporting Manager"};
@@ -78,7 +78,8 @@ public class FacilityAssetTransferFragment extends Fragment {
                 {
                     if(transferReasonsMiniEntity.getReponse()!=null)
                     {
-                        List<String> reasons = new ArrayList<String>();
+                        final List<String> reasons = new ArrayList<String>();
+                        reasons.add("Select Reason");
                         List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();
                         for(int i = 0; i<transferReasonsEntities.size();i++)
                         {
@@ -141,10 +142,11 @@ public class FacilityAssetTransferFragment extends Fragment {
                 else {
 
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
-                    Log.d("Size",selectedAssetList.size()+"");
+                    selectedAssetList = adapter.getSelectedAssetList();
                     assetTransferSummary.putExtra("category", 2);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
                     assetTransferSummary.putExtra("TransferTo",TransferToText);
+                    assetTransferSummary.putExtra("TransferAssetList",(Serializable)selectedAssetList);
                     startActivity(assetTransferSummary);
                 }
 

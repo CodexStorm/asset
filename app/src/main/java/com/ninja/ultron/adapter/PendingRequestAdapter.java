@@ -1,11 +1,9 @@
 package com.ninja.ultron.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,6 +47,7 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         final PendingRequestEntity pendingRequestEntity=pendingRequestEntityArrayList.get(position);
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
+        holder.tvRequestType.setText(pendingRequestEntity.getRequestType());
         holder.pendingRequestCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,12 +69,13 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvAssetStatus,tvAssetRequestId;
+        TextView tvAssetStatus,tvAssetRequestId,tvRequestType;
         RelativeLayout layout;
         View pendingRequestCardView;
         public ViewHolder(View itemView) {
             super(itemView);
             pendingRequestCardView=itemView;
+            tvRequestType = (TextView)itemView.findViewById(R.id.tvRequestType);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);

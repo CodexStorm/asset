@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ninja.ultron.Fragments.FacilityAssetTransferFragment;
 import com.ninja.ultron.Fragments.ProfileAssetTransferFragment;
@@ -32,6 +33,8 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
     boolean showCheckbox=false;
     int type;
     List<CodeDecodeEntity> selectedAssetList = new ArrayList<>();
+
+
     public TransferListRecyclerAdapter(List<CodeDecodeEntity> assetList, Context context, int type) {
         this.assetsList=assetList;
         this.context = context;
@@ -59,10 +62,15 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(holder.checkBox.isChecked())
+                    if(holder.checkBox.isChecked()){
                         holder.checkBox.setChecked(false);
-                    else
+                        selectedAssetList.remove(asset);
+                    }
+                    else{
+                        selectedAssetList.add(asset);
                         holder.checkBox.setChecked(true);
+                    }
+
                 }
             });
         }
@@ -97,6 +105,10 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
 
     }
 
+    public List<CodeDecodeEntity> getSelectedAssetList()
+    {
+        return selectedAssetList;
+    }
 
 }
 

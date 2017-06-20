@@ -1,6 +1,8 @@
 package com.ninja.ultron.entity;
 
-public class CodeDecodeEntity {
+import java.io.Serializable;
+
+public class CodeDecodeEntity implements Serializable {
 
 
     private int Id;

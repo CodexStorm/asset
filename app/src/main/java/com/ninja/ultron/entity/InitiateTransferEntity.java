@@ -6,27 +6,37 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Prabhu Sivanandam on 22-May-17.
  */
 
 public class InitiateTransferEntity {
 
-    int assetIssueTypeId,assetId,requestedBy,approver, transferReasonId,code;
-    String dateOfRequest;
-    CommentEntity comment;
+    int userId;
+    List<Integer> assetList;
+    int assetIssueTypeId;
+    int assetSkuCategoryId;
+    String transferTo;
+    int facilityId;
+    int transferReasonId;
 
-    public InitiateTransferEntity(int assetIssueTypeId, int assetId, int requestedBy, int approver, String dateOfRequest, CommentEntity comment, int transferReasonId) {
-        this.assetIssueTypeId = assetIssueTypeId;
-        this.assetId = assetId;
-        this.requestedBy = requestedBy;
-        this.approver = approver;
-        this.dateOfRequest = dateOfRequest;
-        this.comment = comment;
-        this.transferReasonId = transferReasonId;
+    public int getUserId() {
+        return userId;
     }
 
-    public InitiateTransferEntity() {
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public List<Integer> getAssetList() {
+        return assetList;
+    }
+
+    public void setAssetList(List<Integer> assetList) {
+        this.assetList = assetList;
     }
 
     public int getAssetIssueTypeId() {
@@ -37,56 +47,28 @@ public class InitiateTransferEntity {
         this.assetIssueTypeId = assetIssueTypeId;
     }
 
-    public int getAssetId() {
-        return assetId;
+    public int getAssetSkuCategoryId() {
+        return assetSkuCategoryId;
     }
 
-    public void setAssetId(int assetId) {
-        this.assetId = assetId;
+    public void setAssetSkuCategoryId(int assetSkuCategoryId) {
+        this.assetSkuCategoryId = assetSkuCategoryId;
     }
 
-    public int getRequestedBy() {
-        return requestedBy;
+    public String getTransferTo() {
+        return transferTo;
     }
 
-    public void setRequestedBy(int requestedBy) {
-        this.requestedBy = requestedBy;
+    public void setTransferTo(String transferTo) {
+        this.transferTo = transferTo;
     }
 
-    public int getApprover() {
-        return approver;
+    public int getFacilityId() {
+        return facilityId;
     }
 
-    public void setApprover(int approver) {
-        this.approver = approver;
-    }
-
-    public String getDateOfRequest() {
-        return dateOfRequest;
-    }
-
-    public void setDateOfRequest(String dateOfRequest) {
-        this.dateOfRequest = dateOfRequest;
-    }
-
-    public CommentEntity getComment() {
-        return comment;
-    }
-
-    public void setComment(CommentEntity comment) {
-        this.comment = comment;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public interface UltronRestClientInterface {
-        void onInitialize(InitiateTransferEntity initiateTransferEntity, VolleyError error);
+    public void setFacilityId(int facilityId) {
+        this.facilityId = facilityId;
     }
 
     public int getTransferReasonId() {
@@ -95,6 +77,10 @@ public class InitiateTransferEntity {
 
     public void setTransferReasonId(int transferReasonId) {
         this.transferReasonId = transferReasonId;
+    }
+
+    public interface UltronRestClientInterface {
+        void onInitialize(InitiateTransferEntity initiateTransferEntity, VolleyError error);
     }
 
     public JSONObject getJsonObjectAsParams()

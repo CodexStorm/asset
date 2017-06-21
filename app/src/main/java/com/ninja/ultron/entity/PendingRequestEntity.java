@@ -9,6 +9,7 @@ public class PendingRequestEntity {
     String status;
     int requestId;
     String requestType;
+    int statusId;
 
     public PendingRequestEntity(String status, int requestId, String nomenclature, String categoryName) {
         this.status = status;
@@ -16,6 +17,16 @@ public class PendingRequestEntity {
         this.requestType = categoryName;
 
     }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+
     public String getRequestType() {
         return requestType;
     }

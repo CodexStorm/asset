@@ -45,6 +45,7 @@ public class FacilityAssetTransferFragment extends Fragment {
     RecyclerView recyclerView;
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     List<CodeDecodeEntity> selectedAssetList=new ArrayList<>();
+    List<Integer> selectedAssetId = new ArrayList<>();
     TransferListRecyclerAdapter adapter;
     RelativeLayout rlInitiateButton;
     Spinner spinnerTransferTo;
@@ -67,7 +68,7 @@ public class FacilityAssetTransferFragment extends Fragment {
         transferReasonsMiniEntity = new TransferReasonsMiniEntity();
         RequestReasonId =0;
         TransferToId = 0;
-        final String[] TransferTo = {"Select To","Admin","Reporting Manager"};
+        final String[] TransferTo = {"Select To","ADMIN","Reporting Manager"};
         final ArrayAdapter<String> transferToAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,TransferTo);
         spinnerTransferTo.setAdapter(transferToAdapter);
 
@@ -80,7 +81,7 @@ public class FacilityAssetTransferFragment extends Fragment {
                     {
                         final List<String> reasons = new ArrayList<String>();
                         reasons.add("Select Reason");
-                        List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();
+                        final List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();
                         for(int i = 0; i<transferReasonsEntities.size();i++)
                         {
                             reasons.add(transferReasonsEntities.get(i).getName());
@@ -91,7 +92,16 @@ public class FacilityAssetTransferFragment extends Fragment {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 RequestReasonText = parent.getItemAtPosition(position).toString();
-                                RequestReasonId = parent.getSelectedItemPosition();
+                                int pos =0;
+                                for(int i = 0; i<transferReasonsEntities.size(); i++)
+                                {
+                                    if(RequestReasonText == transferReasonsEntities.get(i).getName())
+                                    {
+                                        pos = i;
+                                        break;
+                                    }
+                                }
+                                RequestReasonId = transferReasonsEntities.get(pos).getId();
                             }
 
                             @Override
@@ -143,9 +153,12 @@ public class FacilityAssetTransferFragment extends Fragment {
 
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
                     selectedAssetList = adapter.getSelectedAssetList();
-                    assetTransferSummary.putExtra("category", 2);
+                    selectedAssetId = adapter.getSelectedAssetId();
+                    assetTransferSummary.putExtra("RequestReasonId",RequestReasonId);
+                    assetTransferSummary.putExtra("category", Constants.FACILIIY_ASSET_TYPE);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
                     assetTransferSummary.putExtra("TransferTo",TransferToText);
+                    assetTransferSummary.putExtra("SelectedAssetId",(Serializable)selectedAssetId);
                     assetTransferSummary.putExtra("TransferAssetList",(Serializable)selectedAssetList);
                     startActivity(assetTransferSummary);
                 }

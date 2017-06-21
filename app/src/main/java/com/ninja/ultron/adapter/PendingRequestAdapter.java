@@ -72,6 +72,7 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         TextView tvAssetStatus,tvAssetRequestId,tvAssetCategory;
         RelativeLayout layout;
         View pendingRequestCardView;
+        int statusId;
         public ViewHolder(View itemView) {
             super(itemView);
             pendingRequestCardView=itemView;

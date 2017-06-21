@@ -33,6 +33,7 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
     boolean showCheckbox=false;
     int type;
     List<CodeDecodeEntity> selectedAssetList = new ArrayList<>();
+    List<Integer> selectedAssetId = new ArrayList<>();
 
 
     public TransferListRecyclerAdapter(List<CodeDecodeEntity> assetList, Context context, int type) {
@@ -65,9 +66,11 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
                     if(holder.checkBox.isChecked()){
                         holder.checkBox.setChecked(false);
                         selectedAssetList.remove(asset);
+                        selectedAssetId.remove(asset.getId());
                     }
                     else{
                         selectedAssetList.add(asset);
+                        selectedAssetId.add(asset.getId());
                         holder.checkBox.setChecked(true);
                     }
 
@@ -108,6 +111,11 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
     public List<CodeDecodeEntity> getSelectedAssetList()
     {
         return selectedAssetList;
+    }
+
+    public  List<Integer> getSelectedAssetId()
+    {
+        return selectedAssetId;
     }
 
 }

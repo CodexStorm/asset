@@ -30,6 +30,8 @@ import com.ninja.ultron.adapter.TransferListRecyclerAdapter;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
+import com.ninja.ultron.entity.TransferReasonsEntity;
+import com.ninja.ultron.entity.TransferReasonsMiniEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
@@ -43,12 +45,13 @@ public class ProfileAssetTransferFragment extends Fragment {
     RecyclerView recyclerView;
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
     List<CodeDecodeEntity> selectedAssetList=new ArrayList<>();
+    List<Integer> selectedAssetId = new ArrayList<>();
     TransferListRecyclerAdapter adapter;
     RelativeLayout rlInitiateButton;
     Spinner spinnerRequestReason;
     String RequestReasonText;
     int RequestReasonId;
-
+    TransferReasonsMiniEntity transferReasonsMiniEntity;
 
     @Nullable
     @Override
@@ -59,22 +62,59 @@ public class ProfileAssetTransferFragment extends Fragment {
         rlInitiateButton = (RelativeLayout)v.findViewById(R.id.rlInitiateButton);
         spinnerRequestReason = (Spinner)v.findViewById(R.id.spinnerRequestReason);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
-        final String[] RequestReason = {"Select Reason","Changing Department"};
-        final ArrayAdapter<String> requestReasonAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,RequestReason);
-        spinnerRequestReason.setAdapter(requestReasonAdapter);
-
-        spinnerRequestReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        transferReasonsMiniEntity = new TransferReasonsMiniEntity();
+        RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity, new TransferReasonsMiniEntity.UltronRestClientInterface() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                RequestReasonText = parent.getItemAtPosition(position).toString();
-                RequestReasonId = parent.getSelectedItemPosition();
-            }
+            public void onInitialize(TransferReasonsMiniEntity transferReasonsMiniEntity, VolleyError error) {
+                if(error==null)
+                {
+                    if(transferReasonsMiniEntity.getReponse()!=null)
+                    {
+                        final List<String> reasons = new ArrayList<String>();
+                        reasons.add("Select Reason");
+                        final List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();
+                        for(int i = 0; i<transferReasonsEntities.size();i++)
+                        {
+                            reasons.add(transferReasonsEntities.get(i).getName());
+                        }
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,reasons);
+                        spinnerRequestReason.setAdapter(dataAdapter);
+                        spinnerRequestReason.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                RequestReasonText = parent.getItemAtPosition(position).toString();
+                                int pos =0;
+                                for(int i = 0; i<transferReasonsEntities.size(); i++)
+                                {
+                                    if(RequestReasonText == transferReasonsEntities.get(i).getName())
+                                    {
+                                        pos = i;
+                                        break;
+                                    }
+                                }
+                                RequestReasonId = transferReasonsEntities.get(pos).getId();
+                            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
 
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Log.d("Tag","error in response");
+                    }
+                }
+                else
+                {
+                    if(transferReasonsMiniEntity.getStatusCode()==401)
+                    {
+                        CommonFunctions.toastString("Unauthorized",getContext());
+                    }
+                }
             }
-        });
+        },getContext());
 
         recyclerView.setLayoutManager(manager);
         callMyAssetListApi();
@@ -89,9 +129,12 @@ public class ProfileAssetTransferFragment extends Fragment {
                 else {
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
                     selectedAssetList = adapter.getSelectedAssetList();
-                    assetTransferSummary.putExtra("category", 1);
+                    selectedAssetId = adapter.getSelectedAssetId();
+                    assetTransferSummary.putExtra("RequestReasonId",RequestReasonId);
+                    assetTransferSummary.putExtra("category",Constants.PROFILE_ASSET_TYPE);
+                    assetTransferSummary.putExtra("SelectedAssetId",(Serializable)selectedAssetId);
                     assetTransferSummary.putExtra("RequestReason",RequestReasonText);
-                    assetTransferSummary.putExtra("TransferTo","Admin");
+                    assetTransferSummary.putExtra("TransferTo","ADMIN");
                     assetTransferSummary.putExtra("TransferAssetList",(Serializable)selectedAssetList);
                     startActivity(assetTransferSummary);
                 }

@@ -57,7 +57,9 @@
         <activity android:name=".activity.RequestNewAssetActivity" />
         <activity android:name=".activity.NewAssetSummaryActivity" />
         <activity android:name=".activity.InitiateAssetTransferActivity" />
-        <activity android:name=".activity.InitiateTransferSummaryActivity"></activity>
+        <activity android:name=".activity.InitiateTransferSummaryActivity" />
+        <activity android:name=".activity.NewAssetRequeestDetailsActivity" />
+        <activity android:name=".activity.TransferAssetRequestDetailsActivity"></activity>
     </application>
 
 </manifest>

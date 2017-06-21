@@ -340,40 +340,22 @@ public class RestClientImplementation {
         queue.add(getRequest);
     }
 
-    public static void initiateTransferApi(final InitiateTransferEntity initiateTransferEntity, final InitiateTransferEntity.UltronRestClientInterface ultronRestClientInterface,final Context context)
-    {
-        final Gson gson=new Gson();
+    public static void initiateTranferApi(final InitiateTransferEntity initiateTransferEntity, final InitiateTransferEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){
+        final Gson gson = new Gson();
         queue=VolleySingleton.getInstance(context).getRequestQueue();
-        JSONObject initiateTransferJson=initiateTransferEntity.getJsonObjectAsParams();
-        Log.d("json",initiateTransferJson.toString());
-        JsonBaseRequest postRequest=new JsonBaseRequest(Request.Method.POST, Constants.INITIATE_TRANSFER_URL, initiateTransferJson, new Response.Listener<JSONObject>() {
+        JSONObject initiateTransferJson = initiateTransferEntity.getJsonObjectAsParams();
+        Log.d("JsonCheck",initiateTransferJson.toString());
+        JsonBaseRequest postRequest = new JsonBaseRequest(Request.Method.POST, Constants.INITIATE_TRANSFER_URL, initiateTransferJson, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                try {
-                    Log.d("gc",response.toString());
-                    int code=response.getInt("statusCode");
-                    initiateTransferEntity.setCode(code);
-                    ultronRestClientInterface.onInitialize(initiateTransferEntity,null);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                ultronRestClientInterface.onInitialize(initiateTransferEntity, null);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                    initiateTransferEntity.setCode(401);
-                    Log.d("cf",error.toString());
-                    ultronRestClientInterface.onInitialize(initiateTransferEntity,new VolleyError());
+                ultronRestClientInterface.onInitialize(initiateTransferEntity,new VolleyError());
             }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> params=new HashMap<String,String>();
-                params.put("sessionid",UserDetails.getSessionId(context));
-                params.put("accesstoken",UserDetails.getSessionToken(context));
-                return params;
-            }
-        };
+        });
         queue.add(postRequest);
     }
 

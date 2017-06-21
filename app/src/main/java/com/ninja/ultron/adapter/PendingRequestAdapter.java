@@ -1,6 +1,8 @@
 package com.ninja.ultron.adapter;
 
+import android.icu.text.LocaleDisplayNames;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +24,14 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     List<PendingRequestEntity> pendingRequestEntityArrayList=new ArrayList<>();
 
+
+
+    int requestTypeId;
     private mCallback callback;
+
     public interface mCallback
     {
-        public void callDetailsFragment();
+        public void callAssetDetailsFragment();
     }
 
     public PendingRequestAdapter(List<PendingRequestEntity> pendingRequestEntityArrayList,mCallback callback)
@@ -47,18 +53,29 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
         final PendingRequestEntity pendingRequestEntity=pendingRequestEntityArrayList.get(position);
         holder.tvAssetStatus.setText(pendingRequestEntity.getStatus());
         holder.tvAssetRequestId.setText(pendingRequestEntity.getRequestId()+"");
-        holder.tvAssetCategory.setText(pendingRequestEntity.getRequestType());
+        holder.tvRequestType.setText(pendingRequestEntity.getRequestType());
+        holder.statusId = pendingRequestEntity.getStatusId();
         holder.pendingRequestCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlterPendingRequestDetailsURL(""+pendingRequestEntity.getRequestId());
-                callback.callDetailsFragment();
+                requestTypeId = 0;
+                Log.d("RequestType",pendingRequestEntity.getRequestType());
+                if(pendingRequestEntity.getRequestType().equals("NEW ASSET")) {
+                    requestTypeId = 2;
+                }
+                else if(pendingRequestEntity.getRequestType().equals("TRANSFER")){
+                    requestTypeId = 1;
+                }
+                else
+                    requestTypeId =3;
+                AlterPendingRequestDetailsURL(pendingRequestEntity.getRequestId(),requestTypeId);
+                callback.callAssetDetailsFragment();
             }
         });
     }
 
-    private void AlterPendingRequestDetailsURL(String s) {
-        Constants.PENDING_REQUESTS_DETAILS_URL=Constants.PENDING_REQUESTS_DETAILS_MODEL_URL+s;
+    private void AlterPendingRequestDetailsURL(int RequestId, int RequestTypeId) {
+        Constants.PENDING_REQUESTS_DETAILS_URL=Constants.PENDING_REQUESTS_DETAILS_MODEL_URL+RequestId+"&requestTypeId="+RequestTypeId;
     }
 
     @Override
@@ -69,18 +86,20 @@ public class PendingRequestAdapter extends RecyclerView.Adapter<PendingRequestAd
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvAssetStatus,tvAssetRequestId,tvAssetCategory;
+        TextView tvAssetStatus,tvAssetRequestId, tvRequestType;
         RelativeLayout layout;
         View pendingRequestCardView;
         int statusId;
         public ViewHolder(View itemView) {
             super(itemView);
             pendingRequestCardView=itemView;
-            tvAssetCategory = (TextView)itemView.findViewById(R.id.tvRequestType);
+            tvRequestType = (TextView)itemView.findViewById(R.id.tvRequestType);
             tvAssetStatus=(TextView)itemView.findViewById(R.id.tvAssetStatus);
             tvAssetRequestId=(TextView)itemView.findViewById(R.id.tvAssetRequestId);
             layout=(RelativeLayout)itemView.findViewById(R.id.layout);
         }
     }
-
+    public int getRequestId() {
+        return requestTypeId;
+    }
 }

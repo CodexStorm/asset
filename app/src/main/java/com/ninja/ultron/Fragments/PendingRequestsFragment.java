@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.ninja.ultron.R;
+import com.ninja.ultron.activity.NewAssetRequeestDetailsActivity;
 import com.ninja.ultron.activity.PendingRequestDetailsActivity;
+import com.ninja.ultron.activity.TransferAssetRequestDetailsActivity;
 import com.ninja.ultron.adapter.PendingRequestAdapter;
 import com.ninja.ultron.entity.PendingRequestEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
@@ -61,11 +63,17 @@ public class PendingRequestsFragment extends Fragment {
                         adapter=new PendingRequestAdapter(pendingRequestEntities,new PendingRequestAdapter.mCallback()
                         {
                             @Override
-                            public void callDetailsFragment() {
-                                //PendingRequestDetailsFragment pendingRequestDetailsFragment=new PendingRequestDetailsFragment();
-                                // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.rlPendingRequestList,pendingRequestDetailsFragment).addToBackStack(null).commit();
-                                Intent intent=new Intent(getActivity(), PendingRequestDetailsActivity.class);
-                                startActivity(intent);
+                            public void callAssetDetailsFragment() {
+                                int requestid = adapter.getRequestId();
+                                if(requestid==1) {
+                                    Intent Tintent = new Intent(getActivity(), TransferAssetRequestDetailsActivity.class);
+                                    startActivity(Tintent);
+                                }
+                                else{
+                                    Intent Nintent = new Intent(getActivity(), NewAssetRequeestDetailsActivity.class);
+                                    startActivity(Nintent);
+                                }
+
                             }
                         });
                         recyclerView.setAdapter(adapter);

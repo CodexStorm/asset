@@ -52,7 +52,7 @@ public class Constants {
     public static String PROFILE_ASSET_LIST = "&categoryId=3001";
     public static String FACILITY_ASSET_LIST = "&categoryId=3002";
     public static final String PENDING_REQUESTS_URL="http://10.0.0.23:1111/api/web/request/pending?userId=";
-    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request/?assetRequestId=";
+    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://10.0.0.23:1111/api/web/request/?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
 
     public static final String INITIATE_TRANSFER_URL="http://10.0.0.23:1111/api/web/request/transfer";

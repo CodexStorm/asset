@@ -23,6 +23,7 @@ public class SkuAssetDetailsAdapter extends RecyclerView.Adapter<SkuAssetDetails
     List<SkuAssetDetailsEntity> assetList;
     SkuAssetDetailsEntity asset;
     Context context;
+    String details[] = new String[3];
 
     public SkuAssetDetailsAdapter(Context context,List<SkuAssetDetailsEntity> assetList){
         this.assetList = assetList;

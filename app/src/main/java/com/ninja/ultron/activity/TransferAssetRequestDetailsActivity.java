@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -33,6 +37,12 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     TextView tvRequestType;
     RecyclerView rvTransferAssets;
     SkuAssetDetailsAdapter adapter;
+    LinearLayout bBeforeRmApproval;
+    LinearLayout bAfterAdminApproval;
+    Button bEdit;
+    Button bDelete;
+    Button bAccept;
+    Button bReject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +52,12 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
         tvStatus = (TextView)findViewById(R.id.tvStatus);
         tvRequestType = (TextView)findViewById(R.id.tvRequestType);
         rvTransferAssets = (RecyclerView)findViewById(R.id.rvTransferAssets);
+        bBeforeRmApproval = (LinearLayout)findViewById(R.id.bBeforeRmApproval);
+        bAfterAdminApproval = (LinearLayout)findViewById(R.id.bAfterAdminApproval);
+        bEdit = (Button)findViewById(R.id.bEdit);
+        bDelete = (Button)findViewById(R.id.bDelete);
+        bAccept = (Button)findViewById(R.id.bAccept);
+        bReject = (Button)findViewById(R.id.bReject);
         transferDetailsAssetListEntities = new ArrayList<>();
         skuAssetDetails = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(TransferAssetRequestDetailsActivity.this);
@@ -78,6 +94,11 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                             rvTransferAssets.setAdapter(adapter);
                             rvTransferAssets.hasFixedSize();
                             adapter.notifyDataSetChanged();
+                            if(entity.getStatus().equals("WAITING FOR USER RECEIVAL"))
+                                bAfterAdminApproval.setVisibility(View.VISIBLE);
+                            else if(entity.getStatus().equals("WAITING FOR RM APPROVAL"))
+                                bBeforeRmApproval.setVisibility(View.VISIBLE);
+
                         }
                     }
                     else{

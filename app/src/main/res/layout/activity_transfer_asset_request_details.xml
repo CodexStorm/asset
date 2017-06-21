@@ -148,6 +148,59 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/bBeforeRmApproval"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1"
+        android:visibility="gone"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Edit"
+            android:id="@+id/bEdit"
+            android:textColor="#ffffff"
+            android:background="@color/actionbarcolor"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Delete"
+            android:id="@+id/bDelete"
+            android:textColor="#ffffff"
+            android:background="#ff0000"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/bAfterAdminApproval"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1"
+        android:visibility="gone"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Receive"
+            android:id="@+id/bAccept"
+            android:textColor="#ffffff"
+            android:background="@color/actionbarcolor"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Reject"
+            android:id="@+id/bReject"
+            android:textColor="#ffffff"
+            android:background="#ff0000"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
 

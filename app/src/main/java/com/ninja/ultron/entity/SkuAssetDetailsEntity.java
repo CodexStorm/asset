@@ -24,15 +24,7 @@ public class SkuAssetDetailsEntity {
     }
 
     public List<String> getList() {
-        //Log.d("size",list.size()+"");
-        for(int i = 0 ; i<list.size() ; i++)
-        {
-            details = new String[list.get(i).split("\\@").length];
-            details = list.get(i).split("\\@");
-            Log.d("Details",details[0]+"   "+details[1]);
-            modifiedList.add(i,details[0]+"        "+details[1]);
-        }
-        return modifiedList;
+        return list;
     }
 
     public void setList(List<String> list) {

@@ -12,11 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.SkuAssetDetailsAdapter;
+import com.ninja.ultron.adapter.TransferAssetDetailsAdapter;
 import com.ninja.ultron.entity.EntityGroup;
 import com.ninja.ultron.entity.SkuAssetDetailsEntity;
 import com.ninja.ultron.entity.TranferDetailsAssetListMiniEntity;
+import com.ninja.ultron.entity.TransferAssetTypeDetailsEntity;
 import com.ninja.ultron.entity.TransferDetailsAssetListEntity;
 import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.restclient.RestClientImplementation;
@@ -30,13 +33,18 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     List<TransferDetailsAssetListEntity> transferDetailsAssetListEntities;
     TransferDetailsAssetListEntity entity;
     List<SkuAssetDetailsEntity> skuAssetDetails;
+    List<TransferAssetTypeDetailsEntity> transferAssetTypeDetailsEntities;
+    String nomenclature;
+    String AssetMake;
+    String AssetType;
+    String details[];
 
     TextView tvRequestId;
     TextView tvCategoryName;
     TextView tvStatus;
     TextView tvRequestType;
     RecyclerView rvTransferAssets;
-    SkuAssetDetailsAdapter adapter;
+    TransferAssetDetailsAdapter adapter;
     LinearLayout bBeforeRmApproval;
     LinearLayout bAfterAdminApproval;
     Button bEdit;
@@ -58,6 +66,7 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
         bDelete = (Button)findViewById(R.id.bDelete);
         bAccept = (Button)findViewById(R.id.bAccept);
         bReject = (Button)findViewById(R.id.bReject);
+        transferAssetTypeDetailsEntities = new ArrayList<>();
         transferDetailsAssetListEntities = new ArrayList<>();
         skuAssetDetails = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(TransferAssetRequestDetailsActivity.this);
@@ -90,7 +99,22 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            adapter = new SkuAssetDetailsAdapter(TransferAssetRequestDetailsActivity.this,skuAssetDetails);
+
+                            for(int i =0 ; i<skuAssetDetails.size();i++)
+                            {
+                                AssetType = skuAssetDetails.get(i).getSkuName();
+                                int size = skuAssetDetails.get(i).getList().size();
+                                for(int j = 0 ; j<size ; j++){
+                                    nomenclature = skuAssetDetails.get(i).getList().get(j);
+                                    details = new String[nomenclature.split("@").length];
+                                    details = nomenclature.split("@");
+                                    nomenclature = details[0];
+                                    Log.d("NOME",nomenclature);
+                                    TransferAssetTypeDetailsEntity object = new TransferAssetTypeDetailsEntity(AssetType,nomenclature);
+                                    transferAssetTypeDetailsEntities.add(object);
+                                }
+                            }
+                            adapter = new TransferAssetDetailsAdapter(transferAssetTypeDetailsEntities);
                             rvTransferAssets.setAdapter(adapter);
                             rvTransferAssets.hasFixedSize();
                             adapter.notifyDataSetChanged();

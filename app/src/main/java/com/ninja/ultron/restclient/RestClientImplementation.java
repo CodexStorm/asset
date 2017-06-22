@@ -203,7 +203,6 @@ public class RestClientImplementation {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         String userId= String.valueOf(UserDetails.getAsgardUserId(context));
         Log.d("UserId",userId);
-
         JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_LIST_URL+userId+category, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -211,6 +210,7 @@ public class RestClientImplementation {
                     Log.d("RESPONSE CHECK",response.toString());
                     Gson gson = new Gson();
                     AssetMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetMiniEntity.class);
+                    Log.d("StatusCode",successAssetMiniEntity.getStatusCode()+"");
                     assetMiniEntity.setStatusCode(successAssetMiniEntity.getStatusCode());
                     assetMiniEntity.setResponse(successAssetMiniEntity.getResponse());
                     assetMiniEntity.setMessage(successAssetMiniEntity.getMessage());

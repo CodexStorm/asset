@@ -1,5 +1,10 @@
 package com.ninja.ultron.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,29 +56,135 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     Button bDelete;
     Button bAccept;
     Button bReject;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog alertDialog = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer_asset_request_details);
-        tvRequestId = (TextView)findViewById(R.id.tvRequestId);
-        tvCategoryName = (TextView)findViewById(R.id.tvCategoryName);
-        tvStatus = (TextView)findViewById(R.id.tvStatus);
-        tvRequestType = (TextView)findViewById(R.id.tvRequestType);
-        rvTransferAssets = (RecyclerView)findViewById(R.id.rvTransferAssets);
-        bBeforeRmApproval = (LinearLayout)findViewById(R.id.bBeforeRmApproval);
-        bAfterAdminApproval = (LinearLayout)findViewById(R.id.bAfterAdminApproval);
-        bEdit = (Button)findViewById(R.id.bEdit);
-        bDelete = (Button)findViewById(R.id.bDelete);
-        bAccept = (Button)findViewById(R.id.bAccept);
-        bReject = (Button)findViewById(R.id.bReject);
+        tvRequestId = (TextView) findViewById(R.id.tvRequestId);
+        tvCategoryName = (TextView) findViewById(R.id.tvCategoryName);
+        tvStatus = (TextView) findViewById(R.id.tvStatus);
+        tvRequestType = (TextView) findViewById(R.id.tvRequestType);
+        rvTransferAssets = (RecyclerView) findViewById(R.id.rvTransferAssets);
+        bBeforeRmApproval = (LinearLayout) findViewById(R.id.bBeforeRmApproval);
+        bAfterAdminApproval = (LinearLayout) findViewById(R.id.bAfterAdminApproval);
+        bEdit = (Button) findViewById(R.id.bEdit);
+        bDelete = (Button) findViewById(R.id.bDelete);
+        bAccept = (Button) findViewById(R.id.bAccept);
+        bReject = (Button) findViewById(R.id.bReject);
         transferAssetTypeDetailsEntities = new ArrayList<>();
         transferDetailsAssetListEntities = new ArrayList<>();
         skuAssetDetails = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(TransferAssetRequestDetailsActivity.this);
         rvTransferAssets.setLayoutManager(manager);
+        alertDialogBuilder = new AlertDialog.Builder(TransferAssetRequestDetailsActivity.this, R.style.AlertDialogBackground);
+        final Intent intent = new Intent(TransferAssetRequestDetailsActivity.this, AssetActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         callGetDetailsApi();
 
+        bAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to accept the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });
+
+        bReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to reject the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });
+
+        /*bEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to accept the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });*/
+
+        bDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to Delete  the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+
+        });
     }
+
 
     private void callGetDetailsApi() {
         entity = new TransferDetailsAssetListEntity();

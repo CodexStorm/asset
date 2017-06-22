@@ -1,5 +1,10 @@
 package com.ninja.ultron.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,6 +44,8 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
     Button bDelete;
     Button bAccept;
     Button bReject;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog alertDialog = null;
 
 
 
@@ -61,7 +68,110 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
         assetDetails = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(NewAssetRequeestDetailsActivity.this);
         rvNewAssets.setLayoutManager(manager);
+        alertDialogBuilder = new AlertDialog.Builder(NewAssetRequeestDetailsActivity.this, R.style.AlertDialogBackground);
+        final Intent intent = new Intent(NewAssetRequeestDetailsActivity.this, AssetActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         callNewAssetRequestDetailsApi();
+
+        bAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to accept the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });
+
+        bReject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to reject the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });
+
+        /*bEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to accept the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });*/
+
+        bDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuilder
+                        .setMessage("Are you sure do you want to Delete  the selected assets ")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        startActivity(intent);
+                                        alertDialog.dismiss();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        alertDialog.dismiss();
+                                    }
+                                });
+                alertDialog = alertDialogBuilder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                alertDialog.show();
+            }
+        });
 
     }
 

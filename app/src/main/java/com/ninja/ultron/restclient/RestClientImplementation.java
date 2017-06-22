@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.internal.Streams;
 import com.google.gson.reflect.TypeToken;
+import com.ninja.ultron.activity.PendingRequestDetailsActivity;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AsgardCodeMessageEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
@@ -30,6 +31,7 @@ import com.ninja.ultron.entity.LabourShiftDetailEntity;
 import com.ninja.ultron.entity.LabourTimeEntity;
 import com.ninja.ultron.entity.LoginEntity;
 import com.ninja.ultron.entity.NewAssetInitateRequestEntity;
+import com.ninja.ultron.entity.NewAssetMiniEntityGroup;
 import com.ninja.ultron.entity.PendingRequestDetailsMiniEntity;
 import com.ninja.ultron.entity.PendingRequestMiniEntity;
 import com.ninja.ultron.entity.PostBulkLaboursAttendanceAPIEntity;
@@ -287,6 +289,58 @@ public class RestClientImplementation {
             }
         };
         queue.add(getRequest);
+    }
+
+    public static void getNewAssetDetailsApi(final NewAssetMiniEntityGroup newAssetMiniEntityGroup,final NewAssetMiniEntityGroup.UltronRestClientInterface ultronRestClientInterface,final Context context)
+    {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        Log.d("URL",Constants.PENDING_REQUESTS_DETAILS_URL);
+        final JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.PENDING_REQUESTS_DETAILS_URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d("RESPONSECHECK",response.toString());
+                    Gson gson = new Gson();
+                    NewAssetMiniEntityGroup successEntity = gson.fromJson(response.toString(), NewAssetMiniEntityGroup.class);
+                    Log.d("String",successEntity+"");
+                    newAssetMiniEntityGroup.setStatusCode(successEntity.getStatusCode());
+                    newAssetMiniEntityGroup.setMessage(successEntity.getMessage());
+                    newAssetMiniEntityGroup.setResponse(successEntity.getResponse());
+                    ultronRestClientInterface.onInitialize(newAssetMiniEntityGroup, null);
+
+                } catch (Exception e) {
+                    newAssetMiniEntityGroup.setStatusCode(500);
+                    newAssetMiniEntityGroup.setMessage("Cast Exxception");
+                    ultronRestClientInterface.onInitialize(newAssetMiniEntityGroup, new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error.networkResponse!=null && error.networkResponse.data!=null)
+                {
+                    Gson gson = new Gson();
+                    NewAssetMiniEntityGroup failureEntity = gson.fromJson(new String(error.networkResponse.data),NewAssetMiniEntityGroup.class);
+                    if (failureEntity.getMessage()!=null)
+                    {
+                        newAssetMiniEntityGroup.setMessage(failureEntity.getMessage());
+                        newAssetMiniEntityGroup.setStatusCode(failureEntity.getStatusCode());
+                        ultronRestClientInterface.onInitialize(newAssetMiniEntityGroup,new VolleyError());
+                    }
+                }
+            }
+        },3000,0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
+        queue.add(getRequest);
+
+
     }
 
     public static void getPendingTransferDetailsApi(final TranferDetailsAssetListMiniEntity tranferDetailsAssetListMiniEntity, final TranferDetailsAssetListMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){

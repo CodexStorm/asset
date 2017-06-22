@@ -13,7 +13,7 @@ public class SkuAssetDetailsEntity {
     String skuName;
     List<String> list;
     List<String> modifiedList = new ArrayList<>();
-    String details[] = new String[3];
+    String details[];
 
     public String getSkuName() {
         return skuName;
@@ -24,12 +24,13 @@ public class SkuAssetDetailsEntity {
     }
 
     public List<String> getList() {
-
+        //Log.d("size",list.size()+"");
         for(int i = 0 ; i<list.size() ; i++)
         {
+            details = new String[list.get(i).split("\\@").length];
             details = list.get(i).split("\\@");
-            Log.d("Details",details[0]+"   "+details[1]+"  "+details[2]);
-            modifiedList.add(i,details[0]+"        "+details[1]+"  "+details[2]);
+            Log.d("Details",details[0]+"   "+details[1]);
+            modifiedList.add(i,details[0]+"        "+details[1]);
         }
         return modifiedList;
     }

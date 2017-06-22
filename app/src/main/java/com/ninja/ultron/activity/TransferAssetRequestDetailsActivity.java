@@ -94,10 +94,10 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                             rvTransferAssets.setAdapter(adapter);
                             rvTransferAssets.hasFixedSize();
                             adapter.notifyDataSetChanged();
-                            if(entity.getStatus().equals("WAITING FOR USER RECEIVAL"))
+                            /*if(entity.getStatus().equals("WAITING FOR USER RECEIVAL"))
                                 bAfterAdminApproval.setVisibility(View.VISIBLE);
                             else if(entity.getStatus().equals("WAITING FOR RM APPROVAL"))
-                                bBeforeRmApproval.setVisibility(View.VISIBLE);
+                                bBeforeRmApproval.setVisibility(View.VISIBLE);*/
 
                         }
                     }

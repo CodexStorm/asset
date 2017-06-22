@@ -22,6 +22,7 @@ public class NewAssetAdapter extends RecyclerView.Adapter<NewAssetAdapter.ViewHo
 
     Activity activity;
     List<NewAssetEntity> assetList = new ArrayList<>();
+    boolean showCheckbox=false;
 
     public NewAssetAdapter(Activity activity, List<NewAssetEntity> assetList) {
         this.activity = activity;
@@ -37,7 +38,7 @@ public class NewAssetAdapter extends RecyclerView.Adapter<NewAssetAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final NewAssetEntity asset = assetList.get(position);
         holder.tvQuantity.setText(asset.getQuantity()+"");
         holder.tvAssetType.setText(asset.getAssetType());
@@ -45,7 +46,7 @@ public class NewAssetAdapter extends RecyclerView.Adapter<NewAssetAdapter.ViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((RequestNewAssetActivity)activity).deleteSelectedAsset(position);
+                ((RequestNewAssetActivity)activity).deleteSelectedAsset(position,asset.getQuantity(),asset.getAssetType());
             }
         });
 

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,7 +58,9 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     List<Integer> assetTypeIdList;
     List<String> assetTypeNameList;
     List<String> assetTypes;
+    List<AssetTypeEntity> assetTypeEntities;
     int Quantity;
+    LayoutInflater inflater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +133,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                     if(assetTypeMiniEntity.getResponse()!=null)
                     {
                         assetTypes = new ArrayList<String>();
-                        final List<AssetTypeEntity> assetTypeEntities = assetTypeMiniEntity.getResponse();
+                        assetTypeEntities = assetTypeMiniEntity.getResponse();
 
                         for(int i =0; i<assetTypeEntities.size();i++)
                         {
@@ -267,29 +270,74 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     }
 
 
-    public void deleteSelectedAsset(final int position){
-        String assetType = newAssetEntityArrayList.get(position).getAssetType();
-        alertDialogBuilder = new AlertDialog.Builder(RequestNewAssetActivity.this, R.style.AlertDialogBackground);
-        alertDialogBuilder
-                .setMessage("Do you want to delete this (" + assetType +") ? ")
+    public void deleteSelectedAsset(final int position, final int num, final String AssetType){
+        final String assetType = newAssetEntityArrayList.get(position).getAssetType();
+        alertDialogBuilder = new AlertDialog.Builder(RequestNewAssetActivity.this);
+        LayoutInflater inflater = RequestNewAssetActivity.this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.quanity_change_alert_dialogue,null,false);
+        final TextView tvNum = (TextView)v.findViewById(R.id.tvQ);
+        final int[] q = {num};
+        tvNum.setText(q[0] +"");
+        ImageView ivPlus = (ImageView)v.findViewById(R.id.ivPlus);
+        ImageView ivMinus = (ImageView)v.findViewById(R.id.ivMinus);
+        alertDialogBuilder.setView(v)
                 .setCancelable(true)
-                .setPositiveButton("Yes",
+                .setPositiveButton("Delete",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                for(int i = 0 ; i<assetTypeEntities.size();i++)
+                                {
+                                    if (AssetType.equals(assetTypeEntities.get(i).getName())){
+                                        assetTypeIdList.remove(assetTypeIdList.indexOf(assetTypeEntities.get(i).getId()));
+                                        break;
+                                    }
+                                }
                                 newAssetEntityArrayList.remove(newAssetEntityArrayList.get(position));
                                 newAssetAdapter.notifyDataSetChanged();
                                 alertDialog.dismiss();
                             }
                         })
-                .setNegativeButton("No",
+                .setNegativeButton("Edit",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                if(q[0] == 0){
+                                    for(int i = 0 ; i<assetTypeEntities.size();i++)
+                                    {
+                                        if (AssetType.equals(assetTypeEntities.get(i).getName())){
+                                            assetTypeIdList.remove(assetTypeIdList.indexOf(assetTypeEntities.get(i).getId()));
+                                            break;
+                                        }
+                                    }
+                                    newAssetEntityArrayList.remove(newAssetEntityArrayList.get(position));
+                                }
+                                else {
+                                    newAssetEntityArrayList.get(position).setQuantity(q[0]);
+                                }
+                                newAssetAdapter.notifyDataSetChanged();
                                 alertDialog.dismiss();
                             }
                         });
         alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
         alertDialog.show();
+
+        ivPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                q[0]++;
+                tvNum.setText(q[0] +"");
+            }
+        });
+
+        ivMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(q[0]>0){
+                    q[0]--;
+                    tvNum.setText(q[0] +"");
+                }
+            }
+        });
     }
 
 

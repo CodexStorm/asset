@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -30,6 +33,12 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
     TextView tvRequestType;
     RecyclerView rvNewAssets;
     AssetDetailsAdapter adapter;
+    LinearLayout bBeforeRmApproval;
+    LinearLayout bAfterAdminApproval;
+    Button bEdit;
+    Button bDelete;
+    Button bAccept;
+    Button bReject;
 
 
 
@@ -43,6 +52,12 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
         tvStatus = (TextView)findViewById(R.id.tvStatus);
         tvRequestType = (TextView)findViewById(R.id.tvRequestType);
         rvNewAssets = (RecyclerView)findViewById(R.id.rvNewAssets);
+        bBeforeRmApproval = (LinearLayout)findViewById(R.id.bBeforeRmApproval);
+        bAfterAdminApproval = (LinearLayout)findViewById(R.id.bAfterAdminApproval);
+        bEdit = (Button)findViewById(R.id.bEdit);
+        bDelete = (Button)findViewById(R.id.bDelete);
+        bAccept = (Button)findViewById(R.id.bAccept);
+        bReject = (Button)findViewById(R.id.bReject);
         assetDetails = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(NewAssetRequeestDetailsActivity.this);
         rvNewAssets.setLayoutManager(manager);
@@ -77,6 +92,10 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                             rvNewAssets.setAdapter(adapter);
                             rvNewAssets.hasFixedSize();
                             adapter.notifyDataSetChanged();
+                            if(entity.getRequestDetails().getStatus().equals("WAITING FOR USER RECEIVAL"))
+                                bAfterAdminApproval.setVisibility(View.VISIBLE);
+                            else if(entity.getRequestDetails().getStatus().equals("WAITING FOR RM APPROVAL"))
+                                bBeforeRmApproval.setVisibility(View.VISIBLE);
                         }
                     }
                 }

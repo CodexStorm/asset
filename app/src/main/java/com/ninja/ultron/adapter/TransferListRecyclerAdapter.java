@@ -58,24 +58,27 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
         holder.nomenclature.setText(asset.getNomenclature());
         holder.AssetId.setText(asset.getId()+"");
         holder.AssetMake.setText(asset.getAssetMake());
-        if (showCheckbox == true) {
-            holder.checkBox.setVisibility(View.VISIBLE);
-            holder.cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(holder.checkBox.isChecked()){
-                        holder.checkBox.setChecked(false);
-                        selectedAssetList.remove(asset);
-                        selectedAssetId.remove(asset.getId());
-                    }
-                    else{
-                        selectedAssetList.add(asset);
-                        selectedAssetId.add(asset.getId());
-                        holder.checkBox.setChecked(true);
-                    }
+        holder.status.setText(asset.getStatus());
+        if(!asset.getStatus().equals("IN TRANSIT")) {
+            if (showCheckbox == true) {
+                holder.checkBox.setVisibility(View.VISIBLE);
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (holder.checkBox.isChecked()) {
+                            holder.checkBox.setChecked(false);
+                        } else {
+                            holder.checkBox.setChecked(true);
+                        }
 
-                }
-            });
+                        if (holder.checkBox.isChecked()) {
+                            selectedAssetList.add(asset);
+                            selectedAssetId.add(asset.getId());
+                        }
+
+                    }
+                });
+            }
         }
 
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -94,7 +97,7 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView AssetId, nomenclature,AssetMake;
+        TextView AssetId, nomenclature,AssetMake,status;
         View cardView;
         CheckBox checkBox;
         public ViewHolder(View itemView) {
@@ -104,6 +107,7 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
             AssetId=(TextView)itemView.findViewById(R.id.asset_id);
             nomenclature =(TextView)itemView.findViewById(R.id.asset_name);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkBox);
+            status = (TextView)itemView.findViewById(R.id.asset_status);
         }
 
     }

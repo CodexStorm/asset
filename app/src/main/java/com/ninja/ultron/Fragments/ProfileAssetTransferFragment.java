@@ -126,6 +126,10 @@ public class ProfileAssetTransferFragment extends Fragment {
                 if(RequestReasonId == 0) {
                     Toast.makeText(getContext(),"Invalid Request",Toast.LENGTH_SHORT).show();
                 }
+
+                else if(selectedAssetId.size()==0){
+                    Toast.makeText(getContext(),"Please Select Assets",Toast.LENGTH_SHORT).show();
+                }
                 else {
                     Intent assetTransferSummary = new Intent(getContext(), InitiateTransferSummaryActivity.class);
                     selectedAssetList = adapter.getSelectedAssetList();

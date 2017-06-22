@@ -40,7 +40,6 @@ import java.util.List;
 public class MyAssetsFragment extends Fragment {
 
     List<CodeDecodeEntity> myAssetList=new ArrayList<>();
-    Text t;
     RecyclerView recyclerView;
     AssetListRecyclerAdapter adapter;
     BottomNavigationView bottomNavigationView;

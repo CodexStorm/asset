@@ -30,7 +30,8 @@
             app:itemIconTint="@drawable/nav_item_color_state"
             app:itemTextColor="@drawable/nav_item_color_state"
             app:menu="@menu/asset_details_menu"
-            ></android.support.design.widget.BottomNavigationView>
+            android:visibility="visible"
+            />
 
     </RelativeLayout>
 </FrameLayout>

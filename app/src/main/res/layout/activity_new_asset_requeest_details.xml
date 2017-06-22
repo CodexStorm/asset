@@ -19,7 +19,23 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="103dp"
+            android:layout_marginRight="103dp"
+            android:text="Quantity"
+            android:textSize="@dimen/dp_20"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_alignBaseline="@+id/textView3"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TextView
             android:id="@+id/textView3"
@@ -27,12 +43,15 @@
             android:layout_height="wrap_content"
             android:text="Assets"
             android:textSize="@dimen/dp_20"
-
             android:textStyle="bold"
             android:textColor="#000"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp" />
+            android:layout_alignLeft="@+id/rvNewAssets"
+            android:layout_alignStart="@+id/rvNewAssets" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -200,6 +219,8 @@
             android:textColor="#ffffff"
             android:background="#ff0000"/>
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

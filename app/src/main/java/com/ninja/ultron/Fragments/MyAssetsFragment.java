@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -45,12 +48,17 @@ public class MyAssetsFragment extends Fragment {
     BottomNavigationView bottomNavigationView;
     ProgressBar centreProgressBar;
     RelativeLayout rlProgress;
+    SwipeRefreshLayout swipe;
+    TextView tvRefresh;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_my_assets,container,false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
+        swipe = (SwipeRefreshLayout)v.findViewById(R.id.swipe);
+        tvRefresh = (TextView)v.findViewById(R.id.tvRefresh);
         rlProgress = (RelativeLayout)v.findViewById(R.id.rlProgress);
         centreProgressBar = (ProgressBar)v.findViewById(R.id.centreProgressBar);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
@@ -76,7 +84,46 @@ public class MyAssetsFragment extends Fragment {
             }
         });
 
-        callMyAssetListApi();
+        tvRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(CommonFunctions.isNetworkAvailable(getActivity())) {
+                    callMyAssetListApi();
+                    tvRefresh.setVisibility(View.GONE);
+                    rlProgress.setVisibility(View.GONE);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(CommonFunctions.isNetworkAvailable(getActivity())) {
+                    callMyAssetListApi();
+                    tvRefresh.setVisibility(View.VISIBLE);
+                    swipe.setRefreshing(false);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+                    swipe.setRefreshing(false);
+                    tvRefresh.setVisibility(View.GONE);
+                }
+            }
+        });
+        if(CommonFunctions.isNetworkAvailable(getActivity())) {
+            callMyAssetListApi();
+        }
+        else
+        {
+            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+            rlProgress.setVisibility(View.VISIBLE);
+            tvRefresh.setVisibility(View.VISIBLE);
+        }
         Log.d("val",UserDetails.getMyAssetList(getActivity()));
         myAssetList = (new Gson()).fromJson(UserDetails.getMyAssetList(getActivity()),new TypeToken<ArrayList<CodeDecodeEntity>>(){}.getType());
         return v;

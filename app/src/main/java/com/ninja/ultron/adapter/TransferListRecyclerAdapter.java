@@ -2,6 +2,7 @@ package com.ninja.ultron.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -59,8 +60,8 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
         holder.AssetId.setText(asset.getId()+"");
         holder.AssetMake.setText(asset.getAssetMake());
         holder.status.setText(asset.getStatus());
-        if(!asset.getStatus().equals("IN TRANSIT")) {
-            if (showCheckbox == true) {
+        if (showCheckbox == true) {
+            if(!asset.getStatus().equals("IN TRANSIT")) {
                 holder.checkBox.setVisibility(View.VISIBLE);
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -70,15 +71,19 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
                         } else {
                             holder.checkBox.setChecked(true);
                         }
-
                         if (holder.checkBox.isChecked()) {
                             selectedAssetList.add(asset);
                             selectedAssetId.add(asset.getId());
                         }
-
                     }
+
                 });
             }
+            else
+            {
+                holder.status.setTextColor(Color.RED);
+            }
+
         }
 
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {

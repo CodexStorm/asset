@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -35,6 +37,8 @@ public class PendingRequestsFragment extends Fragment {
     RecyclerView recyclerView;
     PendingRequestAdapter adapter;
     List<PendingRequestEntity> pendingRequestEntities=new ArrayList<>();
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
 
     @Nullable
     @Override
@@ -42,6 +46,8 @@ public class PendingRequestsFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_pending_requests,container,false);
         recyclerView=(RecyclerView)view.findViewById(R.id.rvMyPendingRequests);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        rlProgress = (RelativeLayout)view.findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)view.findViewById(R.id.centreProgressBar);
         recyclerView.setLayoutManager(manager);
         callMyPendingRequestsApi();
         return view;
@@ -49,6 +55,8 @@ public class PendingRequestsFragment extends Fragment {
 
     private void callMyPendingRequestsApi() {
         PendingRequestMiniEntity entity=new PendingRequestMiniEntity();
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
         RestClientImplementation.pendingRequestsApi(entity, new PendingRequestMiniEntity.UltronRestClientInterface() {
             @Override
             public void onInitialize(PendingRequestMiniEntity pendingRequestMiniEntity, VolleyError error) {
@@ -59,6 +67,8 @@ public class PendingRequestsFragment extends Fragment {
                     {
                         pendingRequestEntities=pendingRequestMiniEntity.getResponse();
                         Gson gson=new Gson();
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         String myPendingRequestsString=gson.toJson(pendingRequestEntities);
                         adapter=new PendingRequestAdapter(pendingRequestEntities,new PendingRequestAdapter.mCallback()
                         {

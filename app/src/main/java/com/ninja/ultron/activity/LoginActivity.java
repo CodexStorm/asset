@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         etLoginUserName =  (EditText)findViewById(R.id.etLoginUserName);
         etLoginPassword = (EditText)findViewById(R.id.etLoginPassword);
         rlLogin = (RelativeLayout) findViewById(R.id.rlLogin);
-        splashCentreProgressBar = (ProgressBar) findViewById(R.id.splashCentreProgressBar);
+        splashCentreProgressBar = (ProgressBar) findViewById(R.id.centreProgressBar);
     }
 
     public void login() {

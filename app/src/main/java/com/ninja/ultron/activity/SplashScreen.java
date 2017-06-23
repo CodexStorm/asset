@@ -79,7 +79,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setContentView(R.layout.act_splash_screen);
-        splashCentreProgressBar = (ProgressBar) findViewById(R.id.splashCentreProgressBar);
+        splashCentreProgressBar = (ProgressBar) findViewById(R.id.centreProgressBar);
         splashProgressBar = (ProgressBar) findViewById(R.id.splashProgressBar);
         tvSplashNoInternet = (TextView) findViewById(R.id.tvSplashNoInternet);
         copyRight = (TextView) findViewById(R.id.copyRight);

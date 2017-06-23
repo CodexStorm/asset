@@ -19,7 +19,7 @@
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:id="@+id/splashCentreProgressBar"
+        android:id="@+id/centreProgressBar"
         android:layout_marginTop="16dp"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"

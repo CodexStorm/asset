@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -55,6 +56,8 @@ public class FacilityAssetTransferFragment extends Fragment {
     int TransferToId;
     int RequestReasonId;
     TransferReasonsMiniEntity transferReasonsMiniEntity;
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
 
 
     @Override
@@ -65,13 +68,16 @@ public class FacilityAssetTransferFragment extends Fragment {
         rlInitiateButton = (RelativeLayout)v.findViewById(R.id.rlInitiateButton);
         spinnerRequestReason=(Spinner)v.findViewById(R.id.spinnerRequestReason);
         spinnerTransferTo=(Spinner)v.findViewById(R.id.spinnerTransferTo);
+        rlProgress = (RelativeLayout)v.findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)v.findViewById(R.id.centreProgressBar);
         transferReasonsMiniEntity = new TransferReasonsMiniEntity();
         RequestReasonId =0;
         TransferToId = 0;
         final String[] TransferTo = {"Select To","ADMIN","Reporting Manager"};
         final ArrayAdapter<String> transferToAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,TransferTo);
         spinnerTransferTo.setAdapter(transferToAdapter);
-
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
         RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity, new TransferReasonsMiniEntity.UltronRestClientInterface() {
             @Override
             public void onInitialize(TransferReasonsMiniEntity transferReasonsMiniEntity, VolleyError error) {
@@ -79,6 +85,8 @@ public class FacilityAssetTransferFragment extends Fragment {
                 {
                     if(transferReasonsMiniEntity.getReponse()!=null)
                     {
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         final List<String> reasons = new ArrayList<String>();
                         reasons.add("Select Reason");
                         final List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();

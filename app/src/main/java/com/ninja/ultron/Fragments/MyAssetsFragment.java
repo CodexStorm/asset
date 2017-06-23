@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
@@ -28,8 +30,6 @@ import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +43,16 @@ public class MyAssetsFragment extends Fragment {
     RecyclerView recyclerView;
     AssetListRecyclerAdapter adapter;
     BottomNavigationView bottomNavigationView;
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v=inflater.inflate(R.layout.fragment_my_assets,container,false);
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
+        rlProgress = (RelativeLayout)v.findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)v.findViewById(R.id.centreProgressBar);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         bottomNavigationView = (BottomNavigationView)v.findViewById(R.id.bottomNavigation);
@@ -80,12 +84,17 @@ public class MyAssetsFragment extends Fragment {
 
     private void callMyAssetListApi() {
         AssetMiniEntity assetMiniEntity = new AssetMiniEntity();
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
+
         RestClientImplementation.assetListApi(assetMiniEntity, new AssetMiniEntity.UltronRestClientInterface() {
             @Override//return call
             public void onInitialize(AssetMiniEntity assetMiniEntity, VolleyError error) {
                 if(error == null) {
                     if(assetMiniEntity.getResponse() != null) {
                         Gson gs = new Gson();
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         myAssetList = assetMiniEntity.getResponse();
                         Log.d("Check",myAssetList.toString());
                         String myAssetListAsString = gs.toJson(myAssetList);

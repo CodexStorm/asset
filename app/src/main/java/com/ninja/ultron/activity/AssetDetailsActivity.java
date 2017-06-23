@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -37,6 +39,8 @@ public class AssetDetailsActivity extends AppCompatActivity {
     AssetAccessoryAdapter adapter;
     BottomNavigationView bottomNavigationView;
     ReportAssetFragment reportAssetFragment;
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class AssetDetailsActivity extends AppCompatActivity {
         tvAssetMake = (TextView)findViewById(R.id.tvAssetMake1);
         tvSpecifiaction1 = (TextView) findViewById(R.id.tvSpecification1);
         lvAccessories = (ListView) findViewById(R.id.lvAccessories);
+        rlProgress = (RelativeLayout)findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)findViewById(R.id.centreProgressBar);
 
 
         callAssetDetailsApi();
@@ -58,12 +64,16 @@ public class AssetDetailsActivity extends AppCompatActivity {
 
     private void callAssetDetailsApi() {
         AssetDetailsMiniEntity assetDetailsMiniEntity = new AssetDetailsMiniEntity();
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
         RestClientImplementation.assetDetailsApi(assetDetailsMiniEntity, new AssetDetailsMiniEntity.UltronRestClientInterface() {
             @Override
             public void onInitialize(AssetDetailsMiniEntity assetDetailsMiniEntity, VolleyError error) {
                 if (error == null) {
                     if (assetDetailsMiniEntity.getResponse() != null) {
                         Gson gs = new Gson();
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         assetDetailsList = assetDetailsMiniEntity.getResponse();
                         AssetDetailsEntity assetDetailsEntity = assetDetailsList.get(0);
                         tvId1.setText("" + assetDetailsEntity.getAssetId());

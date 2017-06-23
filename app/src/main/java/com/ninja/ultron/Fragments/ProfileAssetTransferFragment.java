@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -52,6 +53,8 @@ public class ProfileAssetTransferFragment extends Fragment {
     String RequestReasonText;
     int RequestReasonId;
     TransferReasonsMiniEntity transferReasonsMiniEntity;
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
 
     @Nullable
     @Override
@@ -61,6 +64,10 @@ public class ProfileAssetTransferFragment extends Fragment {
         recyclerView=(RecyclerView)v.findViewById(R.id.rvMyAssets);
         rlInitiateButton = (RelativeLayout)v.findViewById(R.id.rlInitiateButton);
         spinnerRequestReason = (Spinner)v.findViewById(R.id.spinnerRequestReason);
+        rlProgress = (RelativeLayout)v.findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)v.findViewById(R.id.centreProgressBar);
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         transferReasonsMiniEntity = new TransferReasonsMiniEntity();
         RestClientImplementation.getTransferReasonsApi(transferReasonsMiniEntity, new TransferReasonsMiniEntity.UltronRestClientInterface() {
@@ -70,6 +77,8 @@ public class ProfileAssetTransferFragment extends Fragment {
                 {
                     if(transferReasonsMiniEntity.getReponse()!=null)
                     {
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         final List<String> reasons = new ArrayList<String>();
                         reasons.add("Select Reason");
                         final List<TransferReasonsEntity> transferReasonsEntities = transferReasonsMiniEntity.getReponse();

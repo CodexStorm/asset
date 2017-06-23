@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,6 +59,8 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     Button bReject;
     AlertDialog.Builder alertDialogBuilder = null;
     AlertDialog alertDialog = null;
+    ProgressBar centreProgressBar;
+    RelativeLayout rlProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +70,8 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
         tvStatus = (TextView) findViewById(R.id.tvStatus);
         tvRequestType = (TextView) findViewById(R.id.tvRequestType);
         rvTransferAssets = (RecyclerView) findViewById(R.id.rvTransferAssets);
+        rlProgress = (RelativeLayout)findViewById(R.id.rlProgress);
+        centreProgressBar = (ProgressBar)findViewById(R.id.centreProgressBar);
         bBeforeRmApproval = (LinearLayout) findViewById(R.id.bBeforeRmApproval);
         bAfterAdminApproval = (LinearLayout) findViewById(R.id.bAfterAdminApproval);
         bEdit = (Button) findViewById(R.id.bEdit);
@@ -188,6 +193,8 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
 
     private void callGetDetailsApi() {
         entity = new TransferDetailsAssetListEntity();
+        rlProgress.setVisibility(View.VISIBLE);
+        centreProgressBar.setVisibility(View.VISIBLE);
         TranferDetailsAssetListMiniEntity tranferDetailsAssetListMiniEntity = new TranferDetailsAssetListMiniEntity();
         RestClientImplementation.getPendingTransferDetailsApi(tranferDetailsAssetListMiniEntity, new TranferDetailsAssetListMiniEntity.UltronRestClientInterface() {
             @Override
@@ -196,6 +203,8 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                 {
                     if (tranferDetailsAssetListMiniEntity.getResponse()!=null)
                     {
+                        centreProgressBar.setVisibility(View.GONE);
+                        rlProgress.setVisibility(View.GONE);
                         EntityGroup entityGroup = tranferDetailsAssetListMiniEntity.getResponse();
                         TransferDetailsAssetListEntity entity = entityGroup.getRequestDetails();
                         Log.d("qwerty",entity.getRequestType()+"");

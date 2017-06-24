@@ -45,8 +45,8 @@
                 android:id="@+id/asset_make"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="42dp"
-                android:layout_marginStart="42dp"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif"
                 android:text="Asset Make"
@@ -66,6 +66,15 @@
                 android:fontFamily="sans-serif"
                 android:text="Nomenclature"
                 android:textSize="16dp" />
+
+            <CheckBox
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
 
         </RelativeLayout>

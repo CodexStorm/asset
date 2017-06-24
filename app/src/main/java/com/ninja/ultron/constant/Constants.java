@@ -48,7 +48,9 @@ public class Constants {
 
     public static final String ASSET_LIST_URL="http://10.0.0.23:1111/api/web/find/asset?userId=";
     public static final String ASSET_DETAILS_MODEL_URL="http://10.0.0.23:1111/api/web/details/asset?assetId=";
+    public static final String ASSET_USER_RECIEVAL_MODEL_URL="http://10.0.0.23:1111/api/web/request/assignedAssets?assetRequestId=";
     public static String ASSET_DETAILS_URL;
+    public static String ASSET_USER_RECIEVAL_URL;
     public static String PROFILE_ASSET_LIST = "&categoryId=3001";
     public static String FACILITY_ASSET_LIST = "&categoryId=3002";
     public static final String PENDING_REQUESTS_URL="http://10.0.0.23:1111/api/web/request/pending?userId=";

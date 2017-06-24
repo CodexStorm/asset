@@ -21,6 +21,7 @@ import com.ninja.ultron.entity.AssetAcceptEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.AssetTypeMiniEntity;
+import com.ninja.ultron.entity.AssetUserRecievalMiniEntity;
 import com.ninja.ultron.entity.GetPenaltyApiEntity;
 import com.ninja.ultron.entity.InitApiEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
@@ -611,6 +612,51 @@ public class RestClientImplementation {
         };
         queue.add(getRequest);
     }
+
+    public static void getAssetUserRecivalDetailApi(final AssetUserRecievalMiniEntity assetUserRecievalMiniEntity,final AssetUserRecievalMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context,String id) {
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        final JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET, Constants.ASSET_USER_RECIEVAL_MODEL_URL + id, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Gson gson = new Gson();
+                    Log.d("sup",response.toString());
+                    AssetUserRecievalMiniEntity successEntity = gson.fromJson(response.toString(), AssetUserRecievalMiniEntity.class);
+                    assetUserRecievalMiniEntity.setStatusCode(successEntity.getStatusCode());
+                    assetUserRecievalMiniEntity.setMessage(successEntity.getMessage());
+                    assetUserRecievalMiniEntity.setResponse(successEntity.getResponse());
+                    ultronRestClientInterface.onInitialize(assetUserRecievalMiniEntity, null);
+                } catch (Exception e) {
+                    assetUserRecievalMiniEntity.setStatusCode(500);
+                    assetUserRecievalMiniEntity.setMessage("Cast Exception");
+                    ultronRestClientInterface.onInitialize(assetUserRecievalMiniEntity, new VolleyError());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error.networkResponse != null && error.networkResponse.data != null) {
+                    Gson gson = new Gson();
+                    AssetUserRecievalMiniEntity failureEntity = gson.fromJson(new String(error.networkResponse.data), AssetUserRecievalMiniEntity.class);
+                    if (failureEntity.getMessage() != null) {
+                        assetUserRecievalMiniEntity.setMessage(failureEntity.getMessage());
+                        assetUserRecievalMiniEntity.setStatusCode(failureEntity.getStatusCode());
+                        ultronRestClientInterface.onInitialize(assetUserRecievalMiniEntity, new VolleyError());
+                    }
+                }
+            }
+        }, 3000, 0) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("sessionid", UserDetails.getSessionId(context));
+                params.put("accesstoken", UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
 
     public static void getPendingRequestDetailsApi(final PendingRequestDetailsMiniEntity pendingRequestDetailsMiniEntity,final PendingRequestDetailsMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context)
     {

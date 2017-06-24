@@ -19,7 +19,10 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetDetailsAdapter;
+import com.ninja.ultron.adapter.AssetUserRecievalAdapter;
 import com.ninja.ultron.entity.AssetAcceptEntity;
+import com.ninja.ultron.entity.AssetUserRecievalEntity;
+import com.ninja.ultron.entity.AssetUserRecievalMiniEntity;
 import com.ninja.ultron.entity.NewAssetEntityGroup;
 import com.ninja.ultron.entity.NewAssetMiniEntityGroup;
 import com.ninja.ultron.entity.NewAssetTypeDetailsEntity;
@@ -35,13 +38,17 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
 
     NewAssetEntityGroup newAssetEntityGroupList;
     NewAssetEntityGroup entity;
+    AssetUserRecievalEntity entityAfter;
+    List<AssetUserRecievalEntity> entityAfterList;
     List<NewAssetTypeDetailsEntity> assetDetails;
     TextView tvRequestId;
     TextView tvCategoryName;
     TextView tvStatus;
     TextView tvRequestType;
     RecyclerView rvNewAssets;
-    AssetDetailsAdapter adapter;
+    LinearLayout rl;
+    AssetUserRecievalAdapter adapterAfterApproval;
+    AssetDetailsAdapter adapterBeforeRmApproval;
     LinearLayout bBeforeRmApproval;
     LinearLayout bAfterAdminApproval;
     Button bEdit;
@@ -73,7 +80,9 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
         bDelete = (Button)findViewById(R.id.bDelete);
         bAccept = (Button)findViewById(R.id.bAccept);
         bReject = (Button)findViewById(R.id.bReject);
+        rl = (LinearLayout)findViewById(R.id.rl);
         assetDetails = new ArrayList<>();
+        entityAfterList = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(NewAssetRequeestDetailsActivity.this);
         rvNewAssets.setLayoutManager(manager);
         alertDialogBuilder = new AlertDialog.Builder(NewAssetRequeestDetailsActivity.this, R.style.AlertDialogBackground);
@@ -90,6 +99,8 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
+                                        createAssetAcceptEntity();
+                                        callAssetAcceptApi();
                                         startActivity(intent);
                                         alertDialog.dismiss();
                                     }
@@ -206,21 +217,25 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                         tvRequestId.setText(""+entity.getRequestDetails().getRequestId());
                         tvRequestType.setText(entity.getRequestDetails().getRequestType());
                         tvStatus.setText(entity.getRequestDetails().getStatus());
-                        assetDetails = entity.getRequestDetails().getAssetTypeDetails();
-                        if(assetDetails.size()==0)
+                        if(entity.getRequestDetails().getStatus().equals("WAITING FOR USER RECEIVAL"))
                         {
 
+                           rl.setVisibility(View.GONE);
+                            callUserRecievalApi();
+                            bAfterAdminApproval.setVisibility(View.VISIBLE);
                         }
-                        else
-                        {
-                            adapter = new AssetDetailsAdapter(assetDetails);
-                            rvNewAssets.setAdapter(adapter);
-                            rvNewAssets.hasFixedSize();
-                            adapter.notifyDataSetChanged();
-                            if(entity.getRequestDetails().getStatus().equals("WAITING FOR USER RECEIVAL"))
-                                bAfterAdminApproval.setVisibility(View.VISIBLE);
+                        else {
+                            assetDetails = entity.getRequestDetails().getAssetTypeDetails();
+                            if (assetDetails.size() == 0) {
+
+                            } else {
+                                adapterBeforeRmApproval = new AssetDetailsAdapter(assetDetails);
+                                rvNewAssets.setAdapter(adapterBeforeRmApproval);
+                                rvNewAssets.hasFixedSize();
+                                adapterBeforeRmApproval.notifyDataSetChanged();
                             /*else if(entity.getRequestDetails().getStatus().equals("WAITING FOR RM APPROVAL"))
                                 bBeforeRmApproval.setVisibility(View.VISIBLE);*/
+                            }
                         }
                     }
                 }
@@ -235,8 +250,46 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void callUserRecievalApi() {
+        entityAfter = new AssetUserRecievalEntity();
+        AssetUserRecievalMiniEntity assetUserRecievalMiniEntity = new AssetUserRecievalMiniEntity();
+        RestClientImplementation.getAssetUserRecivalDetailApi(assetUserRecievalMiniEntity, new AssetUserRecievalMiniEntity.UltronRestClientInterface() {
+            @Override
+            public void onInitialize(AssetUserRecievalMiniEntity assetUserRecievalMiniEntity, VolleyError error) {
+                if (error == null)
+                {
+                    if(assetUserRecievalMiniEntity.getResponse()!=null)
+                    {
+                        entityAfterList = assetUserRecievalMiniEntity.getResponse();
+                        adapterAfterApproval = new AssetUserRecievalAdapter(entityAfterList);
+                        rvNewAssets.setAdapter(adapterAfterApproval);
+                        rvNewAssets.hasFixedSize();
+                        adapterAfterApproval.notifyDataSetChanged();
+
+                    }
+                }
+            }
+        },NewAssetRequeestDetailsActivity.this,entity.getRequestDetails().getRequestId()+"");
+    }
+
+    private void callAssetAcceptApi(){
+        RestClientImplementation.assetAccetApi(assetAcceptEntity, new AssetAcceptEntity.UltronRestClientInterface() {
+            @Override
+            public void onInitialize(AssetAcceptEntity assetAcceptEntity, VolleyError error) {
+                if(error == null)
+                {
+
+                }
+            }
+        },NewAssetRequeestDetailsActivity.this);
+    }
+
     private void createAssetAcceptEntity() {
         assetAcceptEntity = new AssetAcceptEntity();
         assetAcceptEntity.setUserId(UserDetails.getAsgardUserId(NewAssetRequeestDetailsActivity.this));
+        assetAcceptEntity.setFacilityId(UserDetails.getFacilityId(NewAssetRequeestDetailsActivity.this));
+        assetAcceptEntity.setAssetRequestId(entity.getRequestDetails().getRequestId());
+        assetAcceptEntity.setAssetIds(adapterAfterApproval.getSelectedAssetId());
+
     }
 }

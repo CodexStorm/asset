@@ -196,6 +196,7 @@
                 android:background="@drawable/bg_diplay"
                 android:layout_below="@+id/rlDetails"
                 android:layout_alignLeft="@+id/rlDetails"
+                android:visibility="gone"
                 android:layout_alignStart="@+id/rlDetails">
             <TextView
                 android:id="@+id/tvAccessories"

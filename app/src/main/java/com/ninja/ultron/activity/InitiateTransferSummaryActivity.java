@@ -1,6 +1,10 @@
 package com.ninja.ultron.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +42,8 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
     int categoryId;
     String TransferTo;
     int reasonId;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog alertDialog = null;
 
 
 
@@ -60,9 +66,13 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         List<CodeDecodeEntity> transferAssetEntityList =(List<CodeDecodeEntity>) transferAssetSummary.getSerializableExtra("TransferAssetList");
         selectedAssetId = (List<Integer>)transferAssetSummary.getSerializableExtra("SelectedAssetId");
 
+        alertDialogBuilder = new AlertDialog.Builder(InitiateTransferSummaryActivity.this, R.style.AlertDialogBackground);
+        final Intent intent = new Intent(InitiateTransferSummaryActivity.this, AssetActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         tvRequestedBy.setText(UserDetails.getUserName(InitiateTransferSummaryActivity.this));
         tvRequestReason.setText(transferAssetSummary.getStringExtra("RequestReason"));
         tvRequestedTo.setText(transferAssetSummary.getStringExtra("TransferTo"));
+
         if(transferAssetSummary.getIntExtra("category",0) == 2) {
             tvFacility.setVisibility(View.VISIBLE);
             tvhFacility.setVisibility(View.VISIBLE);
@@ -80,7 +90,30 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         rlInitateTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callInitiateTransferApi();
+
+
+
+                        alertDialogBuilder
+                                .setMessage("Are you sure do you want to Delete  the selected assets ")
+                                .setCancelable(true)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                callInitiateTransferApi();
+                                                startActivity(intent);
+                                                alertDialog.dismiss();
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                alertDialog.dismiss();
+                                            }
+                                        });
+                        alertDialog = alertDialogBuilder.create();
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                        alertDialog.show();
+
             }
         });
 

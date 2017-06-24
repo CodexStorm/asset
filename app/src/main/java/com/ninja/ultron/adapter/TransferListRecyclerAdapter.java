@@ -60,7 +60,6 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
         holder.AssetId.setText(asset.getId()+"");
         holder.AssetMake.setText(asset.getAssetMake());
         holder.status.setText(asset.getStatus());
-        if (showCheckbox == true) {
             if(!asset.getStatus().equals("IN TRANSIT")) {
                 holder.checkBox.setVisibility(View.VISIBLE);
                 holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -81,20 +80,12 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
             }
             else
             {
+                holder.checkBox.setEnabled(false);
                 holder.status.setTextColor(Color.RED);
             }
 
-        }
-
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                showCheckbox=true;
-                notifyDataSetChanged();
-                return false;
-            }
-        });
     }
+
     @Override
     public int getItemCount() {
         return assetsList.size();

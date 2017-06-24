@@ -6,13 +6,31 @@ package com.ninja.ultron.entity;
 
 public class TransferAssetTypeDetailsEntity {
     String assetType;
-    //String assetMake;
+    String assetMake;
+    int assetId;
     String nomenclature;
 
-    public TransferAssetTypeDetailsEntity(String assetType, String nomenclature) {
+    public TransferAssetTypeDetailsEntity(String assetType, String nomenclature,int assetId) {
         this.assetType = assetType;
      //   this.assetMake = assetMake;
         this.nomenclature = nomenclature;
+        this.assetId = assetId;
+    }
+
+    public String getAssetMake() {
+        return assetMake;
+    }
+
+    public void setAssetMake(String assetMake) {
+        this.assetMake = assetMake;
+    }
+
+    public int getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(int assetId) {
+        this.assetId = assetId;
     }
 
     public String getAssetType() {

@@ -19,10 +19,12 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.AssetDetailsAdapter;
+import com.ninja.ultron.entity.AssetAcceptEntity;
 import com.ninja.ultron.entity.NewAssetEntityGroup;
 import com.ninja.ultron.entity.NewAssetMiniEntityGroup;
 import com.ninja.ultron.entity.NewAssetTypeDetailsEntity;
 import com.ninja.ultron.functions.CommonFunctions;
+import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
     AlertDialog alertDialog = null;
     ProgressBar centreProgressBar;
     RelativeLayout rlProgress;
+    AssetAcceptEntity assetAcceptEntity;
 
 
     @Override
@@ -177,8 +180,11 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+        createAssetAcceptEntity();
 
     }
+
+
 
     private void callNewAssetRequestDetailsApi() {
         entity = new NewAssetEntityGroup();
@@ -213,8 +219,8 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
                             if(entity.getRequestDetails().getStatus().equals("WAITING FOR USER RECEIVAL"))
                                 bAfterAdminApproval.setVisibility(View.VISIBLE);
-                            else if(entity.getRequestDetails().getStatus().equals("WAITING FOR RM APPROVAL"))
-                                bBeforeRmApproval.setVisibility(View.VISIBLE);
+                            /*else if(entity.getRequestDetails().getStatus().equals("WAITING FOR RM APPROVAL"))
+                                bBeforeRmApproval.setVisibility(View.VISIBLE);*/
                         }
                     }
                 }
@@ -227,5 +233,10 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
             }
         },NewAssetRequeestDetailsActivity.this);
 
+    }
+
+    private void createAssetAcceptEntity() {
+        assetAcceptEntity = new AssetAcceptEntity();
+        assetAcceptEntity.setUserId(UserDetails.getAsgardUserId(NewAssetRequeestDetailsActivity.this));
     }
 }

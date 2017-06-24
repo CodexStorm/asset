@@ -16,18 +16,21 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.ninja.ultron.R;
 import com.ninja.ultron.adapter.SkuAssetDetailsAdapter;
 import com.ninja.ultron.adapter.TransferAssetDetailsAdapter;
+import com.ninja.ultron.entity.AssetAcceptEntity;
 import com.ninja.ultron.entity.EntityGroup;
 import com.ninja.ultron.entity.SkuAssetDetailsEntity;
 import com.ninja.ultron.entity.TranferDetailsAssetListMiniEntity;
 import com.ninja.ultron.entity.TransferAssetTypeDetailsEntity;
 import com.ninja.ultron.entity.TransferDetailsAssetListEntity;
 import com.ninja.ultron.functions.CommonFunctions;
+import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     String AssetMake;
     String AssetType;
     String details[];
-
+    int id;
     TextView tvRequestId;
     TextView tvCategoryName;
     TextView tvStatus;
@@ -61,6 +64,7 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
     AlertDialog alertDialog = null;
     ProgressBar centreProgressBar;
     RelativeLayout rlProgress;
+    AssetAcceptEntity assetAcceptEntity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,25 +95,34 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
         bAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialogBuilder
-                        .setMessage("Are you sure do you want to accept the selected assets ")
-                        .setCancelable(true)
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        startActivity(intent);
-                                        alertDialog.dismiss();
-                                    }
-                                })
-                        .setNegativeButton("No",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        alertDialog.dismiss();
-                                    }
-                                });
-                alertDialog = alertDialogBuilder.create();
-                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
-                alertDialog.show();
+                if(adapter.getSelectedId().size() == 0)
+                {
+                    Toast.makeText(TransferAssetRequestDetailsActivity.this,"Please tick the asset that you want to accept",Toast.LENGTH_SHORT);
+                }
+                else {
+                    alertDialogBuilder
+                            .setMessage("Are you sure do you want to accept the selected assets ")
+                            .setCancelable(true)
+                            .setPositiveButton("Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            createAssetAcceptEntity();
+                                            callAssetAcceptApi();
+                                            Log.d("lkjhgf", adapter.getSelectedId().toString());
+                                            startActivity(intent);
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                            .setNegativeButton("No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                    alertDialog.show();
+                }
             }
         });
 
@@ -209,6 +222,7 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                         TransferDetailsAssetListEntity entity = entityGroup.getRequestDetails();
                         Log.d("qwerty",entity.getRequestType()+"");
                         tvRequestId.setText(""+(entity.getRequestId()));
+                        id = entity.getRequestId();
                         tvRequestType.setText(entity.getRequestType());
                         tvStatus.setText(entity.getStatus());
                         tvCategoryName.setText(entity.getCategoryName());
@@ -230,7 +244,8 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                                     details = nomenclature.split("@");
                                     nomenclature = details[0];
                                     Log.d("NOME",nomenclature);
-                                    TransferAssetTypeDetailsEntity object = new TransferAssetTypeDetailsEntity(AssetType,nomenclature);
+                                    int id = Integer.parseInt(details[2]);
+                                    TransferAssetTypeDetailsEntity object = new TransferAssetTypeDetailsEntity(AssetType,nomenclature,id);
                                     transferAssetTypeDetailsEntities.add(object);
                                 }
                             }
@@ -238,10 +253,10 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
                             rvTransferAssets.setAdapter(adapter);
                             rvTransferAssets.hasFixedSize();
                             adapter.notifyDataSetChanged();
-                            if(entity.getStatus().equals("WAITING FOR USER RECEIVAL"))
+                       //     if(entity.getStatus().equals("WAITING FOR USER RECEIVAL"))
                                 bAfterAdminApproval.setVisibility(View.VISIBLE);
-                            else if(entity.getStatus().equals("WAITING FOR RM APPROVAL"))
-                                bBeforeRmApproval.setVisibility(View.VISIBLE);
+                            /*else if(entity.getStatus().equals("WAITING FOR RM APPROVAL"))
+                                bBeforeRmApproval.setVisibility(View.VISIBLE);*/
 
                         }
                     }
@@ -256,5 +271,30 @@ public class TransferAssetRequestDetailsActivity extends AppCompatActivity {
             }
         },TransferAssetRequestDetailsActivity.this);
 
+
+
     }
+
+    private void callAssetAcceptApi(){
+        RestClientImplementation.assetAccetApi(assetAcceptEntity, new AssetAcceptEntity.UltronRestClientInterface() {
+            @Override
+            public void onInitialize(AssetAcceptEntity assetAcceptEntity, VolleyError error) {
+                if(error == null)
+                {
+
+                }
+            }
+        },TransferAssetRequestDetailsActivity.this);
+    }
+
+    private void createAssetAcceptEntity() {
+            assetAcceptEntity = new AssetAcceptEntity();
+            assetAcceptEntity.setUserId(UserDetails.getAsgardUserId(TransferAssetRequestDetailsActivity.this));
+            Log.d("lkjhgf",adapter.getSelectedId().toString());
+            assetAcceptEntity.setAssetIds(adapter.getSelectedId());
+            assetAcceptEntity.setAssetRequestId(id);
+            assetAcceptEntity.setFacilityId(UserDetails.getFacilityId(TransferAssetRequestDetailsActivity.this));
+
+        }
+
 }

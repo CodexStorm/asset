@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ninja.ultron.activity.PendingRequestDetailsActivity;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.AsgardCodeMessageEntity;
+import com.ninja.ultron.entity.AssetAcceptEntity;
 import com.ninja.ultron.entity.AssetDetailsMiniEntity;
 import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.AssetTypeMiniEntity;
@@ -464,6 +465,24 @@ public class RestClientImplementation {
             }
         });
         queue.add(postRequest);
+    }
+
+    public static void assetAccetApi(final AssetAcceptEntity assetAcceptEntity , final AssetAcceptEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){
+        final Gson gson = new Gson();
+        queue = VolleySingleton.getInstance(context).getRequestQueue();
+        JSONObject assetAccetJson = assetAcceptEntity.getJsonObjectAsParams();
+        JsonBaseRequest postReqest = new JsonBaseRequest(Request.Method.POST, Constants.ASSET_ACCEPT_URL, assetAccetJson, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                ultronRestClientInterface.onInitialize(assetAcceptEntity, null);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                ultronRestClientInterface.onInitialize(assetAcceptEntity,new VolleyError());
+            }
+        });
+        queue.add(postReqest);
     }
 
     public static void getTransferReasonsApi(final TransferReasonsMiniEntity transferReasonsMiniEntity,final TransferReasonsMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context )

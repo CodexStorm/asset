@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -99,8 +100,9 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        createAssetAcceptEntity();
-                                        callAssetAcceptApi();
+                                     //   createAssetAcceptEntity();
+                                     //   callAssetAcceptApi();
+
                                         startActivity(intent);
                                         alertDialog.dismiss();
                                     }
@@ -191,7 +193,6 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-        createAssetAcceptEntity();
 
     }
 
@@ -215,6 +216,8 @@ public class NewAssetRequeestDetailsActivity extends AppCompatActivity {
                         entity=newAssetEntityGroupList;
                         tvCategoryName.setText(entity.getRequestDetails().getCategoryName());
                         tvRequestId.setText(""+entity.getRequestDetails().getRequestId());
+                        Log.d("dfghj",entity.toString());
+
                         tvRequestType.setText(entity.getRequestDetails().getRequestType());
                         tvStatus.setText(entity.getRequestDetails().getStatus());
                         if(entity.getRequestDetails().getStatus().equals("WAITING FOR USER RECEIVAL"))

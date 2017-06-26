@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="3dp"
+        android:padding="5dp"
+        android:layout_marginBottom="3dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_bordergreen_inside_white"
+
+            >
+<RelativeLayout
+    android:id="@+id/rlNomenclature"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:background="@drawable/bg_green_border_white_solid"
+
+    >
+            <TextView
+                android:id="@+id/tvAssetNomenclature1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="2345"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18dp"
+
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="13dp" />
+            <TextView
+                android:id="@+id/tvAssetNomenclature2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1234"
+                android:textSize="18dp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_below="@+id/tvAssetNomenclature1"
+                android:layout_centerHorizontal="true" />
+</RelativeLayout>
+            <TextView
+                android:id="@+id/tvAssetMake"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:fontFamily="sans-serif"
+                android:text="Asset Make"
+                android:textColor="#000"
+                android:textSize="22dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/rlNomenclature"
+                android:layout_toEndOf="@+id/rlNomenclature" />
+
+            <TextView
+                android:id="@+id/tvAssetType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Nomenclature"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvAssetMake"
+                android:layout_alignLeft="@+id/tvAssetMake"
+                android:layout_alignStart="@+id/tvAssetMake" />
+            <TextView
+                android:id="@+id/tvAssetCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(P/F)"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/tvAssetMake"
+                android:layout_toRightOf="@+id/tvAssetType"
+                android:layout_toEndOf="@+id/tvAssetType" />
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:layout_alignTop="@+id/tvAssetMake"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="12dp"
+                android:layout_marginEnd="12dp" />
+
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
+

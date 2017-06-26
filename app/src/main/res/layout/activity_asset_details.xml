@@ -27,165 +27,140 @@
     android:layout_marginLeft="20dp"
     android:background="@drawable/bg_diplay"
     >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout3">
+        <TextView
+            android:id="@+id/tvType"
+            android:textColor="@android:color/background_dark"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Type  :"
+            android:layout_marginLeft="20dp"
+            android:gravity="end"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvhAssetMake"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCategory"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Asset Make  :"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:gravity="end"
+            />
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="100dp"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="@android:color/background_dark"
                 android:textStyle="bold"
-                android:text="Name  :"
-                android:textAlignment="textEnd"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:text="Nomenclature  :"
+                android:gravity="end"
+                 />
+        <TextView
+            android:id="@+id/tvCategory"
+            android:textColor="@android:color/background_dark"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Category  :"
+            android:gravity="end"
+            android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tvId"
-                android:textColor="@android:color/background_dark"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvName"
-                android:layout_alignStart="@+id/tvName"
-                android:layout_below="@+id/tvName"
-                android:layout_marginTop="20dp"
-                android:text="Asset ID  :"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"/>
+        <TextView
+            android:textColor="@android:color/background_dark"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Facility  :"
+            android:gravity="end"
+            android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tvCategory"
-                android:textColor="@android:color/background_dark"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvId"
-                android:layout_alignStart="@+id/tvId"
-                android:layout_below="@+id/tvId"
-                android:layout_marginTop="20dp"
-                android:text="Category  :"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvType"
-                android:textColor="@android:color/background_dark"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvhAssetMake"
-                android:layout_alignStart="@+id/tvhAssetMake"
-                android:layout_below="@id/tvhAssetMake"
-                android:layout_marginTop="20dp"
-                android:text="Type  :"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvMaker"
-                android:textColor="@android:color/background_dark"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvType"
-                android:layout_alignStart="@+id/tvType"
-                android:layout_below="@+id/tvType"
-                android:layout_marginTop="20dp"
-                android:text="Maker  :"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/tvSpecification"
-                android:textColor="@android:color/background_dark"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvMaker"
-                android:layout_alignStart="@+id/tvMaker"
-                android:layout_below="@+id/tvMaker"
-                android:layout_marginTop="20dp"
-                android:text="Specification  :"
-                android:textAlignment="textEnd"
-                android:layout_marginBottom="20dp"
-                android:textStyle="bold"/>
+        <TextView
+            android:textColor="@android:color/background_dark"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Status  :"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
 
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/linearLayout3"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
-            <TextView
+        <TextView
+            android:id="@+id/tvType1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/tvAssetMake1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000"
+            />
+        <TextView
                 android:id="@+id/tvName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_above="@+id/tvId"
+                android:layout_marginTop="20dp"
                 android:textColor="#000"
-                android:layout_toRightOf="@+id/tvSpecification"
-                android:layout_toEndOf="@+id/tvSpecification" />
-
-            <TextView
-                android:id="@+id/tvId1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/tvCategory"
-                android:textColor="#000"
-                android:layout_alignLeft="@+id/tvName1"
-                android:layout_alignStart="@+id/tvName1" />
+                />
 
             <TextView
                 android:id="@+id/tvCategory1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvId1"
                 android:textColor="#000"
-                android:layout_alignStart="@+id/tvId1"
-                android:layout_alignTop="@+id/tvCategory" />
-
-            <TextView
-                android:id="@+id/tvType1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvCategory1"
-                android:textColor="#000"
-                android:layout_alignStart="@+id/tvCategory1"
-                android:layout_alignTop="@+id/tvType" />
-
-            <TextView
-                android:id="@+id/tvMaker1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvType1"
-                android:textColor="#000"
-                android:layout_alignStart="@+id/tvType1"
-                android:layout_alignTop="@+id/tvMaker"/>
-
-            <TextView
-                android:id="@+id/tvSpecification1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tvMaker1"
-                android:textColor="#000"
-                android:layout_alignStart="@+id/tvMaker1"
-                android:layout_alignTop="@+id/tvSpecification" />
-    <TextView
-        android:id="@+id/tvAssetMake1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tvhAssetMake"
-        android:layout_below="@+id/tvCategory1"
-        android:layout_alignStart="@+id/tvCategory1"
-        android:layout_marginTop="20dp"/>
-
-    <TextView
-                android:id="@+id/tvhAssetMake"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCategory"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:text="Asset Make  :"
-                android:textStyle="bold"
-                android:textColor="#000"
-                android:textAlignment="textEnd"
                 />
+
+
+
+            <TextView
+                android:id="@+id/tvFacility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:layout_marginTop="20dp"
+                 />
+
+
+    </LinearLayout>
 </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

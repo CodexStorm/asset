@@ -256,6 +256,7 @@ public class RestClientImplementation {
             public void onResponse(JSONObject response) {
                 try{
                     Gson gson = new Gson();
+                    Log.d("FUCK",response.toString());
                     AssetDetailsMiniEntity successAssetMiniEntity = gson.fromJson(response.toString(), AssetDetailsMiniEntity.class);
                     assetDetailsMiniEntity.setStatusCode(successAssetMiniEntity.getStatusCode());
                     assetDetailsMiniEntity.setResponse(successAssetMiniEntity.getResponse());
@@ -564,9 +565,10 @@ public class RestClientImplementation {
         queue.add(postRequest);
     }
 
-    public static void getAssetTypeApi(final AssetTypeMiniEntity assetTypeMiniEntity,final AssetTypeMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context){
+    public static void getAssetTypeApi(final AssetTypeMiniEntity assetTypeMiniEntity,final AssetTypeMiniEntity.UltronRestClientInterface ultronRestClientInterface,final Context context,int id){
         queue = VolleySingleton.getInstance(context).getRequestQueue();
-        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_TYPE_API,null,new Response.Listener<JSONObject>(){
+        Log.d("ASS",Constants.ASSET_TYPE_API+"?categoryId="+id+"");
+        JsonBaseRequest getRequest = new JsonBaseRequest(Request.Method.GET,Constants.ASSET_TYPE_API+"?categoryId="+id+"",null,new Response.Listener<JSONObject>(){
 
             @Override
             public void onResponse(JSONObject response) {

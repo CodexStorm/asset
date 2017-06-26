@@ -143,7 +143,7 @@ public class MyAssetsFragment extends Fragment {
                         centreProgressBar.setVisibility(View.GONE);
                         rlProgress.setVisibility(View.GONE);
                         myAssetList = assetMiniEntity.getResponse();
-                        Log.d("Check",myAssetList.toString());
+                        Log.d("check",myAssetList.toString());
                         String myAssetListAsString = gs.toJson(myAssetList);
                         Log.d("Check",myAssetListAsString);
                         UserDetails.setMyAssetList(getContext(),myAssetListAsString);

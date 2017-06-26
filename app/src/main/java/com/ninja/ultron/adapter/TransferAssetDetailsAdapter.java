@@ -76,8 +76,8 @@ TransferAssetDetailsAdapter extends RecyclerView.Adapter<TransferAssetDetailsAda
 
             super(itemView);
            //  AssetMake = (TextView)itemView.findViewById(R.id.asset_make) ;
-            nomenclature=(TextView)itemView.findViewById(R.id.asset_id);
-            AssetType =(TextView)itemView.findViewById(R.id.asset_name);
+            nomenclature=(TextView)itemView.findViewById(R.id.tvAssetNomenclature);
+            AssetType =(TextView)itemView.findViewById(R.id.tvAssetType);
             cardView=itemView;
             check = (CheckBox)itemView.findViewById(R.id.checkBox);
         }

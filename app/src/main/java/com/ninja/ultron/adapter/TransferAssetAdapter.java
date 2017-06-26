@@ -2,14 +2,12 @@ package com.ninja.ultron.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
-import com.ninja.ultron.entity.AssetMiniEntity;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 
 import java.util.ArrayList;
@@ -56,8 +54,8 @@ public class TransferAssetAdapter extends RecyclerView.Adapter<TransferAssetAdap
             super(itemView);
             cardView=itemView;
             AssetMake = (TextView)itemView.findViewById(R.id.asset_make) ;
-            AssetId=(TextView)itemView.findViewById(R.id.asset_id);
-            nomenclature =(TextView)itemView.findViewById(R.id.asset_name);
+            AssetId=(TextView)itemView.findViewById(R.id.tvAssetNomenclature);
+            nomenclature =(TextView)itemView.findViewById(R.id.tvAssetType);
         }
     }
 }

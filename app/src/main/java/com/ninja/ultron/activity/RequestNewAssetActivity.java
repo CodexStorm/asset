@@ -42,9 +42,10 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     TextView bAdd;
     String assetType;
     String categoryType;
-    int categorySelected;
+    int categorySelected =0;
     int assetSelected;
     int assetTypeId;
+    int selected = 0;
     NewAssetAdapter newAssetAdapter;
     RelativeLayout rlInitiateButton;
     RecyclerView.LayoutManager layoutManager;
@@ -60,7 +61,10 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     List<String> assetTypes;
     List<AssetTypeEntity> assetTypeEntities;
     int Quantity;
+    int categoryId;
+    RelativeLayout rlAssetDetails;
     LayoutInflater inflater;
+    TextView listQuantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,8 +72,10 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         assetTypeMiniEntity = new AssetTypeMiniEntity();
         newAssetRecyclerView = (RecyclerView)findViewById(R.id.rvNewAsset);
         newAssetRecyclerView.hasFixedSize();
+        listQuantity = (TextView)findViewById(R.id.listQuantity);
         layoutManager = new LinearLayoutManager(this);
         newAssetRecyclerView.setLayoutManager(layoutManager);
+        rlAssetDetails = (RelativeLayout)findViewById(R.id.rlAssetDetails);
         bAdd = (TextView)findViewById(R.id.bAdd);
         tvAssetType = (TextView)findViewById(R.id.tvAssetType);
         ivIncreement = (ImageView)findViewById(R.id.ivIncreement);
@@ -91,8 +97,18 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         ivDecreement.setEnabled(false);
         categoryTypeSpinner.setSelection(0);
         String[] categoryTypeList ={"Select Category","Profile", "Facility"};
-        ArrayAdapter<String> categoryTypeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categoryTypeList);
+        final ArrayAdapter<String> categoryTypeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categoryTypeList);
         categoryTypeSpinner.setAdapter(categoryTypeAdapter);
+
+        rlAssetDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(categorySelected==0)
+                {
+                    Toast.makeText(RequestNewAssetActivity.this,"Select Asset category",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         categoryTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -100,14 +116,21 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 categoryType = parent.getItemAtPosition(position).toString();
                 categorySelected = parent.getSelectedItemPosition();
                 if(categorySelected == 2) {
+                    categoryId = 3002;
                     assetTypeSpinner.setEnabled(true);
                     ivIncreement.setEnabled(true);
                     ivDecreement.setEnabled(true);
+                    categoryTypeSpinner.setEnabled(false);
+                    callAssetTypeApi();
+
                 }
                 else if(categorySelected ==1) {
+                    categoryId = 3001;
                     assetTypeSpinner.setEnabled(true);
                     ivIncreement.setEnabled(true);
                     ivDecreement.setEnabled(true);
+                    categoryTypeSpinner.setEnabled(false);
+                    callAssetTypeApi();
                 }
                 else {
                     Toast.makeText(RequestNewAssetActivity.this, "Select Category type", Toast.LENGTH_SHORT).show();
@@ -125,75 +148,10 @@ public class RequestNewAssetActivity extends AppCompatActivity {
             }
         });
 
-        RestClientImplementation.getAssetTypeApi(assetTypeMiniEntity, new AssetTypeMiniEntity.UltronRestClientInterface() {
-            @Override
-            public void onInitialize(AssetTypeMiniEntity assetTypeMiniEntity, VolleyError error) {
-                if(error==null)
-                {
-                    if(assetTypeMiniEntity.getResponse()!=null)
-                    {
-                        assetTypes = new ArrayList<String>();
-                        assetTypeEntities = assetTypeMiniEntity.getResponse();
+        callAssetTypeApi();
 
-                        for(int i =0; i<assetTypeEntities.size();i++)
-                        {
-                            assetTypes.add(assetTypeEntities.get(i).getName());
-                        }
-                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(RequestNewAssetActivity.this,android.R.layout.simple_spinner_item,assetTypes);
-                        assetTypeSpinner.setAdapter(dataAdapter);
-                        assetTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                Log.d("ID",id+"");
-                                Log.d("position",position+"");
-                                assetType = parent.getItemAtPosition(position).toString();
-                                assetSelected = parent.getSelectedItemPosition();
-                                assetTypeId = assetTypeEntities.get(position).getId();
-                                Log.d("ChangedAssetId",assetTypeId+"");
-                                Quantity = 0;
-                                tvQuantity.setText(String.valueOf(Quantity));
-                                if(assetSelected != 0)
-                                {
-                                    ivIncreement.setEnabled(true);
-                                    ivDecreement.setEnabled(true);
-                                }
-                                else
-                                {
-                                    ivIncreement.setEnabled(false);
-                                    ivDecreement.setEnabled(false);
-                                }
 
-                            }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
-                        onContentChanged();
-                    }
-                    else
-                    {
-                        Log.d("Tag","Erroro in Response");
-                    }
-                }
-                else
-                {
-                    if(assetTypeMiniEntity.getStatusCode()==401)
-                    {
-                        CommonFunctions.toastString("UnAuthorized",RequestNewAssetActivity.this);
-                    }
-                }
-            }
-        },RequestNewAssetActivity.this);
-        tvQuantity.setText(String.valueOf(Quantity));
-        ivIncreement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Quantity++;
-                tvQuantity.setText(String.valueOf(Quantity));
-            }
-        });
 
         ivDecreement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,8 +172,10 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Quantity == 0) {
-                    Toast.makeText(RequestNewAssetActivity.this,"Invalid Request",Toast.LENGTH_SHORT).show();
+                if(Quantity == 0)
+                {
+                    Toast.makeText(RequestNewAssetActivity.this,"Select  Quantity",Toast.LENGTH_SHORT).show();
+
                 }
                 else if(assetTypeIdList.contains(assetTypeId))
                 {
@@ -238,6 +198,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                     newAssetEntityArrayList.add(entity);
                     assetTypeIdList.add(assetTypeId);
                     assetTypeNameList.add(assetType);
+                    listQuantity.setText(assetTypeIdList.size()+"");
                     Log.d("idlist",assetTypeIdList+"");
                     Log.d("assetList",assetType);
                     newAssetAdapter = new NewAssetAdapter(RequestNewAssetActivity.this,newAssetEntityArrayList);
@@ -266,6 +227,72 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+
+    private void callAssetTypeApi() {
+        RestClientImplementation.getAssetTypeApi(assetTypeMiniEntity, new AssetTypeMiniEntity.UltronRestClientInterface() {
+            @Override
+            public void onInitialize(AssetTypeMiniEntity assetTypeMiniEntity, VolleyError error) {
+                if(error==null)
+                {
+                    if(assetTypeMiniEntity.getResponse()!=null)
+                    {
+                        assetTypes = new ArrayList<String>();
+                        assetTypeEntities = assetTypeMiniEntity.getResponse();
+                        for(int i =0; i<assetTypeEntities.size();i++)
+                        {
+                            assetTypes.add(assetTypeEntities.get(i).getName());
+                        }
+                       // assetTypes.add("Select Asset Type");
+                        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(RequestNewAssetActivity.this,android.R.layout.simple_spinner_item,assetTypes);
+                        assetTypeSpinner.setAdapter(dataAdapter);
+                        assetTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                Log.d("ID",id+"");
+                                Log.d("position",position+"");
+                                selected = position;
+                                assetType = parent.getItemAtPosition(position).toString();
+                                assetSelected = parent.getSelectedItemPosition();
+                                assetTypeId = assetTypeEntities.get(position).getId();
+                                Log.d("ChangedAssetId",assetTypeId+"");
+                                Quantity = 0;
+                                tvQuantity.setText(String.valueOf(Quantity));
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+                        onContentChanged();
+                    }
+                    else
+                    {
+                        Log.d("Tag","Erroro in Response");
+                    }
+                }
+                else
+                {
+                    if(assetTypeMiniEntity.getStatusCode()==401)
+                    {
+                        CommonFunctions.toastString("UnAuthorized",RequestNewAssetActivity.this);
+                    }
+                }
+            }
+        },RequestNewAssetActivity.this,categoryId);
+        tvQuantity.setText(String.valueOf(Quantity));
+        ivIncreement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Quantity++;
+                tvQuantity.setText(String.valueOf(Quantity));
+            }
+        });
+
 
     }
 
@@ -341,4 +368,39 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
+
+        super.onBackPressed();
+
+        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
+
+        alertdialog.setTitle("Warning");
+        alertdialog.setMessage("Are you sure you Want to exit the tutorial???");
+        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(RequestNewAssetActivity.this, AssetActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        AlertDialog alert=alertdialog.create();
+        alertdialog.show();
+
+
+
+    }
+
 }
+
+

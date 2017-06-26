@@ -33,6 +33,8 @@ public class AssetDetailsActivity extends AppCompatActivity {
     TextView tvSpecifiaction1;
     ListView lvAccessories;
     TextView tvAssetMake;
+    TextView tvFacility;
+    TextView tvStatus;
     List<AssetAccessoryEntity> assetAccessoryList = new ArrayList<>();
     AssetAccessoryEntity assetAccessory;
     List<AssetDetailsEntity> assetDetailsList;
@@ -48,15 +50,15 @@ public class AssetDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_asset_details);
 
         tvName1 = (TextView) findViewById(R.id.tvName1);
-        tvId1 = (TextView) findViewById(R.id.tvId1);
         tvCategory1 = (TextView) findViewById(R.id.tvCategory1);
         tvType1 = (TextView) findViewById(R.id.tvType1);
-        tvMaker1 = (TextView) findViewById(R.id.tvMaker1);
         tvAssetMake = (TextView)findViewById(R.id.tvAssetMake1);
-        tvSpecifiaction1 = (TextView) findViewById(R.id.tvSpecification1);
         lvAccessories = (ListView) findViewById(R.id.lvAccessories);
         rlProgress = (RelativeLayout)findViewById(R.id.rlProgress);
         centreProgressBar = (ProgressBar)findViewById(R.id.centreProgressBar);
+        tvFacility = (TextView)findViewById(R.id.tvFacility);
+        tvStatus = (TextView)findViewById(R.id.tvStatus);
+
 
 
         callAssetDetailsApi();
@@ -76,13 +78,12 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         rlProgress.setVisibility(View.GONE);
                         assetDetailsList = assetDetailsMiniEntity.getResponse();
                         AssetDetailsEntity assetDetailsEntity = assetDetailsList.get(0);
-                        tvId1.setText("" + assetDetailsEntity.getAssetId());
                         tvName1.setText(assetDetailsEntity.getNomenclature());
                         tvCategory1.setText(assetDetailsEntity.getAssetCategory());
-                        tvMaker1.setText(assetDetailsEntity.getAssetMaker());
                         tvType1.setText(assetDetailsEntity.getAssetType());
-                        tvSpecifiaction1.setText(assetDetailsEntity.getAssetSpecification());
                         tvAssetMake.setText(assetDetailsEntity.getAssetMake());
+                        tvStatus.setText(assetDetailsEntity.getStatusName());
+                        tvFacility.setText(assetDetailsEntity.getFacilityId()+"");
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
                         if (assetAccessoryList.size() != 0) {
                             String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);

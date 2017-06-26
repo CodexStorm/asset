@@ -1,12 +1,12 @@
 package com.ninja.ultron.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
@@ -42,7 +42,7 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.asset_cards,parent,false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.my_asset_card,parent,false);
         ViewHolder holder=new ViewHolder(v);
         return holder;
     }
@@ -51,10 +51,22 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         final CodeDecodeEntity asset =assetsList.get(position);
-        holder.nomenclature.setText(asset.getNomenclature());
-        holder.AssetId.setText(asset.getId()+"");
-        holder.AssetMake.setText(asset.getAssetMake());
+        holder.tvAssetMake.setText(asset.getAssetMake());
+        holder.tvAssetType.setText(asset.getTypeName());
+        String x = asset.getNomenclature();
+        String[] part = x.split("(?<=\\D)(?=\\d)");
+        holder.tvAssetNomenclature1.setText(part[0]+"");
+        holder.tvAssetNomenclature2.setText(part[1]+"");
+        x = asset.getCategoryName();
+        holder.tvAssetCategory.setText("("+Character.toString(x.charAt(0))+")");
         Log.d("ASSET",""+asset.getId());
+        holder.tvStatus.setText(asset.getStatus());
+        /*if(asset.getStatus().equals("IN TRANSIT")){
+            holder.tvStatus.setTextColor(Color.parseColor("#FF0"));
+        }
+        else
+            holder.tvStatus.setTextColor(Color.parseColor("#309229"));*/
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,14 +85,18 @@ public class AssetListRecyclerAdapter extends RecyclerView.Adapter<AssetListRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView AssetId, nomenclature,AssetMake;
+        TextView tvAssetNomenclature1, tvAssetMake,tvAssetType,tvAssetCategory,tvAssetNomenclature2,tvStatus;
         View cardView;
         public ViewHolder(View itemView) {
             super(itemView);
             cardView=itemView;
-            AssetMake = (TextView)itemView.findViewById(R.id.asset_make) ;
-            AssetId=(TextView)itemView.findViewById(R.id.asset_id);
-            nomenclature =(TextView)itemView.findViewById(R.id.asset_name);
+            tvAssetNomenclature2 = (TextView)itemView.findViewById(R.id.tvAssetNomenclature2);
+            tvAssetNomenclature1 = (TextView)itemView.findViewById(R.id.tvAssetNomenclature1);
+            tvAssetMake = (TextView)itemView.findViewById(R.id.tvAssetMake);
+            tvAssetType = (TextView)itemView.findViewById(R.id.tvAssetType);
+            tvAssetCategory = (TextView)itemView.findViewById(R.id.tvAssetCategory);
+            tvStatus = (TextView)itemView.findViewById(R.id.tvStatus);
+
         }
 
     }

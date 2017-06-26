@@ -8,7 +8,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.ninja.ultron.R;
-import com.ninja.ultron.activity.InitiateTransferSummaryActivity;
 import com.ninja.ultron.entity.AssetUserRecievalEntity;
 
 import java.util.ArrayList;
@@ -71,8 +70,8 @@ public class AssetUserRecievalAdapter extends RecyclerView.Adapter<AssetUserReci
             super(itemView);
             cardView = itemView;
             AssetMake = (TextView) itemView.findViewById(R.id.asset_make);
-            AssetId = (TextView) itemView.findViewById(R.id.asset_id);
-            nomenclature = (TextView) itemView.findViewById(R.id.asset_name);
+            AssetId = (TextView) itemView.findViewById(R.id.tvAssetNomenclature);
+            nomenclature = (TextView) itemView.findViewById(R.id.tvAssetType);
             check = (CheckBox) itemView.findViewById(R.id.check);
 
         }

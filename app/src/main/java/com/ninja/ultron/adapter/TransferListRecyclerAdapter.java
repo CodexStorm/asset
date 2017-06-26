@@ -1,26 +1,17 @@
 package com.ninja.ultron.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ninja.ultron.Fragments.FacilityAssetTransferFragment;
-import com.ninja.ultron.Fragments.ProfileAssetTransferFragment;
 import com.ninja.ultron.R;
-import com.ninja.ultron.activity.InitiateTransferSummaryActivity;
-import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,8 +91,8 @@ public class TransferListRecyclerAdapter extends RecyclerView.Adapter<TransferLi
             super(itemView);
             cardView=itemView;
             AssetMake = (TextView)itemView.findViewById(R.id.asset_make) ;
-            AssetId=(TextView)itemView.findViewById(R.id.asset_id);
-            nomenclature =(TextView)itemView.findViewById(R.id.asset_name);
+            AssetId=(TextView)itemView.findViewById(R.id.tvAssetNomenclature);
+            nomenclature =(TextView)itemView.findViewById(R.id.tvAssetType);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkBox);
             status = (TextView)itemView.findViewById(R.id.asset_status);
         }

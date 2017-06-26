@@ -21,9 +21,25 @@ public class AssetDetailsEntity {
     private String assetType;
     private String assetMaker;
     private String assetMake;
+    private String statusName;
+    private int facilityId;
     private List<AssetAccessoryEntity> assetAccessory;
 
+    public String getStatusName() {
+        return statusName;
+    }
 
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public int getFacilityId() {
+        return facilityId;
+    }
+
+    public void setFacilityId(int facilityId) {
+        this.facilityId = facilityId;
+    }
 
     public AssetDetailsEntity(String nomenclature , int assetId, String assetSpecification, String assetCategory, String assetType, String assetMaker, String assetMake, List<AssetAccessoryEntity> assetAccessory) {
         this.nomenclature = nomenclature;

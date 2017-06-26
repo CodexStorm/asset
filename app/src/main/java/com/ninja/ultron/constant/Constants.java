@@ -45,23 +45,22 @@ public class Constants {
     public static final int PROFILE_ASSET_TYPE = 3001;
     public static final int TRANSFER_ISSUE_ID = 1;
 
-
-    public static final String ASSET_LIST_URL="http://10.0.0.23:1111/api/web/find/asset?userId=";
-    public static final String ASSET_DETAILS_MODEL_URL="http://10.0.0.23:1111/api/web/details/asset?assetId=";
-    public static final String ASSET_USER_RECIEVAL_MODEL_URL="http://10.0.0.23:1111/api/web/request/assignedAssets?assetRequestId=";
+    public static final String ASSET_LIST_URL="http://88.99.31.206:1111/api/web/find/asset?userId=";
+    public static final String ASSET_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/details/asset?assetId=";
+    public static final String ASSET_USER_RECIEVAL_MODEL_URL="http://88.99.31.206:1111/api/web/request/assignedAssets?assetRequestId=";
     public static String ASSET_DETAILS_URL;
     public static String ASSET_USER_RECIEVAL_URL;
     public static String PROFILE_ASSET_LIST = "&categoryId=3001";
     public static String FACILITY_ASSET_LIST = "&categoryId=3002";
-    public static final String PENDING_REQUESTS_URL="http://10.0.0.23:1111/api/web/request/pending?userId=";
-    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://10.0.0.23:1111/api/web/request?assetRequestId=";
+    public static final String PENDING_REQUESTS_URL="http://88.99.31.206:1111/api/web/request/pending?userId=";
+    public static final String PENDING_REQUESTS_DETAILS_MODEL_URL="http://88.99.31.206:1111/api/web/request?assetRequestId=";
     public static String PENDING_REQUESTS_DETAILS_URL;
-    public static final String ASSET_ACCEPT_URL="http://10.0.0.23:1111/api/web/request/accept";
+    public static final String ASSET_ACCEPT_URL="http://88.99.31.206:1111/api/web/request/accept";
 
-    public static final String INITIATE_TRANSFER_URL="http://10.0.0.23:1111/api/web/request/transfer";
-    public static final String ASSET_REQUEST_URL="http://10.0.0.23:1111/api/web/request/newAsset";
-    public static final String TRANSFER_REASONS_API="http://10.0.0.23:1111/api/web/find/transferReason";
-    public static final String ASSET_TYPE_API="http://10.0.0.23:1111/api/web/find/asset/type";
+    public static final String INITIATE_TRANSFER_URL="http://88.99.31.206:1111/api/web/request/transfer";
+    public static final String ASSET_REQUEST_URL="http://88.99.31.206:1111/api/web/request/newAsset";
+    public static final String TRANSFER_REASONS_API="http://88.99.31.206:1111/api/web/find/transferReason";
+    public static final String ASSET_TYPE_API="http://88.99.31.206:1111/api/web/find/asset/type";
     public static final String GET_LABOUR_FOR_ATTENDANCE_URL="http://10.1.19.188:1111/api/web/labour/attendance";
     public static final String MARK_ATTENDANCE_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker";
     public static final String GET_LABOUR_SHIFT_DETAILS_URL="http://10.1.19.188:1111/api/web/labourAttendanceTracker/facilityShiftDetails";

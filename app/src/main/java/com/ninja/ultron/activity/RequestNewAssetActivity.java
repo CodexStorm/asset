@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -42,10 +44,12 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     TextView bAdd;
     String assetType;
     String categoryType;
+    int category=0;
     int categorySelected =0;
     int assetSelected;
     int assetTypeId;
     int selected = 0;
+    int previousSelected = 0;
     NewAssetAdapter newAssetAdapter;
     RelativeLayout rlInitiateButton;
     RecyclerView.LayoutManager layoutManager;
@@ -65,6 +69,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
     RelativeLayout rlAssetDetails;
     LayoutInflater inflater;
     TextView listQuantity;
+    ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         newAssetRecyclerView.hasFixedSize();
         listQuantity = (TextView)findViewById(R.id.listQuantity);
         layoutManager = new LinearLayoutManager(this);
+        back = (ImageButton)findViewById(R.id.back);
         newAssetRecyclerView.setLayoutManager(layoutManager);
         rlAssetDetails = (RelativeLayout)findViewById(R.id.rlAssetDetails);
         bAdd = (TextView)findViewById(R.id.bAdd);
@@ -87,9 +93,11 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         newAssetEntityArrayList = new ArrayList<>();
         categorySelected =0;
         assetSelected = 4;
+        previousSelected =0;
         assetTypeIdList = new ArrayList<>();
         assetTypeNameList = new ArrayList<>();
 
+        alertDialogBuilder = new AlertDialog.Builder(RequestNewAssetActivity.this, R.style.AlertDialogBackground);
 
         assetTypeSpinner = (Spinner) findViewById(R.id.spinnerAssetType);
         assetTypeSpinner.setEnabled(false);
@@ -99,6 +107,13 @@ public class RequestNewAssetActivity extends AppCompatActivity {
         String[] categoryTypeList ={"Select Category","Profile", "Facility"};
         final ArrayAdapter<String> categoryTypeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categoryTypeList);
         categoryTypeSpinner.setAdapter(categoryTypeAdapter);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         rlAssetDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,20 +131,77 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 categoryType = parent.getItemAtPosition(position).toString();
                 categorySelected = parent.getSelectedItemPosition();
                 if(categorySelected == 2) {
+                    category = 3002;
+                    if(previousSelected == 0)
+                    {
+                        previousSelected = categorySelected;
+                    }
+                    else if(previousSelected != categorySelected){
+                        alertDialogBuilder
+                                .setMessage("Your data will be lost. Are you sure ? ")
+                                .setCancelable(true)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                previousSelected = categorySelected;
+                                                if(newAssetEntityArrayList.size()!=0){
+                                                    newAssetEntityArrayList.clear();
+                                                    newAssetAdapter.notifyDataSetChanged();
+                                                }
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                alertDialog.dismiss();
+                                            }
+                                        });
+                        alertDialog = alertDialogBuilder.create();
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                        alertDialog.show();
+                    }
                     categoryId = 3002;
                     assetTypeSpinner.setEnabled(true);
                     ivIncreement.setEnabled(true);
                     ivDecreement.setEnabled(true);
-                    categoryTypeSpinner.setEnabled(false);
                     callAssetTypeApi();
 
                 }
                 else if(categorySelected ==1) {
+                    category = 3001;
+                    if(previousSelected == 0)
+                    {
+                        previousSelected = categorySelected;
+                    }
+                    else if(previousSelected != categorySelected){
+                        alertDialogBuilder
+                                .setMessage("Your data will be lost. Are you sure ? ")
+                                .setCancelable(true)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                previousSelected = categorySelected;
+                                                if(newAssetEntityArrayList.size()!=0){
+                                                    newAssetEntityArrayList.clear();
+                                                    newAssetAdapter.notifyDataSetChanged();
+                                                    listQuantity.setText(0+"");
+                                                }
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                alertDialog.dismiss();
+                                            }
+                                        });
+                        alertDialog = alertDialogBuilder.create();
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                        alertDialog.show();
+                    }
                     categoryId = 3001;
                     assetTypeSpinner.setEnabled(true);
                     ivIncreement.setEnabled(true);
                     ivDecreement.setEnabled(true);
-                    categoryTypeSpinner.setEnabled(false);
                     callAssetTypeApi();
                 }
                 else {
@@ -140,7 +212,6 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                 }
 
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -222,7 +293,7 @@ public class RequestNewAssetActivity extends AppCompatActivity {
                     newAssetSummaryIntent.putExtra("AssetNameList",(Serializable)assetTypeNameList);
                     Log.d("List",assetTypeNameList+"");
                     newAssetSummaryIntent.putExtra("NewAssetList",(Serializable)newAssetEntityArrayList);
-                    newAssetSummaryIntent.putExtra("CategoryId",categorySelected);
+                    newAssetSummaryIntent.putExtra("CategoryId",category);
                     startActivity(newAssetSummaryIntent);
                 }
             }
@@ -370,33 +441,26 @@ public class RequestNewAssetActivity extends AppCompatActivity {
 
     public void onBackPressed() {
 
-        super.onBackPressed();
-
-        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-
-        alertdialog.setTitle("Warning");
-        alertdialog.setMessage("Are you sure you Want to exit the tutorial???");
-        alertdialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Intent intent = new Intent(RequestNewAssetActivity.this, AssetActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-
-        AlertDialog alert=alertdialog.create();
-        alertdialog.show();
-
+        alertDialogBuilder
+                .setMessage("Your data will be lost. Are you sure ? ")
+                .setCancelable(true)
+                .setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(RequestNewAssetActivity.this, AssetActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        })
+                .setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                alertDialog.dismiss();
+                            }
+                        });
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        alertDialog.show();
 
 
     }

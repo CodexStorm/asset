@@ -32,7 +32,7 @@
             android:textColor="#000"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp" />
+            android:layout_marginTop="10dp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -147,6 +147,15 @@
             android:textSize="30dp"
             android:gravity="center"
             android:textColor="#fff"
+            />
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icn_back"
+            android:background="@color/actionbarcolor"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_10"
             />
 
     </RelativeLayout>

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by omprakash on 19/5/17.
  */
 
-public class AssetDetailsMiniEntity {
+public class  AssetDetailsMiniEntity {
     int statusCode;
     List<AssetDetailsEntity> response;
     String message;

@@ -1,14 +1,20 @@
 package com.ninja.ultron.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.ninja.ultron.R;
@@ -37,12 +43,16 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
     List<NewAssetEntity> newAssetEntityList;
     List<Integer> assetTypeIdList;
     NewAssetInitateRequestEntity newAssetInitateRequestEntity;
+    AlertDialog.Builder alertDialogBuilder = null;
+    AlertDialog alertDialog = null;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_asset_summary);
         Intent newAssetSummary = getIntent();
+        back = (ImageButton)findViewById(R.id.back);
         newAssetEntityList =(List<NewAssetEntity>)newAssetSummary.getSerializableExtra("NewAssetList");
         assetTypeIdList = (List<Integer>)newAssetSummary.getSerializableExtra("AssetTypeId");
         Log.d("List",assetTypeIdList+"");
@@ -52,7 +62,9 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
         tvhFacility = (TextView)findViewById(R.id.tvhFaciltity);
         rlRequestButton = (RelativeLayout)findViewById(R.id.rlRequestButton);
         tvRequestedBy.setText(UserDetails.getUserName(NewAssetSummaryActivity.this));
-
+        alertDialogBuilder = new AlertDialog.Builder(NewAssetSummaryActivity.this, R.style.AlertDialogBackground);
+        final Intent intent = new Intent(NewAssetSummaryActivity.this, AssetActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         newAssetRecyclerView = (RecyclerView)findViewById(R.id.rvNewAsset);
         newAssetRecyclerView.hasFixedSize();
@@ -68,12 +80,45 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
             tvFacility.setText(UserDetails.getFacilityName(NewAssetSummaryActivity.this));
         }
 
-        createNewAssetRequestEntity();
+
+        back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         rlRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callRequestAssetApi();
+                if(!CommonFunctions.isNetworkAvailable(NewAssetSummaryActivity.this))
+                {
+                    Toast.makeText(NewAssetSummaryActivity.this,"No network connection",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    alertDialogBuilder
+                            .setMessage("Are you sure do you want to Request  the selected assets ")
+                            .setCancelable(true)
+                            .setPositiveButton("Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            createNewAssetRequestEntity();
+                                            callRequestAssetApi();
+                                            startActivity(intent);
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                            .setNegativeButton("No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                    alertDialog.show();
+                }
             }
         });
 
@@ -95,7 +140,7 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
         newAssetInitateRequestEntity.setAssetMakeDetails(requestNewAssetEntityList);
         newAssetInitateRequestEntity.setComment(comments);
         newAssetInitateRequestEntity.setUserId(Requestedby);
-        newAssetInitateRequestEntity.setFacilityId(UserDetails.getFacilityId(NewAssetSummaryActivity.this));
+        newAssetInitateRequestEntity.setFacilityId(1);
         newAssetInitateRequestEntity.setAssetSkuCategoryId(categoryId);
     }
 
@@ -110,5 +155,10 @@ public class NewAssetSummaryActivity extends AppCompatActivity {
                 }
             }
         },NewAssetSummaryActivity.this);
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }

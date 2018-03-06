@@ -72,7 +72,6 @@
                 android:fontFamily="sans-serif"
                 android:text="Status"
                 android:textSize="16dp"
-                android:layout_marginBottom="5dp"
                 />
             <CheckBox
                 android:id="@+id/checkBox"

@@ -23,9 +23,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/rvNewAsset"
         android:layout_alignStart="@+id/rvNewAsset"
+        android:visibility="gone"
         android:id="@+id/textView4" />
     <TextView
         android:id="@+id/listQuantity"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
@@ -228,12 +230,22 @@
         android:id="@+id/relativeLayout">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Request Asset"
             android:textSize="30dp"
             android:gravity="center"
             android:textColor="#fff"
+            android:layout_centerInParent="true"
+            />
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icn_back"
+            android:background="@color/actionbarcolor"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_10"
             />
 
     </RelativeLayout>

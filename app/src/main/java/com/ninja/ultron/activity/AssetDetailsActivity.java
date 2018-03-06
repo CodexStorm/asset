@@ -1,9 +1,14 @@
 package com.ninja.ultron.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -43,12 +48,15 @@ public class AssetDetailsActivity extends AppCompatActivity {
     ReportAssetFragment reportAssetFragment;
     ProgressBar centreProgressBar;
     RelativeLayout rlProgress;
+    String assetName;
+    int assetId;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asset_details);
-
+        back = (ImageButton)findViewById(R.id.back);
         tvName1 = (TextView) findViewById(R.id.tvName1);
         tvCategory1 = (TextView) findViewById(R.id.tvCategory1);
         tvType1 = (TextView) findViewById(R.id.tvType1);
@@ -58,10 +66,36 @@ public class AssetDetailsActivity extends AppCompatActivity {
         centreProgressBar = (ProgressBar)findViewById(R.id.centreProgressBar);
         tvFacility = (TextView)findViewById(R.id.tvFacility);
         tvStatus = (TextView)findViewById(R.id.tvStatus);
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_report:
+                        Intent reportAssetIntent = new Intent(AssetDetailsActivity.this,ReportAssetActivity.class);
+                        reportAssetIntent.putExtra("AssetName",assetName);
+                        reportAssetIntent.putExtra("AssetId",assetId);
+                        startActivity(reportAssetIntent);
+                        //initiateTransferFragment.selectedToName = "Admin";
+                        break;
+                    case R.id.request_asset:
 
+                        break;
+
+                }
+                return true;
+            }
+        });
 
 
         callAssetDetailsApi();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void callAssetDetailsApi() {
@@ -85,6 +119,8 @@ public class AssetDetailsActivity extends AppCompatActivity {
                         tvStatus.setText(assetDetailsEntity.getStatusName());
                         tvFacility.setText(assetDetailsEntity.getFacilityId()+"");
                         assetAccessoryList = assetDetailsEntity.getAssetAccessory();
+                        assetName = assetDetailsEntity.getAssetMake();
+                        assetId = assetDetailsEntity.getAssetId();
                         if (assetAccessoryList.size() != 0) {
                             String myAssetAccessoryListAsString = gs.toJson(assetAccessoryList);
                             UserDetails.setAssetAccessoryList(AssetDetailsActivity.this, myAssetAccessoryListAsString);
@@ -99,5 +135,10 @@ public class AssetDetailsActivity extends AppCompatActivity {
                 }
             }
         }, AssetDetailsActivity.this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

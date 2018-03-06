@@ -1,6 +1,7 @@
 package com.ninja.ultron.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -116,7 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                             //Toast.makeText(LoginActivity.this,loginEntity.getToken()+"   "+loginEntity.getSessionId(),Toast.LENGTH_LONG).show();
                             UserDetails.setSessionId(LoginActivity.this,loginEntity.getSessionId());
                             UserDetails.setSessionToken(LoginActivity.this,loginEntity.getToken());
-                            StartIntent.startSplashScreen(LoginActivity.this);
+                            Intent i = new Intent(LoginActivity.this,AssetActivity.class);
+                            startActivity(i);
+                            //StartIntent.startSplashScreen(LoginActivity.this);
                         }
                     } else {
                         tvLogin.setVisibility(View.VISIBLE);

@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/action_report"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_report"
+        android:title="Report Asset"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/action_service"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_service"
+        android:title="Asset Service"
+        app:showAsAction="ifRoom"
+        />
 </menu>

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.ninja.ultron.adapter.TransferAssetAdapter;
 import com.ninja.ultron.constant.Constants;
 import com.ninja.ultron.entity.CodeDecodeEntity;
 import com.ninja.ultron.entity.InitiateTransferEntity;
+import com.ninja.ultron.functions.CommonFunctions;
 import com.ninja.ultron.functions.UserDetails;
 import com.ninja.ultron.restclient.RestClientImplementation;
 
@@ -44,6 +46,7 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
     int reasonId;
     AlertDialog.Builder alertDialogBuilder = null;
     AlertDialog alertDialog = null;
+    ImageButton back;
 
 
 
@@ -59,6 +62,7 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         tvhFacility = (TextView)findViewById(R.id.tvhFaciltity);
         tvRequestedTo = (TextView)findViewById(R.id.tvRequestedto);
         tvRequestReason = (TextView)findViewById(R.id.tvRequestReason);
+        back = (ImageButton) findViewById(R.id.back);
         Intent transferAssetSummary = getIntent();
         categoryId = transferAssetSummary.getIntExtra("category",0);
         reasonId = transferAssetSummary.getIntExtra("RequestReasonId",0);
@@ -78,45 +82,53 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
             tvhFacility.setVisibility(View.VISIBLE);
         }
 
-        createTransferEntity();
         transferAssetRecyclerView = (RecyclerView)findViewById(R.id.rvTransferAssets);
         transferAssetRecyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);
         transferAssetRecyclerView.setLayoutManager(layoutManager);
-        transferAssetAdapter = new TransferAssetAdapter(InitiateTransferSummaryActivity.this, transferAssetEntityList);
+        transferAssetAdapter = new TransferAssetAdapter(InitiateTransferSummaryActivity.this, transferAssetEntityList,false);
         transferAssetRecyclerView.setAdapter(transferAssetAdapter);
         transferAssetAdapter.notifyDataSetChanged();
 
         rlInitateTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                        alertDialogBuilder
-                                .setMessage("Are you sure do you want to Delete  the selected assets ")
-                                .setCancelable(true)
-                                .setPositiveButton("Yes",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                callInitiateTransferApi();
-                                                startActivity(intent);
-                                                alertDialog.dismiss();
-                                            }
-                                        })
-                                .setNegativeButton("No",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                alertDialog.dismiss();
-                                            }
-                                        });
-                        alertDialog = alertDialogBuilder.create();
-                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
-                        alertDialog.show();
-
+                if(!CommonFunctions.isNetworkAvailable(InitiateTransferSummaryActivity.this))
+                {
+                    Toast.makeText(InitiateTransferSummaryActivity.this,"No nterwork connection",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    alertDialogBuilder
+                            .setMessage("Are you sure do you want to Transfer  the selected assets ")
+                            .setCancelable(true)
+                            .setPositiveButton("Yes",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            createTransferEntity();
+                                            callInitiateTransferApi();
+                                            startActivity(intent);
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                            .setNegativeButton("No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
+                    alertDialog = alertDialogBuilder.create();
+                    alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+                    alertDialog.show();
+                }
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void callInitiateTransferApi() {
@@ -148,5 +160,8 @@ public class InitiateTransferSummaryActivity extends AppCompatActivity {
         initiateTransferEntity.setTransferReasonId(reasonId);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

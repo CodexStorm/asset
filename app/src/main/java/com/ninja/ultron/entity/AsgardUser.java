@@ -4,10 +4,12 @@ package com.ninja.ultron.entity;
  * Created by omprakash on 18/5/17.
  */
 
-public class AsgardUser {
+public class
+
+AsgardUser {
     private int id;
     private String userName;
-    private long contactNumber;
+    private String contactNumber;
     private String email;
     private String password;
     private String externalUserId;
@@ -30,11 +32,11 @@ public class AsgardUser {
         this.userName = userName;
     }
 
-    public long getContactNumber() {
+    public String  getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 

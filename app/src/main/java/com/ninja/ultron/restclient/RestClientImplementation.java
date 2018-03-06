@@ -101,7 +101,7 @@ public class RestClientImplementation {
     public static void userLogin(final LoginEntity loginEntity, final LoginEntity.RestClientInterface restclientinterface, final Context context) {
         queue = VolleySingleton.getInstance(context).getRequestQueue();
         //String url = getAbsoluteUrl("/user/login/app", context);
-        String url = "http://88.99.31.206:1111"+"/web/login";
+        String url = "http://192.168.43.32:1111"+"/web/login";
         JSONObject postParams = loginEntity.getJsonObjectAsParams();
         Log.d("login_params", "" + postParams);
         Log.e("login_url", "" + url);
@@ -561,7 +561,15 @@ public class RestClientImplementation {
                 Log.d("Error",error.toString());
                 ultronRestClientInterface.onInitialize(newAssetInitateRequestEntity,new VolleyError());
             }
-        });
+        },3000,0){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String,String> params=new HashMap<String,String>();
+                params.put("sessionid",UserDetails.getSessionId(context));
+                params.put("accesstoken",UserDetails.getSessionToken(context));
+                return params;
+            }
+        };
         queue.add(postRequest);
     }
 

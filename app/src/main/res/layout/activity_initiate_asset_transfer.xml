@@ -7,8 +7,39 @@
 
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/mainActivityBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/actionbarcolor"
+            android:weightSum="1">
+
+
+            <ImageButton
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icn_back"
+                android:background="@color/actionbarcolor"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/dp_10"
+                />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transfer"
+                android:textSize="40dp"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:layout_weight="3.50" />
+        </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
@@ -25,7 +56,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_below="@+id/app"
         android:padding="3dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
